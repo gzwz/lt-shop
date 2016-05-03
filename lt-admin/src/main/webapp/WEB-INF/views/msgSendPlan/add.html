@@ -1,0 +1,102 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link href="${contextPath}/resources/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="${contextPath}/resources/ueditor/themes/default/css/ueditor.min.css" />
+
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title"></h5>
+			</div>
+			<form class="form-horizontal add-form" action="${contextPath}/system/msgSendPlan/save"
+	method="post">
+	<div class="modal-body">
+			<input type="hidden" id="msgSendPlanId" name="msgSendPlanId" />
+			<div class="form-group">
+				<label class="col-sm-3 control-label">发送时间：</label>
+				<div class="col-sm-6">
+				<input  class="input-sm form-control" name="sendDate" placeholder="发送时间"  type="text" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-%d',firstDayOfWeek:1})">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">过期时间：</label>
+				<div class="col-sm-6">
+					<input  class="input-sm form-control" placeholder="过期时间" name="pastDueDate"  type="text" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-%d',firstDayOfWeek:1})">
+				</div>
+			</div>
+               <div class="form-group">
+		        <label class="col-sm-3 control-label">选择要发送的用户：<input type="hidden" name="userIds" id="userIds"/></label>
+		        <div class="col-sm-6">
+		            <button class="btn btn-primary" onclick="fnClickUser();" id="btn-perm" type="button">选择用户</button>
+		        </div>
+		    </div>
+		    
+		     <div class="form-group">
+		        <label class="col-sm-3 control-label">站内模板：</label>
+		        <div class="col-sm-6">
+		            <select class="form-control" name="msgTemplateId" id="msgTemplateId">
+		            </select>
+		        </div>
+		    </div>
+		    <div class="form-group">
+				<label class="col-sm-3 control-label">计划内容：</label>
+				<div class="col-sm-6">
+				<textarea id="params" name="params" placeholder="请输入计划内容"
+								class="form-control"></textarea>
+					<!-- <script type="text/plain" id="params" name="params" style="height:240px;"></script> -->
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+				<button class="btn btn-primary btn-save" type="submit">保存</button>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
+
+<script src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+    <!--引入开始-->
+<script language="javascript" type="text/javascript" src="${contextPath}/resources/My97DatePicker/WdatePicker.js"></script>
+<!--引入结束-->
+<script type="text/javascript">
+	$(function() {
+		$(".add-form").validate({
+			rules : {
+				sendDate : {
+					required : true
+				},
+				pastDueDate : {
+					required : true
+				},
+				msgTemplateId : {
+					required : true
+				}
+			},
+			submitHandler : function() {
+				$(".add-form").ajaxSubmitForm(saveCollback);
+			}
+		});
+		
+	});
+	function fnClickUser() {
+			layer.open({
+				type : 2,
+				title:'选择推送用户',
+				area : [ '1000px', '730px' ],
+				fix : false, //不固定
+				maxmin : true,
+				content : "${contextPath}/system/msgSendPlan/user_page"
+			});
+		}
+		
+		
+		function getUserIds(b) {
+			$("#userIds").val(b);
+			$("#btn-perm").html("已选择");
+		}
+		
+	</script>

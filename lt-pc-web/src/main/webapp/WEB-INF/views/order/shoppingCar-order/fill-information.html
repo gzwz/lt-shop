@@ -1,0 +1,232 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>1元购订单页</title>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/order/oneBuyConfirm.css">
+    
+    <script src="${contextPath}/resources/js/jquery191.min.js"></script>
+<script src="${contextPath}/resources/js/common.js"></script>
+<script src="${contextPath}/resources/js/layer/layer.js"></script>
+</head>
+<style>
+.addrSelectedDiv{
+width: 200px;
+height:100px;
+float: left;
+border: solid 1px;
+}
+</style>
+<body>
+
+<!-- 头部 -->
+<#include "common/top.html">
+
+<!-- end 头部 -->
+<!-- 订单信息-->
+<form id="submitForm" action="${contextPath}/intercept/select-pay-way" method="post">
+<div class="main">
+    <div class="content">
+        <p class="title">填写并核对订单信息</p>
+        <div class="column">
+            <div class="msg clearfix">
+                <p><span>收货人信息</span><span><a href="javascript:addAddress();">新增收货地址</a></span></p>
+                <div class="site">
+                     <ul id="getUserAddress" class="consignee clearfix">
+	                     
+                    </ul>
+                </div>
+            </div>
+            <div class="msg">
+                <p><span>配送方式</span>
+                <div class="site clearfix">
+                  <ul id="sitee" class="clearfix">
+                       <li  class="curr" accesskey="since">快递运输<i></i></li>
+                       <li  accesskey="logistical">上门自提<i></i></li>
+                   </ul>
+                </div>
+            </div>
+<!-- 送货清单-->
+            <div class="msg clearfix">
+                <p><span>送货清单</span><!-- <span><a href="#">新增收货地址</a></span> --><span><a href="javascript:void(0);">价格说明</a></span></p>
+                <div class="prolist">
+                    <ul>
+                    
+                    <#if showDTOList?exists>
+                       <#list showDTOList as show>
+	                        <li>
+	                            <p class="title1">商家：${show.merchantName}</p>
+	                            <input type="hidden" name="merchantIds" value="${show.id}"/>
+	                            
+	                           
+	                            <#list show.showItem as item>
+	                             <div class="showing clearfix">
+	                             <input type="hidden" name="shoppingCarItemIds" value="${item.id}"/>
+	                                <ul>
+	                                    <li class="num1">
+	                                        <a href="${contextPath}/product/detaile?id=${item.productId}&productCatoryName=${item.productCatoryName}" target="_blank"><img src="${imageContextPath}/${item.urlImage}" alt=""></a>
+	                                    </li>
+	                                    <li class="num1">
+	                                        <p class="title2"><a target="_blank" href="${contextPath}/product/detaile?id=${item.productId}&productCatoryName=${item.productCatoryName}">【 ${item.productName!''} 】   ${item.skuSpecInfo!''}</a></p>
+	                                        <!-- <p class="title3"><i class="flt"></i>７天无理由退货</p>
+	                                        <p class="title5">【赠品】硕扬赠品：Ｇ２００办公商务型键鼠套装×１</p>
+	                            			<p class="title4">【赠品】硕扬赠品：硕扬定制豪华鼠标垫×１</p> -->
+	                                    </li>
+	                                    <li class="num1">
+	                                        <span>￥${item.skuPrice?c}</span>
+	                                    </li>
+	                                    <li class="num1">×</li>
+	                                    <li class="num2">${item.num!1}</li>
+	                                    <li class="num1">=</li>
+	                                    <li class="num2">￥${((item.skuPrice) * item.num)?c}</li>
+	                                </ul>
+	                                </div>
+	                                 </#list>
+	                            
+	                           
+	                        </li>
+                         </#list>
+                    </#if>
+                    </ul>
+                </div>
+            </div>
+<!-- end 送货清单-->
+<!--添加订单备注-->
+            <div class="remark">
+                <div class="remarks">
+                    <p>添加订单备注</p>
+                    <input name="remark" type="text" id="note" maxlength=45 placeholder="  限４５个字（定制类商品，请将购买需求在备注中详细说明）">
+                    <label for="note">提示：请勿填写有关支、收货、发票方面的信息</label>
+                </div>
+            </div>
+<!-- end 添加订单备注-->
+<!-- 发票 -->
+         <!--   <div class="msg">
+                <p><span>发票信息</span></p>
+                <div class="site">
+                    <span>普通发票（纸质）</span>
+                    <span>个人</span>
+                    <span>明细</span>
+                    <span>修改</span>
+                </div>
+            </div>  -->
+<!-- end 发票 -->
+        </div>
+    </div>
+</div>
+
+<!-- end  订单信息-->
+
+<!--提交-->
+<div class="submit clearfix">
+    <div class="content">
+        <div class="submits clearfix">
+            <div class="money">
+            	<input type="hidden" name="totalePrice" value="${(totalePrice)?c!''}"/>
+                <span>总金额：<span class="text">${totalePrice?c}</span>元</span>
+            </div>
+            <button type="button" id="paySubmit">提交订单</button>
+        </div>
+    </div>
+</div>
+
+<!-- end 提交-->
+<input type="hidden" name="addressId" id="attrAddressId"/>
+<input type="hidden" name="pickUp" id="pickUpId"/>
+</form>
+<!--foot/脚部-->
+<#include "common/foot.html">
+<!-- end foot/脚部-->
+
+
+<script type="text/javascript">
+     $(function(){
+        ajaxLoadUserAddress();
+        
+        attrPickUp();
+       
+        $('#sitee li').click(function (){
+			    $(this).siblings("li").removeClass("curr");
+				$(this).addClass("curr");
+				attrPickUp();
+			}); 
+     
+        $("body").on("click",".consignee li",function(){
+            $(this).addClass('curr').siblings().removeAttr("class");
+            $(this).siblings().children("input").removeAttr("name");
+            attrAddressId();
+        });
+        
+        $("#paySubmit").on("click",function(){
+        
+             $("#submitForm").submit();    
+			 $(this).unbind("click");
+        });
+        
+     });
+     
+     function addAddress() {
+		layer.open({
+			type : 2, //page层
+			area : [ '700px', '550px' ],
+			title : '新增收货地址',
+			shade : 0.6, //遮罩透明度
+			moveType : 1, //拖拽风格，0是默认，1是传统拖动
+			shift : 1, //0-6的动画形式，-1不开启
+			content : "${contextPath}/intercept/userAddesses/addAddress"
+		});
+	}
+
+    function attrAddressId(){
+    
+         $(".consignee li").each(function(){
+        	    if($(this).attr("class")=="curr"){
+        	       $("#attrAddressId").val("");
+        	       $("#attrAddressId").val($(this).attr("accesskey"));
+        	    }
+        	});
+    }
+    
+    function attrPickUp(){
+         $("#sitee li").each(function(){
+        	    if($(this).attr("class")=="curr"){
+        	       $("#pickUpId").val("");
+        	       $("#pickUpId").val($(this).attr("accesskey"));
+        	    }
+        	});
+    }
+    
+    
+    function ajaxLoadUserAddress(){
+        
+           $.ajax({
+						type : "post",
+						url :"${contextPath}/intercept/userAddesses/getuserAddesses",
+						dataType : "json",
+						async : true,
+						success : function(data) {
+						  var result="";
+							if(data.length>0){
+							 for(var i=0;i<data.length;i++){
+							    if(data[i].defaultAddress){
+							     result+="<li accesskey='"+data[i].id+"' class='curr'><i></i><div class='addr-hd'><span class='prov'>"+data[i].provinceName+data[i].cityName+"</span><span class='name flr'>（ "+data[i].name+"收）</span></div><span>"+data[i].areaName+data[i].detail+"</span><span class='tel'>"+data[i].mobile+"</span></li>";
+							    }else{
+							     result+="<li accesskey='"+data[i].id+"'><i></i><div class='addr-hd'><span class='prov'>"+data[i].provinceName+data[i].cityName+"</span><span class='name flr'>（ "+data[i].name+"收）</span></div><span>"+data[i].areaName+data[i].detail+"</span><span class='tel'>"+data[i].mobile+"</span></li>";
+							    } 
+							 }
+							}
+							
+							$("#getUserAddress").html("");
+							$("#getUserAddress").html(result);
+							attrAddressId();
+						}
+					});
+    
+    }
+
+    </script>
+    
+</body>
+</html>

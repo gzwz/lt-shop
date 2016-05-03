@@ -1,0 +1,150 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>一元购详情页面</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.det.css">
+    
+</head>
+<body>
+   <!--head/头部-->
+<!-- 头部 -->
+	<#include "common/one-head.html">
+<!--buypage/购买页面-->
+<form action="${contextPath}/oneBuyOrder/confirmOrder" >
+<div class="buypage">
+    <div class="content">
+        <div class="crumb">
+            <span><a href="#">一元购车</a></span> >
+            <span><a href="#">所有商品分类</a></span> >
+            <span><a href="#">数码/手机</a></span> >
+            <span><a class="curr" href="javascript:void(0)">${obp.baseInfo.name!''}</a></span>
+        </div>
+        <div class="detail-bd">
+            <div class="detail-bd-l flt">
+                <div class="booth">
+                    <div class="main-pic">
+                        <a href="#"><img id="thumb2" src="${imageContextPath}/${obp.baseInfo.titleImage!''}" alt=""></a>
+                    </div>
+                </div>
+                <ul id='thumb' class="thumb">
+             	<li>
+					<div>
+						<img width="60px" src="${imageContextPath}/${obp.baseInfo.titleImage!''}"/>
+					</div>
+				</li>
+                  <#if imageList?exists> 
+					    <#list imageList?keys as key>
+					      <#if key_index lt 5>
+                            <li>
+								<div>
+									<img width="60px" src="${imageContextPath}/${imageList[key]}"/>
+								</div>
+							</li>
+							</#if>
+						 </#list> 
+					  </#if>
+                </ul>
+            </div>
+            <div class="detail-bd-r">
+            	<input type="hidden" name="id" value="${obp.id!''}">
+                 <div class="pic-text">
+                     <p>${obp.baseInfo.name!'没有标题'}</p>
+                 </div>
+                 <div class="progress  clearfix">
+                     <p class="cost">市场价：￥${obp.baseInfo.originalPrice!9999}</p>
+                     <div class="progress-bar">
+                         <b style="width: ${(obp.countInfo.partakeCount/obp.countInfo.totalCount)*100}%"></b>
+                     </div>
+                     <div id="asset" class="clearfix">
+                         <div class="asset-b first">
+                             <p class="one">${obp.countInfo.partakeCount!'999'}</p>
+                             <p>已参与</p>
+                         </div>
+                         <div class="asset-b middle">
+                             <p>${obp.countInfo.totalCount!'9999'}</p>
+                             <p>总需人次</p>
+                         </div>
+                         <div class="asset-b lest">
+                             <p class="two flr">${obp.countInfo.residueCount!1}</p>
+                             <input type="hidden" id="shengyushuliang" value="${(obp.countInfo.residueCount)?c}">
+                             <p class="three flr">剩余</p>
+                         </div>
+                     </div>
+                     <p class="cost2">购买价格：￥${obp.baseInfo.price!1}</p>
+                 </div>
+                 <div class="amount space_l25 clearfix">
+                     <ul> 
+                         <li>数量:</li>
+                         <li>
+                             <div id="main">
+                               <div class="demo">
+							   <button type="button" id="decrease" class="but buticon1"></button>
+									<input type="text" id="num" class="number" name="num"/>
+                               <button type="button" id="increase" class="but"></button>
+								</div>
+                            </div>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="items-but">
+                 	 <button class="but1" value="立即1元购">立即1元购</button>
+                    <!--  <a class="but1" type="submit" >立即1元购</a><a class="but2" href="#">加入购物车</a> <i></i>-->
+                 </div>
+                 <div class="service-icon">
+                     <ul class="clearfix">
+                         <li><i class="icon1"></i><span>公平公正</span></li>
+                         <li><i class="icon2"></i><span>正品保证</span></li>
+                         <li><i class="icon3"></i><span>全国免运费</span></li>
+                         <li><i class="icon4"></i><span>安信保认证</span></li>
+                     </ul>
+                     <dl>
+                         <dt>分享到：</dt>
+                         <dd><a class="icon1" href="#"></a></dd>
+                         <dd><a class="icon2" href="#"></a></dd>
+                         <dd><a class="icon3" href="#"></a></dd>
+                         <dd><a class="icon4" href="#"></a></dd>
+                         <dd><a class="icon5" href="#"></a></dd>
+                     </dl>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- end buypage/购买页面-->
+<!--详情页面-->
+<div class="mainwrap">
+    <div class="content">
+        <div id="description" class="mainwrap-all clearfix">
+            <div class="mainwrap-top">
+                <ul>
+                    <li class="curr">商品详情</li>
+                    <li>所有参与记录</li>
+                    <li>晒单</li>
+                </ul>
+            </div>
+            <div class="tshop-psm box1" style="display:block;">
+           <!--      
+                <p>
+                    <img src="${imageContextPath}/img_1.png" alt="">
+                    <img src="${imageContextPath}/img_2.png" alt=""> 
+                </p>  -->
+              <p> ${obp.baseInfo.pcDetail!'没有详情'}</p> 
+            </div>
+            <div class="tshop-psm box2">2222222222</div>
+            <div class="tshop-psm box3">333333333333</div>
+        </div>
+    </div>
+</div>
+<!-- end 详情页面-->
+	<#include "common/foot.html">
+	
+<script src="${contextPath}/resources/js/effects.det.js"></script> 
+<script src="${contextPath}/resources/js/layer/layer.js"></script>
+
+</body>
+
+</html>

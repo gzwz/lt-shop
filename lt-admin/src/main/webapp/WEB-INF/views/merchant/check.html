@@ -1,0 +1,449 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<#include "/public/frame/metrnic.html">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+<link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<!-- jqgrid-->
+<link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+
+<link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+.textValue{
+	color: red;
+}
+</style>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="tabbable tabbable-custom">
+									<ul class="nav nav-tabs">
+
+										<li id="category" class="active"><a
+											href="javascript:void(0);">基本信息</a></li>
+										<li id="propoty" class="active" style="display: none;"><a
+											href="javascript:void(0);">认证信息</a></li>
+										<li id="product" class="active" style="display: none;"><a
+											href="javascript:void(0);">详细信息</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane active fontawesome-demo">
+											<div class="portlet-body form">
+												<!-- BEGIN FORM-->
+												<form  class="form-horizontal" id="merchantCheckAllFrom">
+													<!-- 商家id -->
+													<input type="hidden" value="${merchant.id!''}" name="id"/>
+													
+													<fieldset id="category-content">
+														<div class="ibox-content">
+
+															<table class="table table-bordered" style="text-align: center;">
+																	<tr style="background-color: #E3EDF5; font-size: 16px;">
+																		<td style="width: 40%;">申请项目</td>
+																		<td>用户填写</td>
+																		<td style="width: 10%;">审核操作</td>
+																		 
+																	</tr>
+																	<tr>
+																		<td>店铺名称</td>
+																		<td class="textValue">${merchant.baseInfo.name!''}</td>
+																		<td style="width: 10%;">审核操作</td>
+																	</tr>
+																	<tr>
+																		<td>手机</td>
+																		<td class="textValue">${merchantContactInfo.mobile!''}</td>
+																		<td style="width: 10%;">审核操作</td>
+																	</tr>
+																	<tr>
+																		<td>座机</td>
+																		<td class="textValue">${merchantContactInfo.telephone!''}</td>
+																		<td style="width: 10%;">审核操作</td>
+																	</tr>
+																	<tr>
+																		<td>邮箱</td>
+																		<td class="textValue">${merchantContactInfo.email!''}</td>
+																		<td style="width: 10%;">审核操作</td>
+																	</tr>
+																	
+																	
+																	<tr>
+																		<td>地址</td>
+																		<td class="textValue">
+																		${merchantContactInfo.province.name!''}
+																		-- ${merchantContactInfo.city.name!''} --
+																		${merchantContactInfo.area.name!''} -- 
+																		${merchantContactInfo.detailAddress!''}
+																		</td>
+																		<td style="width: 10%;">审核操作</td>
+																	</tr>
+																<tr>
+																	<td>店铺logo</td>
+																	<td class="textValue"><div title="点击图片放大"
+																			onclick="javascript:lookBigImg('${imageContextPath}/${merchant.baseInfo.headImage!''}');">
+																			<img width="200" alt="点击看大图" src="${imageContextPath}/${merchant.baseInfo.headImage!''}">
+																		</div>
+																	</td>
+																	<td style="width: 10%;">审核操作</td>
+																</tr>
+
+															</table>
+
+														</div>
+
+
+													</fieldset>
+													
+													<fieldset id="product-brand" style="display: none;">
+														 <div class="ibox-content">
+															<table class="table table-bordered" style="text-align: center;">
+																	<tr>
+																		<td>身份证正面</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.front!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.front!''}"></div></td>
+																		<td style="width: 5%;">
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','front');" type="button" id="front">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																		<td>身份证反面</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.opposite!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.opposite!''}"></div></td>
+																		<td style="width: 8%;">
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','opposite');" type="button" id="opposite">
+																			<strong>通过</strong>
+																		</button>
+																	</td>
+																	</tr>
+																	<tr>
+																		
+																		<td>手持身份证照片</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.identifyImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.identifyImage!''}"></div></td>
+																		<td>
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','identifyImage');" type="button" id="identifyImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																		<td>营业执照</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.charterImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.charterImage!''}"></div></td>
+																		<td>
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','charterImage');" type="button" id="charterImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																	</tr>
+																	<tr>
+																		
+																		<td>组织机构代码</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.organizationsImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.organizationsImage!''}"></div></td>
+																		<td>
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','organizationsImage');" type="button" id="organizationsImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																		<td>登记证书</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.registrationImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.registrationImage!''}"></div></td>
+																		 <td>
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','registrationImage');" type="button" id="registrationImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																	</tr>
+																	<tr>
+																		
+																	<!-- 	<td>店铺logo</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.registrationImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.registrationImage!''}"></div></td>
+																		<td>
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','registrationImage');" type="button" id="registrationImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td> -->
+																		<td>纳税人资质证书</td>
+																		<td class="textValue"><div  title="点击图片放大" onclick="javascript:lookBigImg('${imageContextPath}/${mAImgInfo.aptitudesImage!''}')"> <img id="logoImg" width="200" alt="点击看大图" src="${imageContextPath}/${mAImgInfo.aptitudesImage!''}"></div></td>
+																		<td colspan="4" style="float: left;">
+																		<button class="btn btn-warning"
+																		onclick = "javascript:fnClickCheck('${merchant.id!''}','aptitudesImage');" type="button" id="aptitudesImage">
+																			<strong>通过</strong>
+																		</button>
+																		</td>
+																	</tr>
+															</table>
+
+														</div>
+													</fieldset>
+													<fieldset id="product-content" style="display: none;">
+														
+														<div class="ibox-content">
+
+															<table class="table table-bordered" style="text-align: center;">
+																	 
+																	<tr>
+																		<td colspan="2">店铺简介</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2">${merchant.baseInfo.introduction!''}</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2">店铺详情</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2">${merchantContactInfo.detail!''}</td>
+																	</tr>
+															</table>
+
+														</div>
+													</fieldset>
+													
+													<div class="form-actions">
+														<div class="row">
+															<div class="col-md-offset-2 col-md-9">
+																<button id="prve" style="display: none;" type="button"
+																	class="btn btn-default">
+																	<i class="m-icon-swapleft m-icon-white"></i>上一步
+																</button>
+																<button id="prve-product" style="display: none;"
+																	type="button" class="btn btn-default">
+																	<i class="m-icon-swapleft m-icon-white"></i> 上一步
+																</button>
+																<button id="next" type="button"
+																	class="btn btn-primary active">
+																	<i class="m-icon-swapright m-icon-white"></i> 下一步
+																</button>
+																<button id="next-product" style="display: none;"
+																	type="button" class="btn btn-primary active">
+																	<i class="m-icon-swapright m-icon-white"></i> 下一步
+																</button>
+																<button id="submitForm" style="display: none;" onclick="javascript:checkAll();"
+																	type="button" class="btn btn-info " title="不符合要求请不要提交。关闭窗口即可">全部认证通过</button>
+															</div>
+														</div>
+													</div>
+												</form>
+												<!-- END FORM-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END PAGE CONTENT-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<div  id="imgToBig" style="display: none; ">
+<img src="">
+</div>
+
+
+
+
+	<#include "/admin/resource/add.html">
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+
+	<#include "/public/frame/metrnicjs.html">
+
+	<script>
+	 /*搜索*/
+ 	 function search(){
+	 	$("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入
+	 } 
+	 
+	  /*商家全不提交审核通过*/
+		function checkAll() {
+			var param = $("#merchantCheckAllFrom").serialize();
+			var url = "${contextPath}/merchant/checkAll";
+				var delCollback = function(d){
+					if(d.success){
+				swal({
+					title : "恭喜操作成功！",
+					text : d.errorMsg,
+					type : "success",
+					showCancelButton : true,
+					confirmButtonColor : "#1ab394",
+				    confirmButtonText: "审核完成！",
+					cancelButtonText : "返回继续修改",
+			//	    closeOnConfirm: true,
+			//	    closeOnCancel: false
+					closeOnCancel : true
+					},
+					function(isConfirm) {
+					if (isConfirm) {
+						parent.refurbish();//刷新
+						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭 
+					}
+				});
+				}
+
+			}
+			confimSwal("提交通过？", "提交后此商家正式通过审核！", "warning", "确定", function() {
+				fnAjax(url, 'post', 'json', param, delCollback);
+			});
+
+		}
+		/*部分资质照片通过审核*/
+		function fnClickCheck(id, sign) {
+
+			fnAjaxPost("${contextPath}/merchant/check.html", {
+				"id" : id,
+				"sign" : sign
+			}, function(result) {
+				if (result == "success") {
+					$("#" + sign).attr("class",
+							"btn btn-sm btn-primary pull-right m-t-n-xs");
+					$("#" + sign).attr("disabled", true);
+					$("#" + sign).html("<strong>【已通过】</strong>");
+				}
+				search();
+			});
+		}
+
+		//页面层-点击图片放大
+		function lookBigImg(url) {
+			$("#imgToBig img").attr("src", url);
+			layer.open({
+				type : 1,
+				title : false,
+				closeBtn : 0,
+				area : '1000px',
+				skin : 'layui-layer-nobg', //没有背景色
+				shadeClose : true,
+				content : $("#imgToBig").show()
+			});
+		}
+		jQuery(document).ready(
+				function() {
+					Metronic.init(); // 公共js  必须加入
+					Layout.init(); //   布局js  必须加入
+					QuickSidebar.init(); // 右边sidebar 必须加入
+
+					$('.fileupload').fileupload(
+
+							{
+								url : "${contextPath}/file/upload",
+								dataType : 'json',
+								done : function(e, data) {
+									$(this).next().attr("value",
+											data.result.url);
+									$(this).parent().next().attr(
+											"src",
+											"${imageContextPath}/"
+													+ data.result.url).css(
+											"display", "inline");
+
+								}
+							});
+
+					$("#propoty-content").hide();
+					$("#propoty").hide();
+					$("#product").hide();
+
+					$("#next").click(function() {
+						$(this).hide();
+						$("#product-brand").show();
+						$("#category-content").hide();
+						$("#prve").show();
+						$("#next-product").show();
+						$("#category").hide();
+						$("#propoty").show();
+
+					});
+
+					$("#next-product").live("click", function() {
+
+						$(this).hide();
+						$("#product-brand").hide();
+						$("#product").show();
+						$("#category-content").hide();
+						$("#product-content").show();
+						$("#prve-product").show();
+						$("#prve").hide();
+						$("#category").hide();
+						$("#propoty").hide();
+						$("#submitForm").show();
+					});
+
+					$("#prve-product").live("click", function() {
+						$(this).hide();
+						$("#prve").show();
+						$("#product-brand").show();
+						$("#product").hide();
+						$("#category-content").hide();
+						$("#product-content").hide();
+						$("#category").hide();
+						$("#propoty").show();
+						$("#submitForm").hide();
+						$("#next-product").show();
+					});
+
+					$("#prve").live("click", function() {
+						$(this).hide();
+						$("#prve-product").hide();
+						$("#product-brand").hide();
+						$("#product").hide();
+						$("#category-content").show();
+						$("#product-content").hide();
+						$("#category").show();
+						$("#propoty").hide();
+						$("#submitForm").hide();
+						$("#next-product").hide();
+						$("#next").show();
+					});
+
+				});
+
+		//js去掉重复的数据
+		function unique(arr) {
+			var result = [], hash = {};
+			for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+				if (!hash[elem]) {
+					result.push(elem);
+					hash[elem] = true;
+				}
+			}
+			return result;
+			//http://www.cnblogs.com/sosoft/
+		}
+	</script>
+
+</body>
+</html>

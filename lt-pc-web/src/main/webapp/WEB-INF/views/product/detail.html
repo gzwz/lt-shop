@@ -1,0 +1,553 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>${product.showInfo.name}</title>
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.mal.css">
+     <link rel="stylesheet" href="${contextPath}/resources/css/pc/uedit.css">
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <!-- <script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script> -->
+    <script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+
+</head>
+
+<body>
+ <!-- 头部 -->
+ <#include "common/head.html">
+ <form id="submitForm" action="${contextPath}/intercept/fill-information" method="post">
+ 
+ <input type="hidden" name="productId" id="productIds"/>
+  <input type="hidden" name="price" id="prices"/>
+   <input type="hidden" name="num" id="nums"/>
+    <input type="hidden" name="skuSpecInfo" id="skuSpecInfos"/>
+    
+    <input type="hidden" name="productCatoryName" value="${show!''}"/>
+ 
+ 
+ </form>
+	<!--buypage/购买页面-->
+	<div class="buypage clearfix">
+		<div class="content">
+			<div class="crumb">
+				<span><a href="${contextPath}/index">首页</a></span> > 
+				<span><a href="javascript:void(0)">${show!''}</a></span> > <span><a class="curr" href="javascript:void(0);">${product.showInfo.name}</a></span>
+				
+			</div>
+			<div class="detail-bd">
+				<div class="detail-bd-l flt">
+					<div class="booth">
+							<div class="main-pic">
+								<a href="javascript:void(0);"><img id="thumb2" src="${imageContextPath}/${product.showInfo.titleImage}" ></a>
+							</div>
+					</div>
+					<ul id='thumb' class="thumb">
+					  		<li>
+								<div>
+									<img width="60px" src="${imageContextPath}/${product.showInfo.titleImage}"/>
+								</div>
+							</li>
+					 <#if imageList?exists> 
+					    <#list imageList?keys as key>
+					      <#if key_index lt 5>
+							<li>
+								<div>
+									<img width="60px" src="${imageContextPath}/${imageList[key]}"/>
+								</div>
+							</li>
+							</#if>
+						 </#list> 
+					  </#if>
+					</ul>
+				</div>
+				<div class="detail-bd-r">
+					<div class="pic-text">
+						<p>${product.showInfo.name}</p>
+					</div>
+					<div class="progress  clearfix">
+                     <div class="colour clearfix">
+                       <span>价格:</span>
+					<input type="hidden" id="priceS" value="${(product.showInfo.lowestPrice)?c}"/>                     
+					  <span class="money" id="money-price">￥${(product.showInfo.lowestPrice)?c}</span>
+					 </div>
+					<#if skuItemsList?exists>
+					 <#list skuItemsList as skuItem>
+					    <div class="colour clearfix">
+							<span class="parent-propoty" accesskey="${skuItem.proportyName}">${skuItem.proportyName}:</span>
+								   <ul class="colourbox">
+								     <#list skuItem.proportyValueItem?split(",") as valueitem>
+									      <li class="color1" accesskey="${valueitem}">${valueitem}<i></i></li>
+									 </#list>
+								   </ul>
+							
+						</div>
+					 </#list>
+					</#if>
+					</div>
+					<input type="hidden" id="color-select"/>
+					<input type="hidden" id="model-select"/>
+					<div class="amount space_l25 clearfix">
+						<ul>
+							<li>数量：</li>
+							<li>
+                             <div id="main">
+                               <div class="demo">
+							   <button type="button" id="decrease" class="but buticon1"></button>
+									<input type="text" id="num" class="number" name="num"/>
+                               <button type="button" id="increase" class="but"></button>
+								</div>
+                            </div>
+                         </li>
+							<li class="curr1">件（库存：<span id="skuNumer">${skuNumer?c!'0'}</span>辆）</li>
+						</ul>
+					</div>
+					<div class="items-but">
+						<a class="but1" href="javascript:immed('${product.id}');">立即购买</a>
+						<a class="but2" href="javascript:addShop('${product.id}');">加入购物车<i></i></a>
+						
+					</div>
+					<div class="service-icon">
+						<ul class="clearfix">
+							<li><span class="icon1">支付方式：</span></li>
+							<li><a class="icon2" href="#"></a><span>快捷支付</span></li>
+							<li><a class="icon3" href="#"></a><span>信用卡支付</span></li>
+							<li><a class="icon4" href="#"></a><span>余额宝支付</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end buypage/购买页面-->
+	<!--详情页面-->
+	<div class="mainwrap">
+		<div class="content">
+			<div id="descriptions" class="mainwrap-all clearfix">
+				<div class="mainwrap-top">
+					<ul id="description">
+						<li class="curr">综述</li>
+						<li>参数配置</li>
+						<li>实拍图片</li>
+						<li>经销商</li>
+					</ul>
+				</div>
+				<!--综述-->
+				<div class="tshop-psm box1" style="display:block;">
+					
+					<div class="site">
+                    <div class="sitenav">
+                        <i></i><span>经销商</span>
+                    </div>
+                </div>
+                <div class="merchant clearfix">
+                  <div class="flt">
+                    <div class="merc_logo">
+                      <img width="120px" src="${imageContextPath}/${product.merchant.baseInfo.headImage}">
+                    </div>
+                  </div>
+                  <div class="company">
+                    <div class="comp_title clearfix">
+                      <div class="comp_title_l flt">
+                        <i class="icon1"></i>
+                        <span>${product.merchant.baseInfo.name}</span>
+                        <i class="icon2"></i>
+                      </div>
+                      <div class="comp_title_r flr">
+                        <i class="icon"></i>
+                        <span><#if product.merchant.status.charterValid==true>营业执照已认证<#else>营业执照未认证</#if></span>
+                        <span>24小时</span>
+                      </div>
+                    </div>
+                    <div class="location">
+                        <p><span>主营：</span>${product.merchant.baseInfo.mainCore}</p>
+                        <p><span>地址：</span>${merchantContactInfo.province.name}${merchantContactInfo.city.name}${merchantContactInfo.area.name}${merchantContactInfo.detailAddress}</p>
+                        <p class="tel"><i></i><em>${merchantContactInfo.telephone}</em><span>厂商授权</span><span>售全国</span></p>
+                    </div>
+                  </div>
+                  
+                </div>
+					
+					
+					
+					
+					<div class="parameter">
+						<div class="site">
+							<div class="sitenav">
+								<i></i><span>基本参数</span>
+							</div>
+						</div>
+						<div class="parameter-f">
+						${product.showInfo.intro}
+						</div>	
+					</div>
+					<div class="real">
+						<div class="site">
+							<div class="sitenav">
+								<i></i><span>实拍图片</span> <span class="flr"><a href="javascript:imageStock();">进入图片库＞＞</a></span>
+							</div>
+						</div>
+						<#if exterior?exists> 
+							<div class="subtitle">
+								<h3>
+									外观<span> （${exterior?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								  <#list exterior?keys as key> 
+								   <#if key_index lt 8>
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${exterior[key]}" alt=""></a></li>
+											</ul>
+										</#if>
+									 </#list> 
+							</div>
+						</#if>
+						<#if driverCab?exists> 
+							<div class="subtitle">
+								<h3>
+									驾驶室<span>（${driverCab?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								  <#list driverCab?keys as key> 
+								   <#if key_index lt 8>
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${driverCab[key]}" alt=""></a></li>
+											</ul>
+										</#if>
+									 </#list> 
+							</div>
+						</#if>
+						<#if territory?exists> 
+							<div class="subtitle">
+								<h3>
+									底盘<span>（${territory?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								
+								  <#list territory?keys as key> 
+								   <#if key_index lt 8>
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${territory[key]}" alt=""></a></li>
+											</ul>
+										</#if>
+									 </#list> 
+								
+							</div>
+						  </#if>
+					</div>
+				</div>
+
+				<!-- end 综述-->
+
+
+				<div class="tshop-psm box2">${pds.pcDetail}</div>
+				
+<!--实拍图片-->
+            <div class="tshop-psm box3">
+                <div class="real">
+                    <div class="site">
+							<div class="sitenav">
+								<i></i><span>实拍图片</span> 
+							</div>
+						</div>
+						<#if exterior?exists> 
+							<div class="subtitle">
+								<h3>
+									外观<span> （${exterior?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								  <#list exterior?keys as key> 
+								   <#if key_index lt 8>
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${exterior[key]}" alt=""></a></li>
+											</ul>
+										</#if>
+									 </#list> 
+							</div>
+						</#if>
+						<#if driverCab?exists> 
+							<div class="subtitle">
+								<h3>
+									驾驶室<span>（${driverCab?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								  <#list driverCab?keys as key> 
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${driverCab[key]}" alt=""></a></li>
+											</ul>
+									 </#list> 
+							</div>
+						</#if>
+						<#if territory?exists> 
+							<div class="subtitle">
+								<h3>
+									底盘<span>（${territory?size}）张</span>
+								</h3>
+							</div>
+							<div class="picture clearfix">
+								
+								  <#list territory?keys as key> 
+											<ul>
+												<li><a href="javascript:void(0);"><img width="240px" height="150px" src="${imageContextPath}/${territory[key]}" alt=""></a></li>
+											</ul>
+									 </#list> 
+								
+							</div>
+						  </#if>
+                </div>
+            </div>
+<!-- end 实拍图片-->
+
+				 <div class="tshop-psm box4">
+                 <div class="site">
+                    <div class="sitenav">
+                        <i></i><span>经销商</span>
+                    </div>
+                </div>
+                <div class="serv clearfix">
+                    <h1 class="serv_title">${product.merchant.baseInfo.name}</h1>
+                    <div class="comp_title_r flr">
+                        <i class="icon"></i>
+                        <span><#if product.merchant.status.charterValid==true>营业执照已认证<#else>营业执照未认证</#if></span>
+                        <span>24小时</span>
+                    </div>
+                </div>
+                <div class="document">
+                ${merchantContactInfo.detail}
+                </div>
+                <div class="site">
+                    <div class="sitenav">
+                        <span>店铺展示</span>
+                    </div>
+                </div>
+                <div class="show clearfix">
+                    <ul>
+							
+					<#if mpList?exists>
+						<#list mpList?keys as key>
+							<li>
+								<div class="img">
+									<img width="460px"
+										src="${imageContextPath}/${mpList[key]}" />
+								</div>
+								<p>外景</p>
+							</li> 
+						</#list> 
+					 </#if>
+                       
+                        
+                    </ul>
+                </div>
+                <div class="map">
+                    <iframe width="100%" height="100%" style="background:#eee;" frameborder="0" scrolling="no" id="theframe" src="${contextPath}/query/maps?id=${product.merchant.id}"></iframe>
+                </div>
+            </div>
+<!-- end 经销商-->
+			</div>
+		</div>
+	</div>
+	<!-- end 详情页面-->
+	
+	<!--foot/脚部-->
+	
+ <#include "common/foot.html">
+ 
+ 
+ 
+ <script src="${contextPath}/resources/js/layer/layer.js"></script>
+   <script src="${contextPath}/resources/js/effects.mal.js"></script>
+   
+   <script type="text/javascript">
+   $(function(){
+	     $("#num").val("1");
+	        //加减数量
+			$("#decrease").click(function(){
+				//选择商品数量
+				var shengyu = $("#skuNumer").html();
+				if ( parseInt($("#num").val()) >1) {
+					$("#num").val(parseInt(parseInt($("#num").val())-1));
+				}else{
+				$("#num").val(parseInt(1));
+				layer.msg("对不起！最少选择1辆");
+				}
+			});
+		
+			$("#increase").click(function(){
+				//选择商品数量
+					if (parseInt($("#num").val()) >= parseInt($("#skuNumer").html())) {
+					layer.msg("对不起！最多只能选择"+$("#skuNumer").html()+"辆");
+					$("#num").val($("#skuNumer").html());
+				}else{
+					$("#num").val(parseInt(parseInt($("#num").val())+1));
+				}
+			});
+	
+	
+			$("#num").bind('input propertychange', function(){
+					var shengyu = $("#skuNumer").html();
+				if (parseInt($(this).val()) > parseInt(shengyu)) {
+					layer.msg("对不起！最多只能选择"+shengyu+"辆");
+					$("#num").val(parseInt(shengyu));
+				}else if (parseInt($(this).val()) < parseInt(1) ) {
+					$("#num").val(parseInt(1));
+					layer.msg("对不起！最少是1");
+				}
+			});
+         
+			 $('.colourbox li').click(function (){
+			    var temp ="";
+			    var parentName="";
+			    $(this).siblings("li").removeClass("curr");
+				$(this).addClass("curr");
+				$(this).siblings("li").children().removeClass("currt");
+				$(this).find("i").addClass("currt");
+				
+			   update(validate(temp));
+			});
+			 
+			 
+			 $('#description li').click(function(){
+			        $(this).addClass('curr').siblings().removeClass('curr')
+			        $('#descriptions').find('.tshop-psm').css('display','none')
+			        $('#descriptions').find('.tshop-psm').eq($('#description li').index(this)).css('display','block')
+			        $('#theframe').attr('src','${contextPath}/query/maps?id=${product.merchant.id}');
+			    })
+      });
+   
+   
+   
+   function validate(temp){
+       
+       $('.colourbox li').each(function() {
+			   if($(this).attr("class")=="color1 curr"){
+			     temp+=$(this).attr("accesskey");
+			     $(this).parent().prev().removeClass("parent-propoty");
+			   }
+			});
+		   
+	    $(".parent-propoty").each(function(){
+			 bb();//错误代码 终结
+	       });
+         return temp;
+   
+   }
+   
+   
+   function update(temp){
+       $.ajax({
+			type : "post",
+			url : "${contextPath}/product/selectSkuProduct",
+			dataType : "json",
+			async : true,
+			 data : {productId:'${product.id}',skuSpecInfo:temp}, 
+			 success : function(data) {
+				if(data!=null){
+				 $("#skuNumer").html("");
+				 $("#priceS").val("");
+				  $("#money-price").html("");
+				  $("#skuNumer").html(data.number);
+				  $("#money-price").html("￥"+data.price.toFixed(2));
+				  $("#priceS").val(data.price.toFixed(2));
+				   $("#num").val("1");
+				}
+			}
+		}); 
+   }
+   
+   
+   function imageStock(){
+   
+      $("#description li").each(function(){
+          if($(this).text()=="实拍图片"){
+           $(this).addClass('curr').siblings().removeClass('curr');
+        $('#descriptions').find('.tshop-psm').css('display','none');
+        $('#descriptions').find('.tshop-psm').eq($('#description li').index(this)).css('display','block');
+          }
+      });
+   
+   }
+   
+   function immed(id){
+         $(".parent-propoty").each(function(){
+				layer.msg('请选择'+$(this).attr("accesskey"), {icon: 1});
+				bb();//错误代码 终结
+		      });
+		      
+		      var temp=""; 
+		       $('.colourbox li').each(function() {
+			   if($(this).attr("class")=="color1 curr"){
+			     temp+=$(this).attr("accesskey");
+			     $(this).parent().prev().removeClass("parent-propoty");
+			   }
+			});
+		       
+		    
+	         if(parseInt($("#skuNumer").html())>0){
+			     $("#productIds").val(id);
+			     $("#prices").val($("#priceS").val());
+			     $("#nums").val($("#num").val());
+			     $("#skuSpecInfos").val(temp);
+			     $("#submitForm").submit();
+		        }else{
+		          layer.msg("对不起！库存不足，你不能购买");
+		        }
+				  
+				    
+   }
+   
+   function addShop(id){
+        $(".parent-propoty").each(function(){
+				layer.msg('请选择'+$(this).attr("accesskey"), {icon: 1});
+				bb();//错误代码 终结
+		      });
+		      
+		      var temp=""; 
+		       $('.colourbox li').each(function() {
+			   if($(this).attr("class")=="color1 curr"){
+			     temp+=$(this).attr("accesskey");
+			     $(this).parent().prev().removeClass("parent-propoty");
+			   }
+			});
+		       
+		    if("${login_user.id}"==""){
+		      //提示层
+				  layer.msg('你还未登录', {icon: 1});
+				       //停顿1.5秒后跳转
+						$("#submitForm").submit();
+						
+				    }else{
+				      if(parseInt($("#skuNumer").html())>0){
+				          $.ajax({
+							type : "post",
+							url : "${contextPath}/intercept/addShoppingCar",
+							dataType : "json",
+							async : true,
+							data : {productId:id,num:$("#num").val(),skuSpecInfo:temp,productCatoryName:"${show!''}",operationMerchantId:"${product.merchant.id}"},
+							success : function(data) {
+							
+							       if(data.success){
+										  layer.msg(data.errorMsg, {icon: 1});
+										}else{
+										 layer.msg(data.errorMsg, {icon: 1});
+									}
+								  }
+								
+						});
+				        }else{
+				          layer.msg("对不起！库存不足，你不能加入到购物车");
+				        }
+				    
+				    }
+        
+            
+   }
+   
+   </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>分类</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.one.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.oneBuyList.css">
+</head>
+<body>
+	<!--head/头部-->
+<#include "common/one-head.html">
+	<!-- end head/头部-->
+   
+<div class="iconcls">
+    <div class="content">
+<!--分类导航-->
+        <div class="crumb">
+            <span><a href="#">一元购车</a></span> >
+            <span><a href="#">全部商品</a></span> >
+            <span><a class="curr" href="#">数码/手机</a></span>
+        </div>
+        <div class="option">
+            <div class="option-top">全部商品<span  style="font-size:14px; color:#aaa;">（共<span>666</span>件）</span></div>
+            <div class="option-b">
+                <ul>
+                    <li onclick="reload('newPublished')">
+                        <i class="icon1"></i>
+                        <p <#if (type == "newPublished")>style="color: red;"</#if>>最新揭晓</p>
+                    </li>
+                    <li  onclick="reload('willPublish')">
+                        <i class="icon2"></i>
+                        <p <#if (type == "willPublish")>style="color: red;"</#if>>即将揭晓</p>
+                    </li>
+                    <li onclick="reload('normal')">
+                        <i class="icon3"></i>
+                        <p <#if (type == "normal")>style="color: red;"</#if>>热门推荐</p>
+                    </li>
+                    <li>
+                        <i class="icon4"></i>
+                        <p>建设之中</p>
+                    </li>
+                    <li>
+                        <i class="icon5"></i>
+                        <p>建设之中</p>
+                    </li>
+                    <li>
+                        <i class="icon6"></i>
+                        <p>建设之中</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!--end 分类导航-->
+        <div class="commodity">
+            <div class="titled">排列 ： <span>最新商品</span> <span>价格</span></div>
+            <div class="commlist clearfix">
+	<#if (type == "newPublished")>
+<!--揭晓-->
+                 <ul class="clearfix">
+                  <#list oneBuyList as ob> 
+                     <li>
+                         <div class="pic">
+                             <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                         </div>
+                         <div class="pic-text">
+                             <p><a href="#">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</a></p>
+                             <p class="lest">获得者：<span>151****5677</span></p>
+                         </div>
+                         <i></i>
+                     </li> 
+                   </#list>
+                 </ul>
+<!-- end 揭晓-->
+	<#elseif (type == "normal")>
+<!--1元购-->
+                 <ul class="items clearfix">
+                     <li>
+                         <div class="pic">
+                             <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                         </div>
+                         <div class="pic-text">
+                             <p class="tops"><a href="#">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</a></p>
+                             <p class="lest">价值：7488.00</p>
+                         </div>
+                         <div class="progress  clearfix">
+                             <div class="progress-bar">
+                                 <b></b>
+                             </div>
+                             <div id="asset">
+                                 <div class="asset-b first">
+                                     <p class="one">73</p>
+                                     <p>已参与</p>
+                                 </div>
+                                 <div class="asset-b middle">
+                                     <p>79</p>
+                                     <p>总需人次</p>
+                                 </div>
+                                 <div class="asset-b lest">
+                                     <p class="two flr">8</p>
+                                     <p class="three flr">剩余</p>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="items-but">
+                             <a href="#">立即1元购</a>
+                         </div>
+                     </li> 
+                     <li>
+                         <div class="pic">
+                             <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                         </div>
+                         <div class="pic-text">
+                             <p class="tops"><a href="#">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</a></p>
+                             <p class="lest">价值：7488.00</p>
+                         </div>
+                         <div class="progress  clearfix">
+                             <div class="progress-bar">
+                                 <b></b>
+                             </div>
+                             <div id="asset">
+                                 <div class="asset-b first">
+                                     <p class="one">73</p>
+                                     <p>已参与</p>
+                                 </div>
+                                 <div class="asset-b middle">
+                                     <p>79</p>
+                                     <p>总需人次</p>
+                                 </div>
+                                 <div class="asset-b lest">
+                                     <p class="two flr">8</p>
+                                     <p class="three flr">剩余</p>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="items-but">
+                             <a href="#">立即1元购</a>
+                         </div>
+                     </li>
+                     <li>
+                         <div class="pic">
+                             <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                         </div>
+                         <div class="pic-text">
+                             <p class="tops"><a href="#">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</a></p>
+                             <p class="lest">价值：7488.00</p>
+                         </div>
+                         <div class="progress  clearfix">
+                             <div class="progress-bar">
+                                 <b></b>
+                             </div>
+                             <div id="asset">
+                                 <div class="asset-b first">
+                                     <p class="one">73</p>
+                                     <p>已参与</p>
+                                 </div>
+                                 <div class="asset-b middle">
+                                     <p>79</p>
+                                     <p>总需人次</p>
+                                 </div>
+                                 <div class="asset-b lest">
+                                     <p class="two flr">8</p>
+                                     <p class="three flr">剩余</p>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="items-but">
+                             <a href="#">立即1元购</a>
+                         </div>
+                     </li>
+                     <li class="curr">
+                         <div class="pic">
+                             <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                         </div>
+                         <div class="pic-text">
+                             <p class="tops"><a href="#">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</a></p>
+                             <p class="lest">价值：7488.00</p>
+                         </div>
+                         <div class="progress  clearfix">
+                             <div class="progress-bar">
+                                 <b></b>
+                             </div>
+                             <div id="asset">
+                                 <div class="asset-b first">
+                                     <p class="one">73</p>
+                                     <p>已参与</p>
+                                 </div>
+                                 <div class="asset-b middle">
+                                     <p>79</p>
+                                     <p>总需人次</p>
+                                 </div>
+                                 <div class="asset-b lest">
+                                     <p class="two flr">8</p>
+                                     <p class="three flr">剩余</p>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="items-but">
+                             <a href="#">立即1元购</a>
+                         </div>
+                     </li>
+                 </ul>
+<!-- end 1元购-->
+	<#elseif (type == "willPublish")>
+	
+
+<!-- 倒计时 -->
+                <ul class="countdown clearfix">
+                 <li>
+                     <div class="pic">
+                         <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                     </div>
+                     <div class="pic-text">
+                         <p class="tops">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</p>
+                         <p class="lest">价值：7488.00</p>
+                         <p class="timedown"><em></em>揭晓倒计时</p>
+                     </div>
+                     <div id="progress1" class="progress">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                     </div>
+                     <div class="items-but">
+                         <a href="#">立即1元购</a>
+                     </div>
+                 </li> 
+                 <li>
+                     <div class="pic">
+                         <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                     </div>
+                     <div class="pic-text">
+                         <p class="tops">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</p>
+                         <p class="lest">价值：7488.00</p>
+                         <p class="timedown"><em></em>揭晓倒计时</p>
+                     </div>
+                     <div id="progress2" class="progress">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                     </div>
+                     <div class="items-but">
+                         <a href="#">立即1元购</a>
+                     </div>
+                 </li>
+                 <li>
+                     <div class="pic">
+                         <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                     </div>
+                     <div class="pic-text">
+                         <p class="tops">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</p>
+                         <p class="lest">价值：7488.00</p>
+                         <p class="timedown"><em></em>揭晓倒计时</p>
+                     </div>
+                     <div id="progress3" class="progress">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                     </div>
+                     <div class="items-but">
+                         <a href="#">立即1元购</a>
+                     </div>
+                 </li>
+                 <li class="curr">
+                     <div class="pic">
+                         <img src="${contextPath}/resources/images/pic_01.png" alt="">
+                     </div>
+                     <div class="pic-text">
+                         <p class="tops">(第1期)苹果（Apple）iPhone 6 Plus A1524 64G版 4G手机</p>
+                         <p class="lest">价值：7488.00</p>
+                         <p class="timedown"><em></em>揭晓倒计时</p>
+                     </div>
+                     <div id="progress4" class="progress">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img src="${contextPath}/resources/images/00.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                          <img class="countdown" src="${contextPath}/resources/images/imgs0.png" alt="">
+                     </div>
+                     <div class="items-but">
+                         <a href="#">立即1元购</a>
+                     </div>
+                 </li>
+             </ul>
+<!-- end 倒计时 -->
+		</#if>
+            </div>
+        </div>
+<!--页计-->
+        <div class="page">
+            <ul class="clearfix">
+                <li><a href="#">&lt;上一页</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">下一页&gt;</a></li>
+                <li class="heights"> 共 5 页  ，去第</li>
+                <li><a href="#">2</a></li>
+                <li class="heights">页</li>
+                <li><a href="#">确定</a></li>
+            </ul>
+        </div>
+<!-- end 页计-->
+    </div>
+</div>
+   
+   
+   
+   
+   
+   
+   
+<!--foot/脚部-->
+
+ <#include "common/foot.html">
+<!-- end foot/脚部-->
+
+   <script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+    <script>
+    	$(function(){
+    		$("#newPublished").click(function(){
+    			reload("newPublished");
+    		});
+    		$("#willPublish").click(function(){
+    			reload("willPublish");
+    		});
+    		$("#normal").click(function(){
+    			reload("normal");
+    		});
+    	});
+    	function reload(type){
+    	var url = "${contextPath}/oneBuy/one-list.html?type="+type;
+    		  window.location.href=url;
+    	}
+    </script>
+    <!--   头部JS-->
+    <script>
+          $("#category").hover( function () { $("#category").find("ul").stop().slideDown(); }, function () { $("#category").find("ul").stop().slideUp()});
+    </script>
+</body>
+</html>

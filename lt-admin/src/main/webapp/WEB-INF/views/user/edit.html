@@ -1,0 +1,189 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+ <#include "/public/frame/metrnic.html">
+   <link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-content">
+                        <div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								<form class="form-horizontal add-form" action="${contextPath}/user/modify" method="post">
+									<div class="form-body">
+									
+									        <input type="hidden" name="userId" value="${user.id}"/>
+									        
+											<div class="form-group">
+												<label class="control-label col-md-2">登陆名:</label>
+												<div class="col-md-8">
+													<input type="text" placeholder="登陆名" readonly="readonly" id="loginName" name="loginName" value="${user.userLoginInfo.loginName}" class="form-control" />
+												</div>
+											</div>
+											
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">昵称:</label>
+												<div class="col-md-8">
+													<input type="text" name="nickName" placeholder="昵称"  value="${user.baseInfo.nickName}" class="form-control" />
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">真实姓名:</label>
+												<div class="col-md-8">
+													<input type="text" name="name" placeholder="真实姓名"  value="${user.baseInfo.name}" class="form-control" />
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">身份证号:</label>
+												<div class="col-md-8">
+													<input type="text" id="idCardNo" readonly="readonly" name="idCardNo" placeholder="身份证号"  value="${user.baseInfo.idCardNo}" class="form-control" />
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">头像:</label>
+												<div class="col-md-7">
+													<span class="btn btn-success fileinput-button"> <i
+														class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+														<input id="fileupload" type="file" name="file">
+														<input id="fileuploadInput" type="hidden" value="${user.baseInfo.headImage}" name="headImage">
+													</span> <img id="img" class="img-thumbnail" src="<#if user.baseInfo.headImage?if_exists>${imageContextPath}/${user.baseInfo.headImage}</#if>" style="width: 100px; height:66px; <#if "" == user.baseInfo.headImage>display: none;</#if>"/>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">手机:</label>
+												<div class="col-md-8">
+													<input type="text" name="mobile"  readonly="readonly" id="mobile" placeholder="手机"  value="${user.contactInfo.mobile}" class="form-control" />
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="control-label col-md-2">邮箱:</label>
+												<div class="col-md-8">
+													<input type="text" name="email" readonly="readonly" id="email" placeholder="邮箱"  value="${user.contactInfo.email}" class="form-control" />
+												</div>
+											</div>
+											
+											 <fieldset>
+											     <div class="form-group">
+													<label class="control-label col-md-2">手机验证:</label>
+													<div class="col-md-8">
+													   <#if status.mobileValid==true>
+														<input type="radio" name="mobileValid"  checked="checked" value="true" class="form-control"/>已验证
+														<#else>
+														<input type="radio" name="mobileValid"  checked="checked" value="false" class="form-control"/>已验证
+														</#if>
+													</div>
+											     </div>
+											     
+											     <div class="form-group">
+													<label class="control-label col-md-2">邮箱验证:</label>
+													<div class="col-md-8">
+													  <#if status.emailValid==true>
+													    <input type="radio" name="emailValid"  checked="checked" value="true" class="form-control"/>已验证
+													    <#else>
+														<input type="radio" name="emailValid"  checked="checked" value="false" class="form-control"/>已验证
+														</#if>
+													</div>
+											   </div>
+											
+											 </fieldset>
+
+									</div>
+										 <div class="hr-line-dashed"></div>
+											<div class="form-group">
+												<div class="col-sm-offset-3 col-sm-8">
+													<button class="btn btn-info" type="submit">保存</button>
+												</div>
+											</div>
+								</form>
+								<!-- END FORM-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<#include "/public/frame/metrnicjs.html">
+	
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+ <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+ <script src="${contextPath}/resources/js/common.js"></script>
+	<script>
+		jQuery(document).ready(
+				function() {
+					Metronic.init(); // 公共js  必须加入
+					Layout.init(); //   布局js  必须加入
+					QuickSidebar.init(); // 右边sidebar 必须加入
+
+					$('#fileupload').fileupload(
+					
+							{
+								url : "${contextPath}/file/upload",
+								dataType : 'json',
+								done : function(e, data) {
+								   $(this).next().attr("value",data.result.url);
+								   $(this).parent().next().attr("src","${imageContextPath}/"+data.result.url).css("display", "inline");
+									 
+								}
+							});
+				});
+	</script>
+	
+	<script type="text/javascript">
+	 $(function() {
+	  
+		$(".add-form").validate({
+			rules : {
+				loginName : {
+					required : !0,
+					minlength : 2
+				},
+				name : {
+					required : true
+				},
+				
+				mobile : {
+					required : true
+				},
+				email : {
+					required : true
+				},
+				idCardNo : {
+					required : true
+				}
+			},
+			messages : {
+				loginName : {
+					required : e + "请输入登录名",
+					minlength : e + "登录名必须两个字符以上"
+				}
+				
+			},
+			submitHandler:function(){
+				$(".add-form").ajaxSubmitForm(refurbishCollback);
+	          
+			}
+		})
+		
+		
+	});
+	</script>
+</body>
+</html>

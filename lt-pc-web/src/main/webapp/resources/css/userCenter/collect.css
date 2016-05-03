@@ -1,0 +1,143 @@
+.column-r .text1{
+    margin: 17px 0 0 10px;
+    padding-left:20px;
+    background:#306492;
+    line-height: 52px;
+    font-size:30px;
+    color:#fff;
+}
+
+.column-r .text2{
+    margin-left: 10px;
+    font-size:18px;
+    line-height: 50px;
+}
+
+.column-r .text2 span{
+    font-size:26px;
+}
+
+.column-r .pic{
+    width: 275px;
+    height: 226px;
+    position: relative;
+}
+
+.column-r .pic i.icon1{
+    font-size:16px;
+    padding:5px;
+    color:#fff;
+    background:#838383;
+    position:absolute;
+    left:0;
+    bottom: 0;
+    display:none;
+}
+
+.column-r .pic i.icon2{
+    display: inline-block;
+    width:27px;
+    height:27px;
+    background:url(../../images/icon.png) no-repeat -271px -759px;
+    position:absolute;
+    top:0;
+    right: 0;
+    display:none;
+}
+
+#collect_component{
+    width:941px;
+}
+
+#collect_component li{
+    width:273px;
+    float:left;
+    margin: 0 0 20px 36px;
+    position:relative;
+}
+
+#collect_component li:hover i.icon1{
+    display:block;
+}
+
+#collect_component li:hover i.icon2{
+    display:block;
+}
+
+#collect_component .pic{
+    width: 275px;
+    height: 226px;
+    position: relative;
+}
+
+#collect_component .pic i.icon1{
+    font-size:16px;
+    padding:5px;
+    color:#fff;
+    background:#838383;
+    position:absolute;
+    left:0;
+    bottom: 0;
+    display:none;
+}
+
+#collect_component .pic i.icon2{
+    display: inline-block;
+    width:27px;
+    height:27px;
+    background:url(../../images/icon.png) no-repeat -271px -759px;
+    position:absolute;
+    top:0;
+    right: 0;
+    display:none;
+}
+
+#collect_component li img{
+    width:272px;
+    height:225px;
+    border:1px solid #838383;
+}
+
+
+#collect_component li p.t1{
+    width: 144px;
+    height:22px;
+    font-size: 17px;
+    padding-top: 26px;
+    overflow: hidden;
+}
+
+#collect_component li p.t2{
+    width:270px;
+    height:22px;
+    font-size: 16px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+
+#collect_component li .but{
+    width: 142px;
+    height: 36px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+    background: url(../../images/pic_04.png) no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: -17px;
+    bottom: 23px;
+    
+     -ms-transition: -ms-transform 0.5s;
+    -webkit-transition: -webkit-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+#collect_component li:hover .but{
+    -ms-transform:translateX(10px);
+    -webkit-transform:translateX(10px);
+    -o-transform:translateX(10px);
+    transform:translateX(10px);
+}

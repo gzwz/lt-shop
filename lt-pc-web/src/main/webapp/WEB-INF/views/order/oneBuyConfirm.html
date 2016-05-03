@@ -1,0 +1,221 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>1元购订单页</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/order/oneBuyConfirm.css">
+</head>
+<style>
+.addrSelectedDiv{
+width: 200px;
+height:100px;
+float: left;
+border: solid 1px;
+}
+</style>
+<body>
+
+<!-- 头部 -->
+<#include "common/top.html">
+
+<!-- end 头部 -->
+<!-- 订单信息-->
+<form id="onBuyConfirmFormId">
+<div class="main">
+    <div class="content">
+        <p class="title">填写并核对订单信息</p>
+        <div class="column">
+            <div class="msg clearfix">
+                <p><span>收货人信息</span><span><a href="#">新增收货地址</a></span></p>
+                <div class="site">
+                    <ul class="consignee clearfix">
+                    <#if addrList?exists>
+                    <#list addrList as al>
+                    	
+                        <li <#if al.defaultAddress == "true"> class="curr" </#if> >
+                        <input type="hidden" value="${al.id}" <#if al.defaultAddress == "true"> name= "addressId"</#if> />
+                           <i></i>
+                            <div class="addr-hd">
+                                <span class="prov">${al.province.name} ${al.city.name}</span>
+                                <span class="name flr">（${al.name} 收）</span>
+                            </div>
+                            <span>${al.area.name}${al.detail}</span><span class="tel">${al.mobile}</span>
+                        </li>
+                     </#list>
+					</#if>
+                    </ul>
+                </div>
+            </div>
+            <div class="msg">
+                <p><span>配送方式</span>
+                <div class="site clearfix">
+                   <ul id="sitee" class="clearfix">
+                       <li  class="curr" ><input type="hidden" value="kuaidi" name="logistics">快递运输<i></i></li>
+                       <li><input type="hidden" value="ziti">上门自提<i></i></li>
+                   </ul>
+                </div>
+            </div>
+<!-- 送货清单-->
+            <div class="msg clearfix">
+                <p><span>送货清单</span><!-- <span><a href="#">新增收货地址</a></span> --><span><a href="#">价格说明</a></span></p>
+                <div class="prolist">
+                    <ul>
+                        <li>
+                            <p class="title1">商家：卡车网</p>
+                            <div class="showing clearfix">
+                                <ul>
+                                    <li class="num1">
+                                        <a href="${contextPath}/one-detaile?id=${oneBuy.id}" target="_blank"><img src="${contextPath}/resources/images/${oneBuy.baseInfo.titleImage!''}" alt=""></a>
+                                    </li>
+                                    <li class="num1">
+                                        <p class="title2"><a target="_blank" href="${contextPath}/one-detaile?id=${oneBuy.id}">【 ${oneBuy.cloudBrand.brandName!''} 】   ${oneBuy.baseInfo.name!''}</a></p>
+                                        <p class="title3"><i class="flt"></i>７天无理由退货</p>
+                                        <p class="title5">【赠品】硕扬赠品：Ｇ２００办公商务型键鼠套装×１</p>
+                            			<p class="title4">【赠品】硕扬赠品：硕扬定制豪华鼠标垫×１</p>
+                                    </li>
+                                    <li class="num1">
+                                        <span>￥${oneBuy.baseInfo.price!''}</span>
+                                    </li>
+                                    <li class="num1">×</li>
+                                    <li class="num2">${num!1}</li>
+                                    <li class="num1">=</li>
+                                    <li class="num2">￥${(oneBuy.baseInfo.price * num)!''}</li>
+                                </ul>
+                            </div>
+                           
+                        </li>
+                    </ul>
+                </div>
+            </div>
+<!-- end 送货清单-->
+<!--添加订单备注-->
+            <div class="remark">
+                <div class="remarks">
+                    <p>添加订单备注</p>
+                    <input name="remark" type="text" id="note" maxlength=45 placeholder="  限４５个字（定制类商品，请将购买需求在备注中详细说明）">
+                    <label for="note">提示：请勿填写有关支、收货、发票方面的信息</label>
+                </div>
+            </div>
+<!-- end 添加订单备注-->
+<!-- 发票 -->
+       <!--      <div class="msg">
+                <p><span>发票信息</span></p>
+                <div class="site">
+                    <span>普通发票（纸质）</span>
+                    <span>个人</span>
+                    <span>明细</span>
+                    <span>修改</span>
+                </div>
+            </div> -->
+<!-- end 发票 -->
+        </div>
+    </div>
+</div>
+
+<!-- end  订单信息-->
+
+<!--提交-->
+<div class="submit clearfix">
+    <div class="content">
+        <div class="submits clearfix">
+            <div class="money">
+            	<!-- 用户信息 -->
+            	<input type="hidden" value="${user.id}" name="userId">
+            	<!-- 商品信息 -->
+            	<input type="hidden" name="num" value="${num}" />
+            	<input type="hidden" name="productId" value="${(oneBuy.id)}"/>
+            	<input type="hidden" name="totalPrice" value="${(oneBuy.baseInfo.price*num)}"/>
+            	<input type="hidden" name="titleImage" value="${contextPath}/resources/images/${oneBuy.baseInfo.titleImage!''}"/>
+			<!-- 购买者账户 占时使用户昵称代替-->
+				<input type="hidden" name="buyerName" value="${user.baseInfo.nickName!''}">
+				
+				
+            <!--支付信息 -->
+            <!--商户网站订单系统中唯一订单号，必填  -->
+            	<input type="hidden" name="orderId" value="${outTradeNo!''}" />
+            <!-- 订单名称： -->
+            	<input type="hidden" name="subject" value="【 ${oneBuy.cloudBrand.brandName!''} 】   ${oneBuy.baseInfo.name!''}"/>
+            <!-- 订单描述 ： -->
+            	<input type="hidden" name="body" value="【 ${oneBuy.cloudBrand.brandName!''} 】   ${oneBuy.baseInfo.name!''} 数量是 ${num!''}个"/>
+            <!-- 商品展示地址： -->
+            	<input type="hidden" name="showUrl" value="${contextPath}/one-detaile?id=${oneBuy.id}"/> 
+                <span>总金额：<span class="text">${(oneBuy.baseInfo.price*num)}</span>元</span>
+                
+            </div>
+            <button type="button" id="paySubmit">提交订单</button>
+        </div>
+    </div>
+</div>
+</form>
+
+<!-- end 提交-->
+
+<!--foot/脚部-->
+<#include "common/foot.html">
+<!-- end foot/脚部-->
+<script src="${contextPath}/resources/js/jquery191.min.js"></script>
+<script src="${contextPath}/resources/js/common.js"></script>
+<script src="${contextPath}/resources/js/layer/layer.js"></script>
+<script type="text/javascript">
+function addAddress() {
+	layer.open({
+		type : 2, //page层
+		area : [ '700px', '550px' ],
+		title : '新增收货地址',
+		shade : 0.6, //遮罩透明度
+		moveType : 1, //拖拽风格，0是默认，1是传统拖动
+		shift : 1, //0-6的动画形式，-1不开启
+		content : "${contextPath}/intercept/userAddesses/addView"
+	});
+	}
+
+ $("#paySubmit").click(function(){
+ 	var param = $("#onBuyConfirmFormId").serialize();
+ 	var validateUrl = "${contextPath}/oneBuyOrder/createOrderInfo";
+ 	fnAjax(validateUrl, "post", "json", param, function(d){
+ 		if (d.success) {
+			window.location.href = "${contextPath}/oneBuyOrder/orderToPay?orderId=${outTradeNo!''}";
+		}else {
+			layer.msg(d.errorMsg, {icon: 2});
+			setTimeout('jumpurl()',2000);
+		}
+ 		
+ 	});
+ });
+	function jumpurl(){  
+		window.location.href ="${contextPath}/oneBuyOrder/orderToPay?orderId=${outTradeNo!''}";  
+	} 
+</script>
+
+
+<script>
+var oSitee = document.getElementById('sitee');
+var aInps = oSitee.getElementsByTagName('input');
+var aLie = oSitee.getElementsByTagName('li');
+for (var i=0; i<aLie.length; i++){
+    aLie[i].index = i;
+    aLie[i].onclick = function () {
+        for(var i=0; i<aLie.length; i++){
+            aLie[i].className = '';
+            aInps[i].setAttribute('name','');
+        }
+        aLie[this.index].className = 'curr';
+        aInps[this.index].setAttribute('name','logistics');        
+    }
+}
+        
+// end 技付方式
+    /*<!--收货人地址-->*/
+        $('.consignee li').click(function(){
+            $(this).addClass('curr').siblings().removeAttr("class");
+            $(this).siblings().children("input").removeAttr("name");
+        	$(".consignee .curr input").attr("name","addressId");
+        })
+/*<!-- end 收货人地址-->*/
+    </script>
+    
+</body>
+</html>

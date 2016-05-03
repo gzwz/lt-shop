@@ -1,0 +1,222 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    
+    <title>欢迎注册</title>
+    
+	<link rel="stylesheet" href="${contextPath}/resources/css/web/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/web/zhuce.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/validate/validate.css" />
+	<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+ 	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/validate/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/validate/messages_zh.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/validate/Utils.js"></script>
+
+	<style type="text/css">
+	.error{
+	color: red;
+	}
+	</style>
+	
+  </head>
+  
+ <body>
+<!-- 头部 -->
+	<#include "common/top.html">
+<div class="page">
+	<div class="top">
+		<div class="top_img">
+    		<a href="${contextPath}/"><img src="${contextPath}/resources/webImg/logo_dd.png" /></a></div>
+		<div class="zhuce">欢迎注册</div>
+	</div>
+	<div class="center"><span>我已经注册，现在就<a href="${contextPath}/login">登录</a></span></div>
+	<div class="bottom" style="height: 80%;">
+		<form id="registerForm">
+		    <input type="hidden" value="${marketingTokenId}" name="marketingTokenId"/>
+			<table width="770px" height="400px" cellpadding="0" cellspacing="0" border="0px">
+				<tr>
+					<td class="td1"><span>*</span>用户名：</td>
+					<td width="500px"><div class="form-group">
+					<input required type="text" style="color:#ccc; background:url(${contextPath}/resources/img/03.png) no-repeat right" class="form-control" placeholder="邮箱，手机号码" name="loginName" /></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="td1" ><span>*</span>请输入密码：</td>
+					<td width="280px"><div class="form-group">
+					<input required type="password" id="password" name="encryptPassword" class="easyui-validatebox" style="background:url(${contextPath}/resources/img/07.png) no-repeat right" /></div>
+					</td>
+				</tr>
+				<tr>
+					<td class="td1"><span>*</span>请确认密码：</td>
+					<td width="280px"><div class="form-group">
+					<input required  type="password" name="QRencryptPassword" class="easyui-validatebox" data-options="required:true" style="background:url(${contextPath}/resources/img/07.png) no-repeat right"  /></div></td>
+				</tr>
+				<tr>
+					<td class="td1"><span>*</span>验证手机：</td>
+					<td width="280px"><div class="form-group">
+					<input required type="text" id="mobile" name="mobile" class="easyui-validatebox"  style="background:url(${contextPath}/resources/img/10.png) no-repeat right"  /></div>
+					<div class="isTelNum"></div></td>
+				</tr>
+				<tr>
+					<td class="td1"><span>*</span>短信验证码：</td>
+					<td width="280px">
+						<div class="form-group">
+						<input type="hidden" id="sagaId" name="sagaId"> 
+						<input required type="text" name="smsValidCode" style="width:160px;" />
+						<input type="button"  value="获取验证码" id="sendMsg" style="width:102px; height:39px; margin-left:7px; border:1px solid #DEDEDE" /></div>
+						<div class="codeIsTrue"></div>
+					</td>
+				</tr>
+				<tr >
+					<td>&nbsp;</td>
+					<td><input   type="checkbox" checked="checked" /><span class="zt"><a href="#">我已阅读并同意《随时随地用户注册协议》</a></span></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><button type="submit"><span><b>注册</b></span></button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="bottom_gg" style="width:100%; height:90px; border:1px solid #FFF;">
+		<ul>
+			<li>关于我们</li>
+			<li>广告服务</li>
+			<li>合作媒体</li>
+			<li>隐私保护</li>
+			<li>版权声明</li>
+			<li>诚聘精英</li>
+			<li style="border-right:0px;">网站地图</li>
+		</ul>
+		Copyright 2004-2015 贵州随时随地科技有限公司 版权所有 黔ICP备15369200号-1
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+
+		$(document).ready(function(){
+
+ 		 $("#registerForm").validate( {
+				rules : {
+					loginName : {
+					required : true,
+					minlength:2,
+					maxlength:30
+					},
+					encryptPassword : {
+						required : true,
+						minlength:6,
+						maxlength:30
+					},
+					QRencryptPassword :{
+						required : true,
+						equalTo: "#password"
+					},
+					mobile:{
+					required : true,
+					minlength:11,
+					maxlength:11,
+					isMobile :true
+					},
+					code:{
+					required : true,
+					minlength:6,
+					maxlength:6
+					}
+				},
+				messages :{
+					loginName : {
+					required : "用户名不能为空",
+					range : "用户名不能少于2个字符且不得多于30个字符"
+					},
+					encryptPassword : {
+						required : "密码不能为空",
+						minlength:"密码不能少于6位",
+						maxlength:"密码不能多于30位"
+					},
+					QRencryptPassword :{
+						required : "请再次确认密码",
+						equalTo: "两次输入密码不一样"
+					},
+					mobile:{
+					required : "手机号不为空",
+					minlength:"手机号不能低于11位",
+					maxlength:"手机号不能多于11位"
+					
+					},
+					code:{
+					required :"验证码不能为空",
+					minlength:"验证码输入错误",
+					maxlength:"验证码输入错误"
+					}
+				},
+				
+				submitHandler : function(form) {
+				//	$("#registerForm").ajaxSubmitForm(refurbishCollback);	
+				var url = "${contextPath}/register/insert";
+				var param = $("#registerForm").serialize();
+				fnAjaxPost(url, param, function(result){
+					if (result.success) {
+					//提示
+					layer.msg(result.errorMsg, {icon: 1});
+					setTimeout(function() { location.href = "${contextPath}/"; }, 1500);
+					}else {
+					layer.msg(result.errorMsg, {icon: 2});
+					}
+				});
+			}
+
+		});
+	});
+	
+
+		//发送短信
+	//	$(function() {
+			$("#sendMsg").click( function(){
+				if (!isTEL($("#mobile").val())) {
+					layer.msg("手机号格式错误", {icon: 2});
+					return false;
+				}
+				$(this).css("background", "#EFEFEF");
+				var url = "${contextPath}/register/getSMS";
+				var param = { "mobile" : $("#mobile").val(), "type" : 1 };
+			 	fnAjaxPost(url, param, function(result){
+					//成功返回 短信流程id = result.errorMsg  长度为 32 
+					// 失败返回 0 长度 小于32 
+				 	if (result.success) {
+				 	// 设置button效果，开始计时  
+					i = setInterval("SetRemainTime()", 1000);
+				 	$("#sagaId").val(result.errorMsg);
+					//提示
+					layer.msg("发送成功！", {icon: 1});
+					}else {
+					layer.msg(result.errorMsg, {icon: 2});
+					}
+				}); 
+			});
+	//	});
+
+	//timer处理函数 
+	//倒计时 
+	var count = 120;
+	var i;
+	function SetRemainTime() {
+		if (count == 0) {
+			$("#sendMsg").removeAttr("disabled");// 启用按钮  
+			$("#sendMsg").val("重新发送验证码");
+			clearInterval(i);
+			count = 120;
+		} else {
+			$("#sendMsg").val("剩余" + count + "秒重发");
+			$("#sendMsg").attr("disabled", "true");
+			count--;
+		}
+	}
+</script>
+</html>

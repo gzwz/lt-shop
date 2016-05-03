@@ -1,0 +1,118 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>成功支付</title>
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.payOK.css">
+</head>
+<body>
+  <!--head/头部-->
+<#include "common/head.html">
+<!-- end head/头部-->
+   <div class="recordset">
+       <div class="content">
+           <div class="outline">
+               <div class="hint clearfix">
+                   <i></i>
+                   <div class="hint-l">
+                       <p class="p1">恭喜您，支付成功！</p>
+                       <p>您现在可以<span><a href="#">查看购买记录</a></span>或<span><a href="#">继续购物</a></span></p>
+                       <p>总共成功购买1件商品，信息如下：</p>
+                   </div>
+               </div>
+               <div class="foot">
+                    <div class="footlist">
+                        <p class="p2">购买时间</p>
+                        <p class="p3">2016-03-08  14:50:20.775</p>
+                    </div>
+                    <div class="footlist1">
+                        <p class="p2">商品名称</p>
+                        <p class="p4"><a href="#">(第5期)苹果（Apple）iPhone 6 Plus A1524 
+64G版 4G手机</a></p>
+                    </div>
+                    <a href="#" target="_blank"></a>
+                    <div class="footlist3">
+                        <p class="p2">购买人次</p>
+                        <p class="p3">1</p>
+                    </div>
+                    <div class="footlist4">
+                        <p class="p2">购买编码</p>
+                        <p class="p3">10001408</p>
+                    </div>
+               </div>
+           </div>
+           <div class="comm">
+               <div class="comm-top">以下商品即将揭晓，快快购买吧！</div>
+               <div class="commlist clearfix">
+                   <ul>
+                       <li>
+                          <div class="commimg flt">
+                              <a href="#"><img src="${contextPath}/resources/images/pic_011.png" alt=""></a>
+                          </div>
+                           <div class="commtext flt">
+                               <p><a href="#">苹果（Apple）iPhone6Plus A152464G版4G手机</a></p>
+                               <p>价值：7888元</p>
+                               <p>需要<span style="color:#329beb">95</span>人次参与</p>
+                               <p>已参与<span style="color:#c8002e;font-size:16px;">85</span>人次</p>
+                               <p>去看看</p>
+                           </div>
+                       </li>
+                       <li>
+                           <div class="commimg flt">
+                              <a href="#"><img src="${contextPath}/resources/images/pic_011.png" alt=""></a>
+                          </div>
+                           <div class="commtext flt">
+                               <p><a href="#">苹果（Apple）iPhone6Plus A152464G版4G手机</a></p>
+                               <p>价值：7888元</p>
+                               <p>需要<span style="color:#329beb">95</span>人次参与</p>
+                               <p>已参与<span style="color:#c8002e;font-size:16px;">85</span>人次</p>
+                               <p>去看看</p>
+                           </div>
+                       </li>
+                       <li>
+                           <div class="commimg flt">
+                              <a href="#"><img src="${contextPath}/resources//images/pic_011.png" alt=""></a>
+                          </div>
+                           <div class="commtext flt">
+                               <p><a href="#">苹果（Apple）iPhone6Plus A152464G版4G手机</a></p>
+                               <p>价值：7888元</p>
+                               <p>需要<span style="color:#329beb">95</span>人次参与</p>
+                               <p>已参与<span style="color:#c8002e;font-size:16px;">85</span>人次</p>
+                               <p>去看看</p>
+                           </div>
+                       </li>
+                       <li>
+                           <div class="commimg flt">
+                              <a href="#"><img src="${contextPath}/resources/images/pic_011.png" alt=""></a>
+                          </div>
+                           <div class="commtext flt">
+                               <p><a href="#">苹果（Apple）iPhone6Plus A152464G版4G手机</a></p>
+                               <p>价值：7888元</p>
+                               <p>需要<span style="color:#329beb">95</span>人次参与</p>
+                               <p>已参与<span style="color:#c8002e;font-size:16px;">85</span>人次</p>
+                               <p>去看看</p>
+                           </div>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+   </div>
+   
+
+<!--foot/脚部-->
+<#include "common/foot.html">
+
+<!-- end foot/脚部-->
+
+   
+<!--   头部JS-->
+    <script>
+          $("#category").hover( function () { $("#category").find("ul").stop().slideDown(); }, function () { $("#category").find("ul").stop().slideUp()});
+    </script>
+
+
+</body>
+</html>

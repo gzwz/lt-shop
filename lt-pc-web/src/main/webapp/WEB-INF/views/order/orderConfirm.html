@@ -1,0 +1,223 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>1元购订单页</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/order/oneBuyConfirm.css">
+</head>
+<body>
+   <!-- 头部 -->
+
+<#include "common/top.html">
+
+<!-- end 头部 -->
+<!-- 订单信息-->
+
+<div class="main">
+    <div class="content">
+        <p class="title">填写并核对订单信息</p>
+        <div class="column">
+            <div class="msg">
+                <p><span>收货人信息</span><span><a href="#">新增收货地址</a></span></p>
+                <div class="site">
+                    <span class="curr">小王</span>
+                    <span>贵州省贵阳市南明区花果园金融街国际中心2号楼3333</span>
+                    <span>15845422222</span>
+                </div>
+            </div>
+            <div class="msg">
+                <p><span>配送方式</span>
+                <div class="site clearfix">
+                   <ul id="sitee" class="clearfix">
+                       <li class="curr">快递运输<i></i></li>
+                       <li>上门自提<i></i></li>
+                   </ul>
+                </div>
+            </div>
+<!-- 送货清单-->
+            <div class="msg clearfix">
+                <p><span>送货清单</span><span><a href="#">新增收货地址</a></span><span><a href="#">价格说明</a></span></p>
+                <div class="prolist">
+                    <ul>
+                        <li>
+                            <p class="title1">商家：硕扬ＤＩＹ电脑旗舰店</p>
+                            <div class="showing clearfix">
+                                <ul>
+                                    <li>
+                                        <a href="#"><img src="../../servers/images/ind_img_01.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <p class="title2"><a href="#">联想（Lenovo)天逸100 14英寸笔记本电脑（i3-5005U 4G 500G 1G独显DVD摄像</a></p>
+                                        <p class="title3"><i class="flt"></i>７天无理由退货</p>
+                                    </li>
+                                    <li>
+                                        <span>￥1399</span>
+                                    </li>
+                                    <li>×１</li>
+                                </ul>
+                            </div>
+                            <p class="title4">【赠品】硕扬赠品：Ｇ２００办公商务型键鼠套装×１</p>
+                            <p class="title4">【赠品】硕扬赠品：硕扬定制豪华鼠标垫×１</p>
+                        </li>
+                        <li>
+                            <p class="title1">商家：硕扬ＤＩＹ电脑旗舰店</p>
+                            <div class="showing clearfix">
+                                <ul>
+                                    <li>
+                                        <a href="#"><img src="../../servers/images/ind_img_01.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <p class="title2"><a href="#">联想（Lenovo)天逸100 14英寸笔记本电脑（i3-5005U 4G 500G 1G独显DVD摄像</a></p>
+                                        <p class="title3"><i class="flt"></i>７天无理由退货</p>
+                                    </li>
+                                    <li>
+                                        <span>￥1399</span>
+                                    </li>
+                                    <li>×１</li>
+                                </ul>
+                            </div>
+                            <p class="title4">【赠品】硕扬赠品：Ｇ２００办公商务型键鼠套装×１</p>
+                            <p class="title4">【赠品】硕扬赠品：硕扬定制豪华鼠标垫×１</p>
+                        </li>
+                        <li>
+                            <p class="title1">商家：硕扬ＤＩＹ电脑旗舰店</p>
+                            <div class="showing clearfix">
+                                <ul>
+                                    <li>
+                                        <a href="#"><img src="../../servers/images/ind_img_01.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <p class="title2"><a href="#">联想（Lenovo)天逸100 14英寸笔记本电脑（i3-5005U 4G 500G 1G独显DVD摄像</a></p>
+                                        <p class="title3"><i class="flt"></i>７天无理由退货</p>
+                                    </li>
+                                    <li>
+                                        <span>￥1399</span>
+                                    </li>
+                                    <li>×１</li>
+                                </ul>
+                            </div>
+                            <p class="title4">【赠品】硕扬赠品：Ｇ２００办公商务型键鼠套装×１</p>
+                            <p class="title4">【赠品】硕扬赠品：硕扬定制豪华鼠标垫×１</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+<!-- end 送货清单-->
+<!--添加订单备注-->
+            <div class="remark">
+                <div class="remarks">
+                    <p>添加订单备注</p>
+                    <input type="text" id="note" maxlength=45 value="限４５个字（定制类商品，请将购买需求在备注中详细说明）" onfocus="javascript:if(this.value=='限４５个字（定制类商品，请将购买需求在备注中详细说明）')this.value='';" onBlur= "javascript:if(this.value=='')this.value='限４５个字（定制类商品，请将购买需求在备注中详细说明）';">
+                    <label for="note">提示：请勿填写有关支、收货、发票方面的信息</label>
+                </div>
+            </div>
+<!-- end 添加订单备注-->
+<!-- 发票 -->
+            <div class="msg">
+                <p><span>发票信息</span></p>
+                <div class="site">
+                    <span>普通发票（纸质）</span>
+                    <span>个人</span>
+                    <span>明细</span>
+                    <span>修改</span>
+                </div>
+            </div>
+<!-- end 发票 -->
+<!-- 总金额 -->
+            <div class="gross clearfix">
+                <div class="totalb-list1 clearfix">
+                      <span class="title flt">若账户余额不足，请选择以下方式完成支付</span>
+                  </div>
+                  <div id="pay" class="flt clearfix">
+                      <span class="flt">支付方式：</span>
+                      <ul class="flt">
+                          <li class="icon1" id="">
+                             微信支付
+                              <i class=""></i>
+                          </li>
+                          <li class="icon2" id="curricon">
+                             支付宝
+                              <i class="currs"></i>
+                          </li>
+                          <li class="icon3">
+                             网银在线
+                              <i></i>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="acco flr">
+                     <ul>
+                         <li><span>总商品余额：<span class="text">1.00</span>元</span></li>
+                         <li><span style="margin-left:48px;">返现：<span class="text">-1.00</span>元</span></li>
+                         <li><span style="margin-left:48px;">运费：<span class="text">1.00</span>元</span></li>
+                      </ul>
+                  </div>
+            </div>
+<!-- end 总金额 -->
+        </div>
+    </div>
+</div>
+<!-- end  订单信息-->
+
+<!--提交-->
+<div class="submit clearfix">
+    <div class="content">
+        <div class="submits clearfix">
+            <div class="money">
+                <span>总商品余额：<span class="text">1.00</span>元</span>
+            </div>
+            <button type="button">提交订单</button>
+        </div>
+    </div>
+</div>
+
+<!-- end 提交-->
+
+
+
+
+
+<!--foot/脚部-->
+
+<#include "common/foot.html">
+<!-- end foot/脚部-->
+   
+    <script>
+        
+        //技付方式
+var oPay = document.getElementById('pay');
+var oSitee = document.getElementById('sitee');
+var aLi = oPay.getElementsByTagName('li');
+var aLie = oSitee.getElementsByTagName('li');
+var aIa = oPay.getElementsByTagName('i');
+for (var i=0; i<aLi.length; i++){
+    aLi[i].index = i;
+    aLi[i].onclick = function () {
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].id = '';
+            aIa[i].className = '';
+        }
+        aLi[this.index].id = 'curricon';
+        aIa[this.index].className = 'currs';
+    }
+}
+       
+        
+for (var i=0; i<aLie.length; i++){
+    aLie[i].index = i;
+    aLie[i].onclick = function () {
+        for(var i=0; i<aLie.length; i++){
+            aLie[i].className = '';
+        }
+        aLie[this.index].className = 'curr';
+    }
+}
+        
+// end 技付方式
+    
+    </script>
+</body>
+</html>

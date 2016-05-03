@@ -1,0 +1,116 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>导航管理</title>
+<#include "/public/frame/jqgridcss.html">
+   <link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link rel="stylesheet" href="${contextPath}/resources/ueditor/themes/default/css/ueditor.min.css" />
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form class="form-horizontal add-form" action="${contextPath}/system/navigation/create" method="post">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">标题：</label>
+								<div class="col-sm-8">
+									<input name="title" placeholder="请输入标题" type="text" class="form-control">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label">路径：</label>
+								<div class="col-sm-8">
+                                    <input id="curl" type="text" class="form-control" name="url">
+                                </div>
+							</div>
+						    <div class="form-group">
+						        <label class="col-sm-3 control-label">实体类型：</label>
+						        <div class="col-sm-8">
+						            <select class="form-control" name="linkDomainType">
+						              <option value="product_category">链接到商品类目页面</option>
+                                      <option value="article_category">链接到文章类目页面</option>
+						            </select>
+						        </div>
+						    </div>
+						    <div class="form-group">
+								<label class="col-sm-3 control-label">排序：</label>
+								<div class="col-sm-8">
+								    <input class="form-control" name="sort" type="text" >
+								</div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-8">
+									<button class="btn btn-primary btn-save" type="submit">保存</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+    <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.all.min.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/form-validate-common.js"></script>
+    <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+	<script type="text/javascript">
+	 $(function() {
+	  
+		$(".add-form").validate({
+			rules : {
+				title : {
+					required : !0,
+					minlength : 2
+				},
+				url : {
+					required : true
+				},
+				linkDomainType:{
+				required : true
+				},
+				sort : {
+							maxlength : 10,
+							required : true,
+							digits : true
+						}
+			},
+			messages : {
+				title : {
+					required : e + "请输入正确的标题",
+					minlength : e + "标题名称必须两个字符以上"
+				},
+				sort:{
+				required : "请输入排序",
+							maxlength : "长度不能大于10",
+							digits : "必须为整数"
+				}
+			},
+			submitHandler:function(){
+				$(".add-form").ajaxSubmitForm(refurbishCollback);
+	          
+			}
+		})
+		
+		
+	});
+	</script>
+</body>
+</html>

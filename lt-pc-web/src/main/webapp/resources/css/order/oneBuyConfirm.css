@@ -1,0 +1,400 @@
+/*<!-- 璁㈠崟淇℃伅-->*/
+.main .title{
+    font-size: 20px;
+    color:#63676a;
+    font-weight: 500;
+    line-height: 45px;
+}
+
+.main .column{
+    border:1px solid #f0f0f0;
+}
+
+
+.main .column .msg{
+    padding:10px 20px;
+}
+/*<!--鏀惰揣浜哄湴鍧�->*/
+
+.msg .site .consignee span{
+    color:#636363;
+    font-size:14px;
+}
+
+.consignee li{
+    width:247px;
+    height:106px;
+    padding:10px;
+    overflow: hidden;
+    float:left;
+    cursor:pointer;
+    margin: 0 0px 10px 16px;
+    background:url(../../images/consignee_bg01.png) no-repeat;
+    background-size: contain;
+    position: relative;
+}
+
+.consignee li.curr{
+   background:url(../../images/consignee_bg02.png) no-repeat;
+   background-size: contain;
+}
+
+.consignee li.curr i{
+    display: inline-block;
+    width:29px;
+    height:29px;
+    background:url(../../images/icon.png) no-repeat -268px -879px;
+    position: absolute;
+    bottom:13px;
+    right:6px;
+}
+
+.consignee li:hover{
+    background:url(../../images/consignee_bg02.png) no-repeat;
+    background-size: contain;
+}
+
+.consignee .addr-hd{
+    border-bottom: 1px solid #ddd;
+}
+
+.addr-hd .prov{
+    display: inline-block;
+    width:140px;
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    font-weight: 600;
+    line-height: 30px;
+}
+
+.addr-hd .name{
+    display: inline-block;
+    width:103px;
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    margin:0px 3px 0 0;
+    line-height: 30px;
+}
+
+.consignee .tel{
+    margin-left:15px;
+}
+
+/*<!-- end 鏀惰揣浜哄湴鍧�->*/
+
+ .msg p span{
+    line-height: 20px;
+    font-size:18px;
+    font-weight: bold;
+    color:#333;
+}
+
+.msg p span a{
+    float:right;
+    margin-left:30px;
+    font-size: 16px;
+    font-weight: 100;
+    color:#0f5489;
+}
+
+.msg p span a:hover{
+    color:#f00;
+}
+
+.msg .site{
+    font-size: 18px;
+    margin-top: 35px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+
+.msg .site span.curr{
+    display: inline-block;
+    width:100px;
+    height: 30px;
+    line-height: 30px;
+    text-align:center;
+    background:#d1f1fd;
+}
+
+#sitee li{
+    display: inline-block;
+    float:left;
+    padding:10px 20px;
+    margin-left:10px;
+    cursor:pointer;
+    border:2px solid #f0f0f0;
+    position: relative;
+}
+
+#sitee li.curr{
+    border:2px solid #c8002e;
+}
+
+#sitee li.curr i{
+    display: inline-block;
+    width:17px;
+    height:17px;
+    background:url(../../images/icon.png) no-repeat -183px -4px; 
+    position: absolute;
+    right:0;
+    bottom:0;
+}
+
+
+/*<!-- 閫佽揣娓呭崟-->*/
+
+.msg .prolist > ul > li{
+    width:100%;
+    margin-top:20px;
+    padding-bottom: 5px;
+    float:left;
+    font-size:18px;
+    background:#f3fbfe;
+}
+
+.msg .prolist ul li p.title1{
+    font-size:14px;
+    padding-left:30px;
+    font-weight: 600;
+    line-height: 42px;
+    background:#bee4f3;
+    color:#444547;
+}
+
+.msg .prolist ul li p.title2{
+    width:400px;
+    font-size:14px;
+    color:#444547;
+}
+
+.msg .prolist ul li p.title3{
+    font-size:14px;
+    margin-top:30px;
+    color:#ea6707;
+}
+
+.msg .prolist ul li p.title4{
+	
+    font-size:16px;
+    color:#94979a;
+}
+.msg .prolist ul li p.title5{
+    font-size:16px;
+    color:#94979a;
+    width: 400px;
+    margin-top: 50px;
+}
+
+.msg .prolist ul li.num1{
+	margin-left: 40px;
+}
+
+.msg .prolist ul li.num2{
+	margin-left: 40px;
+	color: #C81623;
+}
+
+.msg .prolist ul li img{
+    width:200px;
+    height:200px;
+    border:1px solid #ddd;
+}
+
+.msg .prolist ul li i{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(../../images/icon.png) no-repeat -150px -49px;
+    margin-left: 7px; 
+}
+
+.msg .prolist .showing{
+    margin-top:30px;
+}
+
+.msg .prolist .showing ul li{
+    /* margin: 0 15px 0 20px; */
+    float:left;
+}
+
+/*<!-- end 閫佽揣娓呭崟-->*/
+/*<!-- 娣诲姞璁㈠崟澶囨敞-->*/
+
+.remark{
+    padding:10px 20px;
+}
+
+.remark .remarks{
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.remark .remarks p{
+    font-size:16px;
+    color:#5d595a;
+}
+
+.remark .remarks label{
+    font-size:16px;
+    color:#5d595a;
+    margin-left:20px;
+}
+
+#note{
+    width:620px;
+    height:30px;
+    color:#999;
+    margin:12px 0px;
+    font-size: 18px;
+}
+/*<!-- end 娣诲姞璁㈠崟澶囨敞-->*/
+
+/*<!-- 鎬婚噾棰�-->*/
+
+.gross{
+    padding:10px 20px;
+}
+
+.gross .acco{
+    margin-right: 33px;
+}
+
+.gross .acco ul li.{
+    
+}
+
+.gross .totalb-list1{    
+    padding: 15px 0px;
+
+}
+
+.gross .totalb-list1 .title{
+    line-height: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.gross span{
+    color:#666;
+    font-size:16px;
+}
+
+.gross span.text{
+    color:#c81623;
+    font-size:22px;
+    margin:0 9px 0 42px;
+}
+
+#pay span{
+    color:#666;
+    font-size:14px;
+    line-height: 50px;
+}
+
+#pay ul li input{
+	border: 0 none;
+    height: 46px;
+    padding-left: 30px;
+    width: 127px;
+	background:url(../../images/icon.png) no-repeat;
+}
+
+
+#pay ul li{
+    height:46px;
+    float:left;
+    font-size: 14px;
+    color:#666;
+    cursor:pointer;
+    line-height: 46px;
+    margin-left:20px;
+    border:2px solid #ddd;
+    position:relative;
+}
+
+#pay ul input.icon1{
+    background-position: 6px -982px;
+}
+
+#pay ul input.icon2{
+    background-position:-141px -982px;
+}
+
+#pay ul input.icon3{
+    background-position: -189px -816px;
+}
+
+#pay ul li i{
+    display: inline-block;
+    width:17px;
+    float:right;
+    margin-top: 29px;
+    height:17px;
+    position:absolute;
+    background:url(../../images/icon.png) no-repeat;
+    background-position: -183px -24px ;
+    right:0;
+    bottom: 0;
+}
+
+#pay ul li#curricon{
+    border:2px solid #c8002e;
+}
+
+#pay ul li i.currs{
+    background-position: -183px -4px ;
+}
+
+/*<!-- end 鎬婚噾棰�-->*/
+/*<!-- end  璁㈠崟淇℃伅-->*/
+
+/*<!--鎻愪氦-->*/
+
+.submit{
+    
+}
+
+.submit .submits{
+    width:100%;
+    background:#f4f4f4;
+    padding: 12px 0;
+}
+
+.submit .money{
+    float:right;
+    margin-right:63px;
+}
+
+.submit .money span{
+    color: #666;
+    font-size: 16px;
+}
+
+.submit .money span.text{
+    color:#c81623;
+    font-size:22px;
+    margin:0 9px 0 42px;
+}
+
+.submit button{
+    width:110px;
+    height:40px;
+    float:right;
+    margin: 59px -150px 0 0;
+    border:0;
+    font-size:18px;
+    color:#fff;
+    background:url(../../images/icon.png);
+    background-position: -137px -705px;
+}
+
+.submit button:hover{
+    background-position:-137px -750px;
+}
+
+/*<!--end 鎻愪氦-->*/
+

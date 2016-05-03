@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/reset.css">
+<script src="${contextPath}/resources/js/jquery191.min.js"></script>
+<script src="${contextPath}/resources/js/layer/layer.js"></script>
+<!--head/头部-->
+   <div class="head">
+       <div class="nav-top">
+            <div class="content">
+               <div class="flt"><a href="${contextPath}">欢迎光临卡车网</a></div>
+               <ul class="flr">
+                   <#if login_user??>
+                   <li> <a class="curr" href="${contextPath}/intercept/userCenter/my_order.html?currentValue="><span id="alreadyLogin">${login_user.nickName}</span></a> </li>
+                   <li><a href="javascript:loginOut();">退出</a></li>
+                   <#else>
+                   <li><a class="curr" href="${contextPath}/login">亲！请登录</a></li>
+                   <li><a href="${contextPath}/register">免费注册</a></li>
+                   </#if>
+                   <li><a href="${contextPath}/intercept/userCenter/my_order.html?currentValue=">我的卡车网</a></li>
+                   <li><a href="${contextPath}/intercept/userCenter/my_order.html?currentValue=">我的订单</a></li>
+                   <li><a href="#">物流中心</a></li>
+                   <li><a href="#">卖家中心</a></li>
+                   <li><a href="#">联系客服</a></li>
+                   <li><a href="#">帮助中心</a></li>
+                   
+               </ul>
+            </div>
+        </div>
+     <!-- 搜索 -->
+        <div class="search">
+            <div class="content catn">
+                <div class="logo">
+                    <a href="#">
+                        <img src="${contextPath}/resources/images/logo2.png" alt="">
+                    </a>
+                </div>
+                <div class="searchSuggest">
+                    <div class="loupe"></div>
+                    <input class="input_test" type="text" placeholder="搜索您需要的商品" style="color:#333333;" maxlength="100" autocomplete="off" autofocus="true" data-autofocus="true" x-webkit-speech="" x-webkit-grammar="builtin:translate" >
+                    <button class="search_btn">搜索</button>
+                </div>
+                <div class="miniCart">
+                    <a href="${contextPath}/intercept/shoppingCar-view">我的购物车</a>
+                    <i class="cart_icon"></i>
+                    <i class="cart_icon2"></i>
+                    <i class="cart_icon3"></i>
+                   <i class="cart_icon4">${count}</i>
+                </div>
+            </div>
+        </div>
+     <!-- end 搜索 -->
+     <!-- 导航 -->
+        <div class="nav-food clearfix">
+            <div class="content">
+                <div class="navlist-top">所有商品分类
+                    <ul>
+                        <li>数码/手机<i></i></li>
+                        <li>汽车/配件<i></i></li>
+                        <li>生活日常 <i style="margin-left: 118px;"></i></li>
+                        <li>其他商品 <i style="margin-left: 118px;"></i></li>
+                    </ul>
+                </div>
+                <ul>
+                    <#if ngList??>
+                     <#list ngList as ng>
+                          <#if ng_index==0>
+                             <li><a <#if show=="1">class="curr"</#if> href="${contextPath}/${ng.url}" >${ng.title}</a></li>
+                          </#if>
+                          <#if ng_index==1>
+                             <li><a <#if show=="2">class="curr"</#if> href="${contextPath}/${ng.url}" ><i class="rmb-icon"></i>${ng.title}</a></li>
+                             <#elseif ng_index gt 1 && ng_index lt 5>
+                              <li><a <#if show==ng.title>class="curr"</#if> href="${contextPath}/${ng.url}?id=${ng.id}" >${ng.title}</a></li>
+                          </#if>
+                      </#list>
+                   </#if>
+                </ul>
+            </div>
+        </div>
+   </div>
+<!-- end head/头部-->
+
+
+
+<script type="text/javascript">
+
+    function loginOut(){
+    
+                layer.confirm('您确认退出?', {
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+							    $.ajax({
+								type : "post",
+								url : "${contextPath}/login/logout",
+								dataType : "json",
+								async : true,
+								data : {},
+								success : function(data) {
+								       if(data.success){
+								             window.location.href="${contextPath}/index.html";
+											  layer.msg(data.errorMsg, {icon: 1});
+											}else{
+											  layer.msg(data.errorMsg, {icon: 1});
+										}
+									 }
+							});  
+				 
+				});
+    
+    }
+
+</script>

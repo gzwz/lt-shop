@@ -1,0 +1,131 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                      
+                    	<div class="row m-b-sm m-t-sm">
+                    	
+                    	     <div class="col-md-4">
+                    			<a onclick="fnClickAdd();" href="javascript:void(0);" class="btn btn-primary "><i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i></a>
+                    		    <a onclick="fnClickAllDel();" href="javascript:void(0);" class="btn btn-w-m btn-danger ">&nbsp;批量删除</a>
+                    		</div>
+                        </div> 
+                        <div class="project-list">
+	                        <table id="grid-table"></table>
+	                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <#include "/public/frame/jqgridjs.html">
+    <script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/system/banner/query",
+	     colNames:['标题', '排序','链接','图片','位置','操作'],
+	     colModel:[
+			{name:'title',label:'title',width:40},
+			{name:'sort',label:'sort', width:90},
+			{name:'url',label:'url', width:80},
+			{name:'image',label:'image', width:90,formatter:function(cellvalue, options, rowObject){
+				return "<img style='width: 100px; height:66px;' src=${imageContextPath}/"+cellvalue+">";
+			}} ,
+			{name:'type',label:'type', width:80,formatter:function(cellvalue, options, rowObject){
+			  if(cellvalue=='1')
+			     return "首页";
+			  else if(cellvalue=='2')
+			     return "二级页面";
+			   else if(cellvalue=='3')
+			     return "三级页面";
+			    else if(cellvalue=='4')
+			     return "广告页面";
+			}},
+			{name:'id',label:'id', width:90,formatter:function(cellvalue, options, rowObject){
+				return "<a href='javascript:;'onclick=modifyNavigation('"+cellvalue+"') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>"+
+				"<a style='margin-left:10px;' href='javascript:;' onclick=fnClickDel('"+cellvalue+"') class='btn btn-xs btn-primary'>删除</a>";
+			}} 
+		], 
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"banner列表"
+	});
+    
+    </script>
+ <script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	var keyWord = $("input[name=keyWord]").val();  
+		    $("#grid-table").jqGrid('setGridParam',{  
+		        datatype:'json',  
+		        postData:{'name':keyWord}, //发送数据  
+		        page:1  
+		    }).trigger("reloadGrid"); //重新载入 
+	 }
+ 
+	 function modifyNavigation(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['700px', '530px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/system/banner/edit?id="+cellvalue
+	    	});
+	    }
+	    
+	     function fnClickAdd(){
+	    	 layer.open({
+	    	    type: 2,
+	    	    area: ['700px', '530px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/system/banner/add"
+	    	}); 
+	    }
+	     
+	     
+	     /*批量删除*/
+	     function fnClickAllDel(){
+		　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+		  /* layer.alert('请选择要删除的行!', {
+			    skin: 'layui-layer-molv' //样式类名
+			    ,closeBtn: 0
+			}); */
+			swal("请选择要删除的行!", "");
+			return;
+		  }
+             fnAjaxDel("${contextPath}/system/banner/" + id + "_delete", '', search);
+	     }
+	     
+	   function resertAdd(){
+		  fnClickAdd();
+		}
+	     
+	     /*删除*/
+	     function fnClickDel(id){
+			
+	     	fnAjaxDel("${contextPath}/system/banner/" + id + "_delete", '', search);
+	     }
+	  
+	  function refurbish(){
+		  search();
+	  }
+    </script> 
+</body>
+
+</html>

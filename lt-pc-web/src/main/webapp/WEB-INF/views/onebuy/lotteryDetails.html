@@ -1,0 +1,264 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>开奖详情</title>
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/footer.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/herder.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/oneBuy/lotteryDetail.css">
+    <script src="${contextPath}/resources/js/jquery191.min.js"></script>
+     <!--[if IE]> 
+        <script src="${contextPath}/resources/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+   <!-- 头部 -->
+ <#include "common/head.html">
+<!-- end 头部 -->
+
+<!--期数-->
+<!-- <div class="periods">
+    <div class="content">
+        <div class="lottery clearfix">
+            <ul>
+                <li><a href="#">第49期<img src="${contextPath}/resources/images/award_gif.gif" alt=""></a></li>
+                <li><a href="#">第50期</a></li>
+                <li><a class="curr" href="#">第51期</a></li>
+                <li><a href="#">第52期</a></li>
+                <li><a href="#">第53期</a></li>
+                <li><a href="#">第54期</a></li>
+                <li><a href="#">第55期</a></li>
+                <li><a href="#">第56期</a></li>
+                <li><a href="#">第57期</a></li>
+                <li><a href="#">第58期</a></li>
+                <li><a href="#">第59期</a></li>
+                <li><a href="#">第60期</a></li>
+                <li><a href="#">第61期</a></li>
+                <li><a href="#">第62期</a></li>
+                <li><a href="#">第63期</a></li>
+                <li><a href="#">第64期</a></li>
+                <li><a href="#">第65期</a></li>
+                <li><a class="red" href="#">更多</a></li>
+            </ul>
+        </div>
+    </div>
+</div> -->
+<!-- end 期数-->
+
+<!--详情-->
+<div class="particulars clearfix">
+    <div class="content">
+       <div class="partic_all">
+           <div class="partic_left flt">
+                <div class="bigimg">
+                    <img src="${imageContextPath}/${obp.baseInfo.titleImage!''}" alt="">
+                </div>
+                <ul class="imgs clearfix">
+                    <li><img src="${imageContextPath}/${obp.baseInfo.titleImage!''}" alt=""></li>
+                    <#if imageList?exists> 
+					    <#list imageList?keys as key>
+					      <#if key_index lt 3>
+					     	 <li><img src="${imageContextPath}/${imageList[key]}" alt=""></li>
+							</#if>
+						 </#list> 
+					  </#if>
+                </ul>
+               <ul class="share">
+                   <li><a href="#"><img src="${contextPath}/resources/images/aw_icon_02.png" alt=""></a></li>
+                   <li><a href="#"><img src="${contextPath}/resources/images/aw_icon_04.png" alt=""></a></li>
+                   <li><a href="#"><img src="${contextPath}/resources/images/aw_icon_05.png" alt=""></a></li>
+                   <li><a href="#"><img src="${contextPath}/resources/images/aw_icon_06.png" alt=""></a></li>
+               </ul>
+               </div>
+            <div class="partic_right flt">
+                <p class="title"><!-- 美的家用容量多功能电烤箱  --><span>${obp.baseInfo.name!''}</span></p>
+                <div class="lucno">
+                    <div class="number">
+                        <span id="lotteryNum">10056565</span>
+                    </div>
+                    <div class="user clearfix">
+                        <div class="head flt">
+                            <img src="${contextPath}/resources/images/usre_head.png" alt="">
+                        </div>
+                        <div class="user_data flt">
+                            <p>恭喜<span class="name" id="LotteryUserName">南鸢北筏</span> (中国)获得了本奖品</p>
+                            <p>用户ID：<span class="idd">1003483</span> (ID为用户唯一不变标识)</p>
+                            <p>揭晓时间：<span class="date">2016-04-25</span> <span class="time">10:33:00.000</span></p>
+                            <p>夺宝时间：<span class="date">2016-04-25</span> <span class="time"> 09:21:11.716</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="nu_pepo">
+                    <p>中奖者本期总共参与了18人次</p>
+                    <dl class="pepo_box clearfix">
+                        <dt>他Ta的号码：</dt>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000078</dd>
+                        <dd>10000045</dd>
+                        <dd>10000078</dd>
+                        <dd>10000045</dd>
+                        <dd>10000078</dd>
+                        <dd>10000045</dd>
+                        <dd>10000078</dd>
+                        <dd>10000099</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                        <dd>10000045</dd>
+                    </dl>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>
+<!-- end 详情-->
+<!--计算公式-->
+<div class="formula">
+    <div class="content">
+        <div class="calc">
+            <p class="calc_title"><i></i>计算公式</p>
+            <ul>
+                <li class="item">
+                    <p class="num">10000088</p>
+                    <p class="tnum">本期幸运号码</p>
+                </li>
+                <li><img src="${contextPath}/resources/images/calc_04.png" alt=""></li>
+                <li class="item">
+                    <p class="num">12465652244</p>
+                    <p class="tnum">100个时间求和</p>
+                </li>
+                <li><img src="${contextPath}/resources/images/calc_02.png" alt=""></li>
+                <li class="item">
+                    <p class="num">06898</p>
+                    <p class="tnum">"老时时彩"开奖号码</p>
+                </li>
+                <li><img src="${contextPath}/resources/images/calc_03.png" alt=""></li>
+                <li class="item">
+                    <p class="num">231</p>
+                    <p class="tnum">该奖品总需人次</p>
+                </li>
+                <li><img src="${contextPath}/resources/images/calc_02.png" alt=""></li>
+                <li class="item">
+                    <p class="num">10000011</p>
+                    <p class="tnum">原始数</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- end/计算公式-->
+
+<div class="result">
+    <div class="content">
+        <div class="record clearfix">
+            <ul class="choice clearfix">
+                <li class="curr">计算结果</li>
+                <li>所有参赛记录</li>
+                <li>晒单</li>
+            </ul>
+<!--计算结果-->
+            <div class="record_box" style="display:block;">
+                <div class="publish">
+                    <div class="rule">
+                        <div class="rule_title">
+                            <p>幸运号码计算规则</p>
+                        </div>
+                        <div class="rule_title_r">
+                            <p><i>1</i>奖品的最后一个号码分配完毕后，将公示该分配时间点前本站全部奖品的最后100个参与时间；</p>
+                            <p><i>2</i>将这100个时间的数值进行求和（得出数值A）（每个时间按时、分、秒、毫秒的顺序组合，如20:15:25.362则为201525362）；</p>
+                            <p><i>3</i>为保证公平公正公开，系统还会等待一小段时间，取最近下一期中国福利彩票“老时时彩”的开奖结果（一个五位数值B）；</p>
+                            <p><i>4</i>（数值A+数值B）除以该奖品总需人次得到的余数 + 原始数 10000001，得到最终幸运号码，拥有该幸运号码者，直接获得该奖品。</p>
+                            <p class="red">注：最后一个号码分配时间距离“老时时彩”最近下一期开奖大于24小时或无法读取老时时彩下一期开奖结果时，默认“老时时彩”开奖结果为00000。<span>了解更多“老时时彩”信息</span></p>
+                        </div>
+                    </div>
+                   <ul>
+                       <li>
+                           <div class="name r0">夺宝时间</div>
+                           <div class="acc r0">会员名称/账号</div>
+                           <div class="tro r0">奖品名称</div>
+                           <div class="peop r0">参与人次</div>
+                       </li>
+                       <li><div class="r1">截止该商品最后夺宝时间[2016-4-25  19:19:19]最后100条参与记录</div></li>
+                       <li>
+                           <div class="name">2016-4-25 19:19:19</div>
+                           <div class="acc"><span style="color:#333;">今天要下雨</span><i></i><span>121258699</span></div>
+                           <div class="tro">美的家用功能烤箱300W 经典款式经济实惠</div>
+                           <div class="peop">12人次</div>
+                       </li>
+                   </ul>
+                </div>
+            </div>
+<!-- end 计算结果-->
+            
+            <div class="record_box">2222</div>
+            <div class="record_box">3333</div>
+        </div>
+    </div>
+</div>
+
+
+<!--foot/脚部-->
+<#include "common/foot.html">
+<script type="text/javascript">
+	$(function(){
+		var url = "${contextPath}/oneBuy/getLotteryResult?id=${obp.id}";
+		jQuery.post(url, "", function(data){
+			$("#lotteryNum").html(data.lotteryNum);
+			$("#LotteryUserName").html(data.buyerInfo.consigneeName);
+			
+		}, "json")
+	});
+</script>
+
+<!-- end foot/脚部-->
+    <script type="text/javascript">
+        $('.imgs img').hover(function(){
+            $s =  $(this).attr('src');
+            $('.bigimg img').stop().attr('src',$s);
+            return false;
+        });
+        
+         $('.pepo_box dt').height($('.pepo_box').height()+20);
+        
+         $('.choice li').click(function(){
+            $(this).attr('class','curr').siblings().attr('class','');
+            $('.record .record_box').css('display','none');
+            $('.record .record_box').eq($('.choice li').index(this)).css('display','block');
+        });
+   </script>
+</body>
+</html>

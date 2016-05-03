@@ -1,0 +1,63 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>咨询中心</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/consult.css">
+     <!--[if IE]> 
+        <script src="../../servers/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+  <!-- 头部 -->
+	<#include "common/head.html">
+<div class="wrap">
+    <div class="content clearfix">
+        <div class="sidebar_a ">
+            <#if bottomList?exists>
+                <#list bottomList as bm>
+                   <dl>
+	                <dt><img src="${imageContextPath}/${bm.icon}" width="22px" alt="${bm.name}">${bm.name}</dt>
+	                <#list bm.bottomMenuDTO as children>
+	                  <dd><a   href="${contextPath}/menuContent/getMenuContent?bottomMenuId=${children.id}" <#if children.id==contents.bottomMenu.id>class="curr"</#if>>${children.childrenName}</a></dd>
+	                </#list>
+                 </dl>
+                
+                
+                </#list>
+           </#if>
+            <div class="tel">
+                <p>如果不能在帮助内容中找到答案您还可以拨打：</p>
+                <a href="javascript:void(0);"><img src="${contextPath}/resources/images/tel.png" alt="热线电话"></a>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="nav">
+                <span><a href="${contextPath}/index">首页</a></span>>
+                <span><a href="javascript:void(0);">${contents.bottomMenu.parent.name}</a></span>>
+                <span><a class="at" href="${contextPath}/menuContent/getMenuContent?bottomMenuId=${contents.bottomMenu.id}">${contents.bottomMenu.name}</a></span>
+            </div>
+            <div class="main">
+                <div class="column">
+                    <span>${contents.bottomMenu.name}</span>
+                </div>
+                <div class="description">
+                ${contents.content}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+  
+  
+  
+  
+    <#include "common/foot.html">
+  
+   
+</body>
+</html>

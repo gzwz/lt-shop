@@ -1,0 +1,194 @@
+/*头部*/
+
+.head .nav-top{
+    height:26px;
+    padding-top:5px;
+    background:#f3f3f3;
+}
+
+.head .nav-top ul li{
+    float:left;
+}
+
+.head .nav-top ul li a{
+    display: inline-block;
+    height: 16px;
+    border-left:1px solid #333;
+    padding: 0 10px;
+}
+
+.head .nav-top ul li a.curr{
+    color:#0f5489;
+    border-left:0;
+}
+
+  /*搜*/
+.head .search .logo{
+    width:203px;
+    height:101px;
+    float:left;
+}
+
+
+.head .search .searchSuggest {
+    width:650px;
+    height:34px;
+    margin: 40px 0 0 248px;
+    border:3px solid #0f5489;
+    border-radius: 3px 0 0 3px;
+}
+
+.head .search .searchSuggest .loupe{
+    width:40px;
+    height:34px;
+    float:left;
+    background:url(../../images/icon.png) no-repeat;
+    background-position: -245px -175px; 
+}
+
+.head .search .searchSuggest .input_test{
+    width: 513px;
+    height: 34px;
+    background: #FFF;
+    line-height: 34px;
+    padding-left:2px;
+    border: 0 none;
+    color: #333;
+    font-size:16px;
+    padding-right: 6px;
+    vertical-align: middle;
+    float: left;
+    outline: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.head .search .catn{
+    overflow: hidden;
+}
+
+.head .search .searchSuggest .search_btn{
+    width:89px;
+    height:34px;
+    float:left;
+    border: 0;
+    font-size:16px;
+    color:#fff;
+    outline:none;
+    font-weight: bolder;
+    background:#0f5489;
+}
+
+.head .search .miniCart{
+    width:142px;
+    height:36px;
+    float:right;
+    font-size:16px;
+    line-height: 36px;
+    margin-top:-38px;
+    margin-right:50px;
+    background:#e1e5fa;
+    border:1px solid #cfd2e6;
+    position:relative;
+}
+
+.head .search .miniCart a{
+    display: inline-block;
+    width:103px;
+    height:100%;
+    padding-left:39px;
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 2;
+}
+
+
+.head .search .miniCart .cart_icon{
+    width:21px;
+    height:19px;
+    display: inline-block;
+    background:url(../images/icon.png) no-repeat -206px -7px;
+    position:absolute;
+    left:10px;
+    top:8px;
+}
+
+.head .search .miniCart .cart_icon2{
+    width:16px;
+    height:16px;
+    display: inline-block;
+    background:url(../../images/icon.png) no-repeat -248px -11px;
+    position:absolute;
+    right:10px;
+    top:-5px;
+}
+
+.head .search .miniCart .cart_icon3{
+    width:10px;
+    height:15px;
+    display: inline-block;
+    background:url(../../images/icon.png) no-repeat -282px -13px;
+    position:absolute;
+    right:8px;
+    top:12px;
+}
+
+.head .search .miniCart .cart_icon4{
+    display: inline-block;
+    font-size: 10px;
+    color:#fff;
+    position:absolute;
+    right:15px;
+    top:-16px;
+}
+
+  /* end 搜*/
+  /*导航*/
+
+.head .nav-food{
+    margin-top:20px;
+    border-bottom: 2px solid #0f5489;
+}
+
+.head .nav-food ul{
+    margin-top:20px;
+    position: relative;
+}
+
+.head .nav-food ul li{
+    float:left;
+}
+
+.head .nav-food ul li a.curr{
+    color:#c8002e;
+}
+
+.head .nav-food ul li .rmb-icon{
+    width:22px;
+    height:20px;
+    display: inline-block;
+    background:url(../../images/icon.png) no-repeat -208px -35px;
+    position: absolute;
+    left:170px;
+    top:0;
+    
+}
+
+.head .nav-food ul li a{
+    height:40px;
+    line-height: 40px;
+    font-weight:bold;
+    color:#333;
+    padding-right:60px;
+    font-size:18px;
+    display:inline-block;
+}
+
+.head .nav-food ul li a:hover{
+    color:#c8002e;
+}
+
+
+  /* end 导航*/
+/* end 头部*/

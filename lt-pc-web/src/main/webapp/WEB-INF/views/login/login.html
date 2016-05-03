@@ -1,0 +1,118 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>欢迎登录</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+	<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/web/login.css" />
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+	<script type="text/javascript">	
+	
+/* 	var user="${userZhuCe}";
+	if(user!=""){
+		var account="${account}";
+		var password="${password}";
+		login(account,password);
+	}
+	function login(account,password){
+		alert("注册成功");
+		window.location.href="user/webLogin?account="+account+"&password="+password+"";
+	}
+	//  登录页面若在框架内，则跳出框架		
+		if (self != top) {			
+			top.location = parent.location;		
+		};	 */
+	function login(){
+	var url= "${contextPath}/login/check";
+	var param = $("#loginForm").serialize();
+	$.ajax({ url : url,dataType: "json" ,type : "post", data : param,
+			success : function(result) {
+				if (result.success) {
+					//提示层
+					layer.msg('登陆成功', {icon: 1});
+					//停顿1.5秒后跳转
+					var sendRedict = "${redirect_url}";
+					if (sendRedict == null || sendRedict == "") {
+						sendRedict ="${contextPath}/";
+					}
+					setTimeout(function() { location.href = sendRedict; }, 1000);
+					} else {
+						$("#messages").html("用户名或者密码错误");
+						layer.msg('用户名或者密码错误', function() { });
+					}
+				}
+			});
+
+		}
+	</script>
+	<style>
+		img{
+		border:0px;}
+	</style>
+  </head>
+  
+  <body>
+	<div id="head">
+    	<div class="head_">
+    		<a href="${contextPath}/">
+    		<img src="${contextPath}/resources/webImg/logo_dd.png" class="img"/></a>&nbsp;&nbsp;&nbsp;<span class="shu"></span>&nbsp;&nbsp;&nbsp;<span class="wl">欢迎登录</span></div>
+    </div>
+    <div id="content">
+    	<div class="pic">
+    		<img src="resources/webImg/login_03.png" />
+        </div>
+		<form id="loginForm">
+			<div class="input">
+				<p class="hy">会员登录  <span class="p"><a href="${contextPath}/register"><img src="${contextPath}/resources/webImg/login_04.png" /></a></span></p>
+				<a style="color: red;margin-left: 20px;" id="messages"></a>
+				<p class="f">
+					<span style="padding-top:-10px;margin-top: 10px;">
+						<input type="text" name="userNamne" placeholder="用户名/手机号" style="background:url('${contextPath}/resources/webImg/Image_12.png') no-repeat; padding:0px 2px 0px 45px" required="true"/>
+					</span>
+				</p>
+				<p class="f">
+					<span style="padding-top:-10px">
+						<input type="password" name="pwd" placeholder="密码" style="background:url('${contextPath}/resources/webImg/Image_12.png') no-repeat;padding:0px 2px 0px 45px" required="true"/>
+					</span>
+				</p>
+				<p class="zt">
+					<input type="checkbox" checked="checked"/>自动登录
+					<span><a href="${contextPath}/login/forget-password">忘记密码？</a></span>
+				</p>
+				<p class="zc">
+					<input type="button" onclick="login();" value="登录" />
+				</p>
+			</div>
+		</form>
+    </div>
+	<div class="bottom">
+		<div class="bottom_gg" style="width:100%; height:90px; border:1px solid #FFF;">
+			<ul>
+				<li>关于我们</li>
+				<li>广告服务</li>
+				<li>合作媒体</li>
+				<li>隐私保护</li>
+				<li>版权声明</li>
+				<li>诚聘精英</li>
+				<li style="border-right:0px;">网站地图</li>
+			</ul>
+			<br />
+			Copyright 2004-2015 贵州随时随地科技有限公司 版权所有 黔ICP备15369200号-1
+		</div>
+	</div>
+</body>
+</html>
+
+
+

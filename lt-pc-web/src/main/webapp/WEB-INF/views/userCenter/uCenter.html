@@ -1,0 +1,198 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>个人中心</title>
+    
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/addr.css" />  
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/orderList.css" />    
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/UCenter.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/collect.css" />
+	
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+
+    <!--[if IE]> 
+        <script src="${contextPath}/resources/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!--head/头部-->
+<!--<div class="includemoudle" link="../inc/harderone.html"></div>  /头部引入-->
+<#include "common/head.html">
+
+<!-- end head/头部-->
+<!--个人信息 -->
+<#include "userCenter/userInfo.html">
+<!-- end 个人信息-->
+
+<!-- 主体 -->
+<div class="main">
+    <div class="content clearfix">
+<!--侧边栏-->
+<#include "userCenter/leftSite.html">
+<!-- end 侧边栏-->
+<div class="column-r" id="content">
+<!--此div下引入-->
+<div class="nav">
+    <div class="content">
+        <ul class="clearfix">
+            <li id="all" class="curr"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=">全部订单</a></li>
+            <li id="create"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=create">待付款</a></li>
+            <li id="paid"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=paid">待发贷</a></li>
+            <li id="delivery"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=delivery">待收贷</a></li>
+            <li id="unevaluate"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=unevaluate">待评价</a></li>
+            <li id="finish"><a  href="${contextPath}/intercept/userCenter/my_order.html?currentValue=finish">已完成</a></li>
+        </ul>
+    </div>
+</div>
+<#list pageData.list as page>
+<div class="listing">
+	<div class="linav">
+		<input type="checkbox"> <span>${page.order.baseInfo.createDate}</span>
+		<span>订单号： ${page.order.id!'没有id'}</span> <span>商家:${page.order.marketingInfo.operationMerchantName}</span>
+	</div>
+	<div class="comm clearfix">
+		<ul>
+			<li class="fist clearfix">
+			<#list page.order.orderSKUItems as sku>
+				<ul class="mtop clearfix">
+					<li>
+						<div class="nat">
+							<a href="#"><img class="natimg" src="${imageContextPath}/pro_01.png" alt=""></a>
+						</div>
+						<div class="nat">
+							<p class="te1">
+								<a href="#">
+									${(sku.productName)!''}
+								[交易快照]</a>
+							</p>
+							<p class="te2">颜色分类： 银色 型号：小</p>
+							<p class="te3">
+								<i></i>保障卡
+							</p>
+						</div>
+						<div class="nat">
+							<p class="sum">￥${page.baseInfo.price}</p>
+						</div>
+						<div class="nat">
+							<p>X ${(sku.num)!''}
+							</p>
+						</div>
+						
+						<div class="nat" style="margin-right:10px">
+							<p>
+								<a href="#">投诉卖家</a>
+							</p>
+							<p>
+								<a href="#">退运保险</a>
+							</p>
+						</div>
+					</li>
+				</ul>
+				</#list>
+			</li>
+			
+			<li class="comm2">
+				<p class="sum">实付：${page.order.baseInfo.totalPrice}</p>
+				<p>（含运费：00）</p>
+				<p>
+					<i class="icon"></i>
+				</p>
+			</li>
+			<li class="comm2">
+					<p>
+				<#if page.order.status.currentValue=='create'>
+					<a href="#">等待买家付款</a>
+					<#elseif page.order.status.currentValue=='cancel'>
+					<a href="#">订单取消</a>
+					<#elseif page.order.status.currentValue=='paid'>
+					<a href="#">待发货</a>
+					<#elseif page.order.status.currentValue=='delivery'>
+					<a href="#">已发货</a>
+					<#elseif page.order.status.currentValue=='finish'>
+					<a href="#">交易成功</a>
+					<#elseif page.order.status.currentValue=='remove'>
+					<a href="#">交易关闭</a>
+				</#if>
+				</p>
+				<p>
+					<a href="#">订单详情</a>
+				</p>
+			</li>
+			<li class="comm2">
+				<#if page.order.status.currentValue=='create'>
+				<p>	<a class="but" href="${contextPath}/oneBuyOrder/orderToPay?id=${page.id}" target="_blank">立即付款</a></p>
+				<p>
+				<br>
+				</p>
+				<p>
+					<a href="#">取消订单</a>
+				</p>
+					<#elseif page.order.status.currentValue=='cancel'>
+					<a href="#">订单取消</a>
+					<#elseif page.order.status.currentValue=='paid'>
+					<a href="#">待发货</a>
+					<#elseif page.order.status.currentValue=='delivery'>
+					<a href="#">已发货</a>
+					<#elseif page.order.status.currentValue=='finish'>
+					<a href="#">评价</a>
+					<#elseif page.order.status.currentValue=='remove'>
+					<a href="#">交易关闭</a>
+				</#if>
+			</li>
+		</ul>
+	</div>
+
+</div>
+</#list>
+
+<!-- 分页 -->
+<#import "/freemarker/pagination.ftl" as p> 
+<@p.costPagination pageData/> 
+
+<!--此div上引入-->
+	</div>
+    </div>
+</div>
+
+<!--foot/脚部-->
+	<#include "common/foot.html">
+<!-- end foot/脚部-->
+<!-- 用于分页请求的链接 不可删-->
+
+</body>
+<script>
+	$('.comm2').height($('.comm').height());
+//	var url = window.location.href;
+		
+ 	$(function(){
+		var url =window.location.href;
+	//	alert(url.substring(url.indexOf("?")+1, url.indexOf("=")));
+		if (url.indexOf("&") < 0) {
+			var type = url.substring(url.indexOf("=")+1);
+			if (type == "") {
+				reset("all");
+			}else{ 
+				reset(type);
+			}
+		}else if (url.indexOf("&") > 0) {
+		var	type2 = url.substring(url.indexOf("=")+1,url.indexOf("&"));
+			if (type2 == "") {
+				reset("all");
+			}else{ 
+				reset(type2);
+			}
+		}
+		
+	});	
+	function reset(tp){
+		$(".nav .content .clearfix li").removeAttr("class");
+		$("#"+tp).attr("class","curr");
+		} 
+</script>
+
+</html>

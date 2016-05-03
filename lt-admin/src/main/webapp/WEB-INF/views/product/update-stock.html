@@ -1,0 +1,77 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link href="${contextPath}/resources/css/plugins/iCheck/custom.css"
+	rel="stylesheet">
+
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title">编辑库存</h5>
+			</div>
+			<form  class="form-horizontal add-form"  method="post">
+	<input name="sKUProductId" type="hidden" value="${pc.id}">
+			<div class="modal-body">
+					
+					<div class="form-group">
+                        <label class="col-sm-3 control-label">数量</label>
+                        <div class="col-md-6">
+                           <input type="text" name="number" data-required="1" placeholder="数量" class="form-control"/>
+                         </div>
+                    </div>
+	                                   
+	                <div class="form-group">
+					    <label class="col-sm-3 control-label">价格</label>
+						<div class="col-md-6">
+							<input type="text" name="price" data-required="1" placeholder="价格" class="form-control" />
+						</div>
+				    </div>
+
+					
+					
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+				<button class="btn btn-primary btn-save" type="submit">确认</button>
+			</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+   <script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+<script type="text/javascript">
+   $(function() {
+		$(".add-form").validate({
+			rules : {
+				number : {
+								maxlength : 10,
+							    required : true,
+							    digits : true
+							},
+				price : {
+					maxlength : 10,
+							    required : true,
+							    digits : true
+				}
+			},
+			submitHandler : function() {
+				$(".add-form").ajaxSubmitForm(saveCollback);
+			}
+		});
+	});
+
+
+</script>

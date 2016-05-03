@@ -1,0 +1,102 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link href="${contextPath}/resources/css/plugins/iCheck/custom.css"
+	rel="stylesheet">
+
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title"></h5>
+			</div>
+			<form  class="form-horizontal add-form" action="${contextPath}/productParameterValue/save" method="post">
+	<input name="productParameterValueId" type="hidden" value="${pc.id}">
+			<div class="modal-body">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">值：</label>
+						<div class="col-sm-6">
+							<input name="value" placeholder="请输入值" type="text"
+								class="form-control">
+						</div>
+					</div>
+					
+					 <div class="form-group">
+						        <label class="col-sm-3 control-label">属性名:</label>
+						        <div class="col-sm-6">
+						            <select class="form-control" id="productParameterId" name="productParameterId">
+						            </select>
+						        </div>
+					</div>
+					
+					
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+				<button class="btn btn-primary btn-save" type="submit">保存</button>
+			</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+
+<script type="text/javascript">
+   $(function() {
+		$(".add-form").validate({
+			rules : {
+				value : {
+					required : !0,
+					minlength : 2
+				},
+				
+				productParameterId:{
+				required : true
+				}
+			},
+			messages : {
+				value : {
+					required : e + "请输入正确的名称",
+					minlength : e + "资源名称必须两个字符以上"
+				}
+			},
+			submitHandler : function() {
+				$(".add-form").ajaxSubmitForm(saveCollback);
+			}
+		});
+		productParameter();
+	});
+
+
+     function productParameter(){
+                 $.ajax({
+						type : "post",
+						url : "${contextPath}/productParameter/getPdt",
+						dataType : "json",
+						async : true,
+						success : function(data) {
+							var result = "";
+							if (data.length > 0) {
+								for (var i = 0; i < data.length; i++) {
+									if (i == 0) {
+										result += "<option value=''>请选择</option>";
+									}
+									result += "<option value='" + data[i].id+ "'>"
+											+ data[i].name
+											+ "</option>";
+								}
+							}
+							$("#productParameterId").html("");
+							$("#productParameterId").html(result);
+						}
+					});
+			}
+
+</script>

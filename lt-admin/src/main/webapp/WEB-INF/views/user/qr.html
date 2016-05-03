@@ -1,0 +1,23 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link href="${contextPath}/resources/css/plugins/iCheck/custom.css"
+	rel="stylesheet">
+
+	<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title">二维码</h5>
+			</div>
+			<form class="form-horizontal add-form" id="form-add" action="${contextPath}/user/update-password" method="post">
+			<input type="hidden" id="userId" name="userId" />
+			<div class="modal-body" id="modal-body" style='margin: auto;text-align: center;'>
+			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+

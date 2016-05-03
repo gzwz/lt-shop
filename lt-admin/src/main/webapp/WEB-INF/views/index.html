@@ -1,0 +1,59 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>贵州隆腾--后台管理系统</title>
+<!--[if lt IE 8]>
+<meta http-equiv="refresh" content="0;ie.html" />
+<![endif]-->
+<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+<link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+<!-- jqgrid-->
+<link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+<link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+	<div id="wrapper">
+	<#include "/public/side/default.html"> 
+   	<div id="page-wrapper" class="gray-bg dashbard-1">
+		<#include "/public/header/default.html"> 
+	    <div class="row J_mainContent" id="content-main">
+	       <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${contextPath}/main" frameborder="0" data-id="index" seamless></iframe>
+	    </div>
+		<#include "/public/footer/default.html"> 
+	</div>
+    <#include "/public/side/right.html">  
+	</div>
+<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+<script src="${contextPath}/resources/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${contextPath}/resources/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+<script src="${contextPath}/resources/js/hplus.min1fc6.js?v=4.0.0"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/contabs.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/pace/pace.min.js"></script>
+
+<script src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+<script src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="${contextPath}/resources/js/common.js"></script>
+</body>
+</html>

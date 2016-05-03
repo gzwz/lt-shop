@@ -1,0 +1,95 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隆腾嘉业 - 登录</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+    <link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+    <link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name"><img alt="image" class="img-circle circle-border" src="${contextPath}/resources/img/icon-08.png"></h1>
+
+            </div>
+            <!-- <div class="m-b-md">
+                
+            </div> -->
+            <h3>隆腾嘉业后台管理系统</h3>
+
+            <form class="m-t loginForm" method="post" role="form" action="${contextPath}/submit/login">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="loginName" placeholder="用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="密码" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+            </form>
+        </div>
+    </div>
+    <script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+    <script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/form-validate-common.js"></script>
+    <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	$(".loginForm").validate({
+			rules : {
+				loginName : {
+					required : !0
+				},
+				passowrd : {
+					required : !0
+				}
+			},
+			messages : {
+				loginName : {
+					required : e + "请输入用户名"
+				},
+				passowrd : {
+					required : e + "请输入密码"
+				}
+			},
+			submitHandler:submitLogin
+		});
+    })
+    
+   	var submitLogin = function(){
+   		var loginCollback = function(res){
+   			iconName = "error";
+			if(res.success){
+				location.href = "${contextPath}/index";
+			} else{
+				swal(res.errorMsg, '', iconName);
+			}
+			
+		};
+    	$(".loginForm").ajaxSubmitForm(loginCollback);
+   	}
+    </script>
+</body>
+</html>

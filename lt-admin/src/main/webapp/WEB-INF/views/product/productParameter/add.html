@@ -1,0 +1,127 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+
+	<#include "/public/frame/ztree.html">
+
+<body class="gray-bg">
+
+
+					<div class="ibox-content">
+			<form id="submitForm"  class="form-horizontal add-form" action="${contextPath}/productParameter/save" method="post">
+	        <input name="productParameterId" type="hidden" value="${pc.id}" id="productParameterId"/>
+			<div class="modal-body">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">名称：</label>
+						<div class="col-sm-6">
+							<input name="name" placeholder="请输入名称" type="text"
+								class="form-control">
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+					<label class="col-sm-3 control-label">产品类型:</label>
+					<div class="col-sm-6">
+						<ul id="treeDemo" class="ztree"></ul>
+					</div>
+				</div>
+					
+					
+					
+					<input type="hidden" name="productCategoryIds" id="productCategoryId"/>
+
+			 <div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-8">
+									<button class="btn btn-primary btn-save" type="submit">保存</button>
+								</div>
+							</div>
+			</div>
+			</form>
+					</div>
+
+
+
+
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+
+
+
+ <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    
+    
+                               
+ <SCRIPT type="text/javascript">
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		
+		
+		$(document).ready(function(){
+		  $.ajax({
+		     url : "${contextPath}/productCategory/getPaterZtreeData.html", 
+		type : "post",
+		dataType : "json", 
+		success :function(data){
+		  $.fn.zTree.init($("#treeDemo"), setting, data);
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.setting.check.chkboxType ={"Y" : "ps", "N" : "ps"};
+		}
+	});
+			
+		});
+		
+	</SCRIPT>
+<script type="text/javascript">
+   $(function() {
+		$(".add-form").validate({
+			rules : {
+				name : {
+					required : !0,
+					minlength : 2
+				}
+			},
+			messages : {
+				name : {
+					required : e + "请输入正确的名称",
+					minlength : e + "资源名称必须两个字符以上"
+				}
+			},
+			submitHandler : function() {
+			var treeObj=$.fn.zTree.getZTreeObj("treeDemo");
+		            nodes=treeObj.getCheckedNodes(true);
+		            var resourseIds="";
+		            for(var i=0;i<nodes.length;i++){
+		            resourseIds+=nodes[i].id + ",";
+					}
+				$("#productCategoryId").val(resourseIds);
+				$(".add-form").ajaxSubmitForm(refurbishCollback);
+			}
+		});
+	});
+
+
+</script>
+
+</body>
+</html>

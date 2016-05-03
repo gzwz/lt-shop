@@ -1,0 +1,211 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>消息通知</title>
+<#include "/public/frame/jqgridcss.html">
+<link href="${contextPath}/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+   
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" data-toggle="modal" data-target="#myModal5" href="javascript:void(0);" class="btn btn-primary"> <i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;消息通知发送</i>
+								</a>
+								
+								<a onclick="fnClickPlan();" data-toggle="modal" data-target="#myModal6" href="javascript:void(0);" class="btn btn-primary"> <i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;计划发送</i>
+								</a>
+								
+								 <!-- <a onclick="fnClickAllDel();" href="javascript:void(0);" class="btn btn-w-m btn-danger ">&nbsp;批量删除</a> -->
+							</div>
+							
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	 <#include "/public/frame/jqgridjs.html">
+	
+	
+	<!--引入开始-->
+<script language="javascript" type="text/javascript" src="${contextPath}/resources/My97DatePicker/WdatePicker.js"></script>
+<!--引入结束-->
+	
+<#include "/msgNotice/plan_notice.html">
+		
+			
+
+		<#include "/msgNotice/add.html">
+	<script type="text/javascript">
+		
+		$(function() {
+			$('.btn-search').on('click', function(e) {
+				search();
+			});
+			grid = $('#grid-table')
+					.myJqGrid(
+							{
+								url : "${contextPath}/system/msgNotice/query",
+								colNames : [ '发送时间','过期时间','操作' ],
+								colModel : [
+										{
+											name : 'createDate',
+											label : 'createDate',
+											width : 40
+										},
+										{
+											name : 'pastDueDate',
+											label : 'pastDueDate',
+											width : 40
+										},
+										{
+											name : 'id',
+											label : 'id',
+											width : 90,
+											formatter : function(cellvalue,
+													options, rowObject) {
+												return "<a style='margin-left:10px;' href='javascript:;' onclick=fnClickDel('"
+														+ cellvalue
+														+ "') class='btn btn-xs btn-primary'>删除</a>";
+											}
+										} ],
+								styleUI : 'Bootstrap',
+								pager : '#grid-pager',
+								height:"auto",
+						        viewrecords:true,
+						        caption:"消息通知列表"
+							});
+							
+							
+							load();
+							load_plan();
+
+		});
+	</script>
+	<script type="text/javascript">
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+
+		//计划发送
+		function fnClickPlan(){
+		    $(".modal-title").html("");
+			$(".modal-title").html("计划发送");
+			$("#submitForm").attr('action', '${contextPath}/system/msgNotice/save_plan')
+			$("#planNotice").show();
+			$('#myModal').hide();
+		   
+		}
+		
+		
+		
+		/*添加*/
+		function fnClickAdd(id) {
+		    $(".modal-title").html("");
+			$(".modal-title").html("消息通知发送");
+			$("#form-add").attr('action', '${contextPath}/system/msgNotice/save')
+			$('#myModal').show();
+			$("#planNotice").hide();
+		}
+
+		 /*批量删除*/
+	     function fnClickAllDel(){
+		　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+			swal("请选择要删除的行!", "");
+			return;
+		  }
+            fnAjaxDel("${contextPath}/system/msgNotice/" + id + "_delete", '', search);
+	     }
+		
+		/*删除*/
+		function fnClickDel(id) {
+			fnAjaxDel("${contextPath}/system/msgNotice/" + id + "_delete", '',
+					search);
+		}
+		
+		 function refurbish(){
+		  search();
+	     }
+	     
+	     
+	     
+	      function load(){
+                 $.ajax({
+						type : "post",
+						url : "${contextPath}/system/msgTemplate/query_msgTemplateInfo",
+						dataType : "json",
+						async : true,
+						success : function(data) {
+							var result = "";
+							if (data.length > 0) {
+								for (var i = 0; i < data.length; i++) {
+									if (i == 0) {
+										result += "<option value=''>请选择</option>";
+									}
+									result += "<option value='" + data[i].id+ "'>"
+											+ data[i].name
+											+ "</option>";
+								}
+							}
+							$("#msgTemplateId").html("");
+							$("#msgTemplateId").html(result);
+						}
+					});
+			}
+			
+			
+			
+			
+			
+			
+	      function load_plan(){
+                 $.ajax({
+						type : "post",
+						url : "${contextPath}/system/msgSendPlan/query_plan_info",
+						dataType : "json",
+						async : true,
+						success : function(data) {
+							var result = "";
+							if (data.length > 0) {
+								for (var i = 0; i < data.length; i++) {
+									if (i == 0) {
+										result += "<option value=''>请选择</option>";
+									}
+									result += "<option value='" + data[i].id+ "'>"
+											+ data[i].sendDate
+											+ "</option>";
+								}
+							}
+							$("#msgSendPlanId").html("");
+							$("#msgSendPlanId").html(result);
+						}
+					});
+			}
+		</script>	
+	
+</body>
+</html>

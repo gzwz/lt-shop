@@ -1,0 +1,160 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源管理</title> <#include "/public/frame/metrnic.html">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5"
+	rel="stylesheet">
+<link
+	href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
+<!-- jqgrid-->
+<link
+	href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0"
+	rel="stylesheet">
+
+<link
+	href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+
+</head>
+
+<body class="gray-bg">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<label>网站设置</label>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="tabbable tabbable-custom">
+									<div class="tab-content">
+
+
+
+										<div class="portlet-body form">
+											<!-- BEGIN FORM-->
+											<form id="add_form${itemout.groupId}"
+												action="${contextPath}/website/uporsa.html"
+												class="form-horizontal" method="post">
+												<div class="form-body">
+													<#if websiteList?exists>
+													 <#list websiteList as webSite>
+													    <#if webSite.inputType==1>
+													    <input type="hidden" name="webSiteIds" value="${webSite.id}" class="form-control" />
+														<div class="form-group">
+															<label class="control-label col-md-2">${webSite.name}:</label>
+															<div class="col-md-4">
+																<input type="text" name="webSiteName" value="${webSite.value}" class="form-control" />
+															</div>
+														</div>
+														 <#elseif webSite.inputType==2>
+														 <input type="hidden"  name="webSiteIds" value="${webSite.id}" class="form-control" />
+														<div class="form-group">
+															<label class="control-label col-md-2">${webSite.name}:</label>
+															<div class="col-md-4">
+																<select class="form-control" name="webSiteName">
+																	<option value="${webSite.value}">${webSite.value}</option>
+																</select>
+															</div>
+														</div>
+														
+														<#elseif webSite.inputType==3>
+														<input type="hidden"  name="webSiteIds" value="${webSite.id}" class="form-control" />
+														<div class="form-group">
+															<label class="control-label col-md-2">${webSite.name}:</label>
+															<div class="col-md-7">
+																<span class="btn btn-success fileinput-button"> <i
+																	class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+																	<input class="fileupload" type="file" name="file">
+																	<input id="fileuploadInput" type="hidden" value="${webSite.value}" name="webSiteName">
+																</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+															</div>
+														</div>
+														<#elseif webSite.inputType==4>
+														<input type="hidden" name="webSiteIds" value="${webSite.id}" class="form-control" />
+														<div class="form-group">
+															<label class="control-label col-md-2">${webSite.name}:</label>
+															<div class="col-md-4">
+																<textarea name="webSiteName" data-required="1"
+																	class="form-control" rows="4">${webSite.value}</textarea>
+															</div>
+														</div>
+														</#if>
+													</#list>
+												 </#if>
+
+
+												</div>
+												<div class="form-actions">
+													<div class="row">
+														<div class="col-md-offset-2 col-md-9">
+															<button type="submit" id="submit" class="btn btn-primary active">提交</button>
+															<button type="reset" class="btn default">重置</button>
+														</div>
+													</div>
+												</div>
+											</form>
+											<!-- END FORM-->
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END PAGE CONTENT-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<#include "/public/frame/metrnicjs.html">
+	<script>
+		jQuery(document).ready(
+				function() {
+					Metronic.init(); // 公共js  必须加入
+					Layout.init(); //   布局js  必须加入
+					QuickSidebar.init(); // 右边sidebar 必须加入
+
+					$('.fileupload').fileupload(
+					
+							{
+								url : "${contextPath}/file/upload",
+								dataType : 'json',
+								done : function(e, data) {
+								   $(this).next().attr("value",data.result.url);
+								   $(this).parent().next().attr("src","${imageContextPath}/"+data.result.url).css("display", "inline");
+									 
+								}
+							});
+							
+
+				});
+	</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+
+/*<!-- 导航 -->*/
+.nav{
+	margin-left:8px;
+	margin-top:20px;
+    border:1px solid #ddd;
+    width: 925px;
+    border-radius: 5px;
+}
+
+.nav ul li{
+    float:left;
+    width:155px;
+    color:#333;
+    border-left:1px solid #ddd;
+    cursor:pointer;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+}
+ 
+.nav ul li.curr{
+    background:#77abd2;
+    color:#fff;
+}
+/*<!-- end 导航 -->*/
+/*<!-- 列表侧边栏-->*/
+.listing{
+    margin:17px 0 0 8px;
+}
+
+.column-r .comm{
+    border:solid #dbe6ed;
+    border-width: 0 2px 2px 2px;
+}
+
+.column-r .comm >ul >li{
+    width:110px;
+/*    height:122px;*/
+    padding-top:10px;
+    border-left:2px solid #dbe6ed;
+    float:left;
+    text-align: center;
+}
+
+.column-r .comm ul li.fist{
+    width:auto;
+    padding-top:0;
+    text-align:inherit;
+    border-left:0;
+}
+
+.column-r .comm ul li.fist2{
+    width:auto;
+    height:120px;
+    border-top:2px solid #dbe6ed;
+    text-align:inherit;
+    padding-right:10px;
+    border-left:0;
+}
+
+.column-r .comm ul li .mtop{
+    padding-top:10px;
+    border-top:2px solid #dbe6ed;
+    padding-bottom: 10px;
+}
+
+.column-r .comm ul li p{
+    margin-top:5px;
+}
+
+.column-r .comm ul li .but{
+    display: inline-block;
+    width:61px;
+    height:21px;
+    border-radius: 5px;
+    color:#fff;
+    background:#eb4f38;
+    text-align: center;
+    line-height: 21px;
+}
+
+
+.column-r .comm ul li .icon{
+    display: inline-block;
+    width:24px;
+    height:18px;
+    background:url(../../images/icon.png) no-repeat -274px -237px;
+}
+
+.column-r .listing{
+    width:930px;
+}
+
+.column-r .listing .linav{
+    height:44px;
+    line-height: 44px;
+    vertical-align:middle;
+    background:#e0f5fb;
+    padding-left:20px;
+}
+
+.listing .linav span{
+    font-size:14px;
+    color:#333;
+    margin-left:15px;
+}
+
+.comm .natimg{
+    width:157px;
+    height:112px;
+    border:1px solid #ddd;
+    float:left;
+}
+
+.comm .nat{
+    float:left;
+    margin-left: 10px;
+}
+
+.comm .nat .sum{
+    width:60px;
+}
+
+.comm .nat .te1{
+    width:235px;
+}
+
+.comm .nat .te2{
+    padding:10px 0;
+    color:#a3aaaf;
+}
+
+.comm .nat .te3{
+    color:#ee6551;
+}
+
+.comm .nat .te3 i{
+    display: inline-block;
+    width:16px;
+    height:18px;
+    float:left;
+    margin-right:10px;
+    background:url(../../images/icon.png) no-repeat -252px -238px;
+}
+
+
+/*<!-- end 列表侧边栏-->*/

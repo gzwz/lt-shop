@@ -1,0 +1,143 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>个人中心</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/addr.css" />  
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/orderList.css" />    
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/UCenter.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/collect.css" />
+	
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+
+    <!--[if IE]> 
+        <script src="${contextPath}/resources/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!--head/头部-->
+<!--<div class="includemoudle" link="../inc/harderone.html"></div>  /头部引入-->
+<#include "common/head.html">
+
+<!-- end head/头部-->
+<!--个人信息 -->
+<#include "userCenter/userInfo.html">
+<!-- end 个人信息-->
+
+<!-- 主体 -->
+<div class="main">
+    <div class="content clearfix">
+<!--侧边栏-->
+<#include "userCenter/leftSite.html">
+<!-- end 侧边栏-->
+<!-- 列表侧边栏-->
+<div class="column-r" id="content">
+<!--此div下引入-->
+
+ <#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="sitesup">
+	<div class="sitenav">
+		<div class="navone">
+			<span>地址管理</span> <a class="but3" 
+				href="javascript:addAddress();"><i></i>添加新地址</a>
+		</div>
+		<div class="nav2">
+			<span>姓名</span> <span class="td2">详细地址</span> <span class="td">电话</span>
+		</div>
+	</div>
+	<div class="sitenitem">
+		<ul>
+		<#if addrList?exists>
+			<#list addrList as al>
+				<li>
+					<div class="opt">${al.name}</div>
+					<div>
+						<p>${al.province.name}${al.city.name}${al.area.name}${al.detail}</p>
+					</div>
+					<div>${al.mobile}</div>
+					<div><#if al.defaultAddress = true>
+						默认地址
+						 <#else>
+						  <button onclick="setDefault('${al.id}');" style="border: solid 1px #0F5489; cursor:pointer; background: #1AB394;" >设为默认</button>
+						 </#if>
+					</div>
+					<div>
+						<a class="but1" href="javascript:void(0)" onclick="editAddr('${al.id}')"></a>
+						<a class="but2" href="javascript:void(0)" onclick="delAddr('${al.id}')"></a>
+					</div>
+				</li>
+			</#list>
+		</#if>
+		</ul>
+	</div>
+</div>
+
+<!--此div上引入-->
+        </div>
+<!-- 分页 -->
+
+    </div>
+</div>
+
+<!--foot/脚部-->
+	<#include "common/foot.html">
+<!-- end foot/脚部-->
+</body>
+<script type="text/javascript">
+	function editAddr(id){
+	var url = "${contextPath}/intercept/userAddesses/editAddr?addressId="+id;
+	layer.open({
+		type : 2, //page层
+		area : [ '700px', '550px' ],
+		title : '新增收货地址',
+		shade : 0.6, //遮罩透明度
+		moveType : 1, //拖拽风格，0是默认，1是传统拖动
+		shift : 1, //0-6的动画形式，-1不开启
+		content : url
+	});
+	}
+	function delAddr(id){
+		var url = "${contextPath}/intercept/userAddesses/delAddr?addressId="+id;
+		fnAjax(url, "post", "json", "", function(result){
+			if (result.success) {
+				layer.msg(result.errorMsg, {icon: 1});
+			}else {
+				layer.msg(result.errorMsg, {icon: 2});
+			}
+			window.location.reload();
+		});
+	}
+	
+	function setDefault(id){
+		var url = "${contextPath}/intercept/userAddesses/setDefault?addressId="+id;
+		fnAjax(url, "post", "json", "", function(result){
+			if (result.success) {
+				layer.msg(result.errorMsg, {icon: 1});
+			}else {
+				layer.msg(result.errorMsg, {icon: 2});
+			}
+			window.location.reload();
+		});
+	}
+function addAddress() {
+	layer.open({
+		type : 2, //page层
+		area : [ '700px', '550px' ],
+		title : '新增收货地址',
+		shade : 0.6, //遮罩透明度
+		moveType : 1, //拖拽风格，0是默认，1是传统拖动
+		shift : 1, //0-6的动画形式，-1不开启
+		content : "${contextPath}/intercept/userAddesses/addView"
+	});
+	}
+</script>
+<script>
+	$('.comm2').height($('.comm').height());
+</script>
+
+</html>

@@ -1,0 +1,203 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>广告管理</title>
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+<link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<!-- jqgrid-->
+<link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+<link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>广告列表</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" href="javascript:void(0);"
+									class="btn btn-primary "> <i
+									class="glyphicon glyphicon-plus">&nbsp;新增</i>
+								</a>
+							</div>
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+	<script type="text/javascript">
+		 
+		$(function() {
+		grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/adListView/query",
+	     colNames:['广告名称','广告位置','链接', '媒介类型 ', '开始日期','结束日期','点击次数','状态','上下线', '操作'],
+	   	     colModel:[
+	   			{name:'adName',label:'adName',width:40},
+	   			{name:'adPosition',label:'adPosition',width:40},
+	   			{name:'url',label:'url',width:40},
+	   			{name:'mediaTypes',label:'mediaTypes',width:30},
+	   			{name:'startTime',label:'startTime', width:60},
+	   			{name:'endTime',label:'endTime', width:60},
+	   			{name:'clickNum',label:'clickNum', width:40},
+	   			{name:'status',label:'status', width:40,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue=="enable")
+					   return "<span style='color: 278E29;font: bold;'>正—常</span>";
+					   else if(cellvalue=="disable")
+					   return "<span style='color: B9CB15;font: bold;'>已下线</span>";
+					/*    else if(cellvalue=="create")
+					   return "创建"; */
+					   else if(cellvalue=="remove")
+					   return "已被删除";
+					}},
+	   			{name:'status',label:'status', width:40,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue=="enable")
+					   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickUp('"+rowObject.id+"','disable'); type='button'>下线</button>";
+					   else if(cellvalue=="disable" || cellvalue=="create")
+					   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickDown('"+rowObject.id+"','enable'); type='button'>上线</button>";
+					   else if(cellvalue=="remove")
+						   return "已被删除";
+					}},
+	   			{name:'id',label:'id', width:80,formatter:function(cellvalue, options, rowObject){
+	   				
+	   		/* 	"<a href='javascript:;' onclick=fnClickModify('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>预览</a>" */
+	   		return "<a href='javascript:;' onclick=fnClickLook('"+cellvalue+"') class='btn btn-outline btn-info  dim'><i class='fa fa-paste'></i>预览</a>" 
+	   			+"<a href='javascript:;' onclick=fnClickEdit('"+cellvalue+"') class='btn btn-outline btn-info  dim'><i class='fa fa-paste'></i>编辑</a>" 
+	   			+"<a href='javascript:;' onclick=fnClickDel('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>删除 </a>" ;
+	   			}} 
+	   		],
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+		});
+ 
+		});
+	</script>
+	<script type="text/javascript">
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+
+		/*编辑*/
+		function fnClickEdit(id) {
+			layer.open({
+				title: '编辑详情',
+	    	    type: 2,
+	    	    area: ['900px', '650px'],
+	    	    fix: true, 					//不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/adListView/edit.html?id=" + id
+	    	});
+		}
+		/*添加*/
+		function fnClickAdd() {
+			layer.open({
+				title: '新增广告',
+	    	    type: 2,
+	    	    area: ['900px', '650px'],
+	    	    fix: true, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/adListView/add"
+	    	});
+		}
+		
+		
+		/*预览*/
+		function fnClickLook(id) {
+			layer.open({
+				title: '详情预览',
+	    	    type: 2,
+	    	    area: ['900px', '650px'],
+	    	    fix: true, 					//不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/adListView/look.html?id=" + id
+	    	});
+		}
+		
+		 /*停用*/
+	     function fnClickUp(id, type){
+	     	fnAjaxChange("${contextPath}/adListView/change.html?id="+id+"&status=" + type , '', search);
+	     }
+	     /*启用*/
+	     function fnClickDown(id, type){
+	     	fnAjaxChange("${contextPath}/adListView/change.html?id="+id+"&status=" + type , '', search);
+	     }
+		
+
+		/*删除*/
+		function fnClickDel(id) {
+			fnAjaxDel("${contextPath}/adListView/delete.html?id=" + id , search());
+		}
+		
+		function load(){
+		   $ .ajax({
+				type : "post",
+				url : "${contextPath}/adListView/query_adPosition",
+				dataType : "json",
+				async : true,
+				success : function(data) {
+					var result = "";
+					if (data.length > 0) {
+						for (var i = 0; i < data.length; i++) {
+							if (i == 0) {
+								result += "<option value=''>请选择</option>";
+							}
+							result += "<option value='" + data[i].id+ "'>"
+									+ data[i].name
+									+ "</option>";
+						}
+					}
+					$("#adPositionId").html("");
+					$("#adPositionId").html(result);
+				}
+			});
+		}
+		
+		function refurbish(){
+		  search();
+	 		 }
+	</script>
+</body>
+</html>

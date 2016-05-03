@@ -1,0 +1,106 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>${productCategory.name!''}</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+	<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/pc/master.sel.css">
+<!-- <script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script> -->
+</head>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/myPagination/page.css" /> 
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/msgbox/msgbox.css" /> 
+
+
+<body>
+	<!-- 头部 -->
+	<#include "common/head.html">
+	<div class="filtrate">
+		<div class="content">
+			<div class="crumb">
+				<span><a href="${contextPath}/index">首页</a></span> > <span><a class="curr"
+					href="javascript:void(0);">${productCategory.name!''}</a></span>
+			</div>
+			<!--筛选项-->
+			<div id="shaixuan" class="filtrate-list">
+                <form id="shaixuanForm">
+					<ul id="trate" class="clearfix" style="display: none;">
+						<li class="curr1">已选条件：</li>
+						<li id="clean" class="curr2">清除全部</li>
+					</ul>
+              </form>
+				<#if scList?exists> <#list scList as sc>
+				<dl class="clearfix">
+					<dt class="parent-value" accesskey="${sc.id}">${sc.name}：</dt>
+					<dd class="curr" id="limite">无限</dd>
+					<#list sc.parentList as parent>
+					<dd accesskey="${parent.id}">${parent.name}</dd>
+					</#list>
+				</dl>
+				</#list> </#if>
+               <#if (brandList?size>0)>
+				<dl id="brandalls" class="clearfix">
+					<dt class="parent-value" accesskey="123456">品牌：</dt>
+					 <#list brandList as brand> <#if
+					brand_index=="0">
+					<dd id="limite" accesskey="${brand.id}" class="curr getbrandId">${brand.brandName}</dd>
+					<#else>
+					<dd accesskey="${brand.id}">${brand.brandName}</dd>
+					 </#if></#list> 
+				</dl>
+                </#if>
+
+			</div>
+			<!-- end 筛选项-->
+			<div class="paging">
+				<ul id="pagingbox" class="clearfix">
+					<span>排序方式：</span>
+					<li class="curr">品牌</li>
+					
+					
+				</ul>
+			</div>
+			<!--品版-->
+			<div id="brandall" class="ranking">
+				<div class="brand clearfix">
+					<div class="brand-nav"></div>
+					<div class="thebrand clearfix">
+						<div class="products ">
+							<ul id="product-list">
+								
+							</ul>
+						</div>
+						<ul class="borands">
+                           
+                       </ul>
+                  </div>
+                 <div class="page">
+                     <div id="demo5" class="pages">
+                         
+                     </div>
+					</div>
+				</div>
+			</div>
+			<!-- end 品版-->
+		</div>
+	</div>
+
+<input type="hidden" value="${productCategory.id!''}" id="productCategoryid"/>
+<input type="hidden" value="${productCategory.name!''}" id="productCategoryName"/>
+	<!--foot/脚部-->
+
+	<#include "common/foot.html">
+	  
+<!-- 分页 -->
+ 	<input type="hidden" id="contextPath" value="${contextPath}">
+	
+	<script type="text/javascript" src="${contextPath}/resources/js/myPagination/jquery.myPagination6.0.js "></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/msgbox/min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/msgbox/msgbox.js"></script>
+   <script src="${contextPath}/resources/js/effect.selt.js"></script>
+</body>
+</html>

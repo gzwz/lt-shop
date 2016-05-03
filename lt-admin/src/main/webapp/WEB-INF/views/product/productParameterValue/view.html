@@ -1,0 +1,131 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+<link href="${contextPath}/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+   
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" data-toggle="modal" data-target="#myModal5" href="javascript:void(0);" class="btn btn-primary"> <i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i>
+								</a>
+							</div>
+							
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	    <#include "/public/frame/jqgridjs.html">
+	
+		<#include "/product/productParameterValue/add.html">
+	<script type="text/javascript">
+		
+		$(function() {
+			$('.btn-search').on('click', function(e) {
+				search();
+			});
+			grid = $('#grid-table')
+					.myJqGrid(
+							{
+								url : "${contextPath}/productParameterValue/query",
+								colNames : [ '属性值名称','属性名称','操作' ],
+								colModel : [
+										{
+											name : 'name',
+											label : 'name',
+											width : 40
+										},{
+											name : 'categoryName',
+											label : 'categoryName',
+											width : 40
+										},
+										{
+											name : 'id',
+											label : 'id',
+											width : 90,
+											formatter : function(cellvalue,
+													options, rowObject) {
+												return "<a href='javascript:void();' data-toggle='modal' data-target='#myModal5' onclick=fnClickModify('"
+														+ cellvalue
+														+ "') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>";
+											}
+										} ],
+								styleUI : 'Bootstrap',
+								pager : '#grid-pager',
+								height:"auto",
+						        viewrecords:true,
+						        caption:"属性值列表"
+							});
+							
+
+		});
+	</script>
+	<script type="text/javascript">
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+
+		
+		
+		
+		/*添加*/
+		function fnClickAdd(id) {
+		    $(".modal-title").html("");
+			$(".modal-title").html("属性值添加");
+			 search();
+			$(".form-add").attr('action', '${contextPath}/productParameterValue/save')
+		}
+		
+		/*修改*/
+		function fnClickModify(adminId) {
+			var collback = function(d) {
+				$(".modal-title").html("");
+				$(".modal-title").html("属性值编辑");
+				$('input[name=value]').val(d.value);
+				$('#productParameterId').val(d.parameter.id);
+				$('input[name=productParameterValueId]').val(d.id);
+				$(".add-form").attr('action',
+						'${contextPath}/productParameterValue/modify')
+			}
+			fnAjaxGet("${contextPath}/productParameterValue/edit?id="+adminId, '',
+					collback);
+		}
+
+		
+		 function refurbish(){
+		  search();
+	     }
+	     
+	     
+	     
+	     
+		</script>	
+	
+</body>
+</html>

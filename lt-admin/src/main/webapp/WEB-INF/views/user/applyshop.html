@@ -1,0 +1,578 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<#include "/public/frame/metrnic.html">
+
+<link
+	href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
+<!-- jqgrid-->
+<link
+	href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0"
+	rel="stylesheet">
+
+<link
+	href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+
+li{list-style: none;margin-right:10px;}
+li label{cursor: pointer;}
+.Father_Title{float: left;}
+</style>
+<link rel="stylesheet" href="${contextPath}/resources/ueditor/themes/default/css/ueditor.min.css" />
+<script type="text/javascript">
+  	var contextPath = '${contextPath}';
+    var plugins_webuploader = '${contextPath}/resources/js/plugins/webuploader';
+    var image_servler_url = '${contextPath}/upload_image';
+</script>
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+					
+					<div class="row m-b-sm m-t-sm">
+							
+						</div>
+					
+				         <div class="row">
+			<div class="col-md-12">
+				<div class="tabbable tabbable-custom">
+					<ul class="nav nav-tabs">
+					
+						<li id="category" class="active"><a href="javascript:void(0);">基本信息</a></li>
+						<li id="propoty" class="active" style="display: none;"><a href="javascript:void(0);">认证信息</a></li>
+						<li id="product" class="active" style="display: none;"><a href="javascript:void(0);">详细信息</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active fontawesome-demo">
+							<div class="portlet-body form">
+								<!-- BEGIN FORM-->
+								<form action="${contextPath}/merchant/add"
+									class="form-horizontal" method="post" id="form2">
+									
+									<input type="hidden" value="${user.id}" name="userId"/>
+									
+									 <fieldset id="category-content">
+									    
+									    <div class="form-group">
+                                            <label class="control-label col-md-2">用户类型</label>
+                                            <div class="col-md-4">
+                                                 <select class="form-control select2me" name="type">
+									             <option value="common_user" <#if user.type=="common_user">selected="selected"</#if>>普通用户</option>
+									             <option value="member_user" <#if user.type=="member_user">selected="selected"</#if>>会员用户</option>
+			                                     <option value="driver_user" <#if user.type=="driver_user">selected="selected"</#if>>驾驶员用户</option>
+			                                     <option value="merchant_user" <#if user.type=="merchant_user">selected="selected"</#if>>商家用户</option>
+			                                     <option value="owner_user" <#if user.type=="owner_user">selected="selected"</#if>>业主用户</option>
+									            </select>
+                                                </div>
+                                        </div>
+                                        
+                                       <div class="form-group">
+                                            <label class="control-label col-md-2">申请类型</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+														<div class="input-icon">
+															<i class="fa fa-search fa-fw"></i>
+															<input id="newpassword"  class="text-input form-control" type="text" placeholder="请选择上级分类" readonly value="">
+															<input type="hidden" id="parentId" name="merchantCategoryId" class="hidden-input" value=""/>
+														</div>
+														<span class="input-group-btn">
+															<a class="btn blue" type="button" data-url='${contextPath}/merchantCategory/getPermData.html' data-current-id='' data-toggle='iceModal' data-target='#MyModalPerm'><i class="fa fa-search fa-fw"></i>选择</a>
+														</span>
+													</div>
+									            
+									            </div>
+                                        </div> 
+                                        
+                                        
+									    
+									     <div class="form-group">
+                                            <label class="control-label col-md-2">店名</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="name" data-required="1" placeholder="商品名称" class="form-control"/></div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">主营</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="mainCore" data-required="1" placeholder="主营" class="form-control"/></div>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                            <label class="control-label col-md-2">店铺简介</label>
+                                            <div class="col-md-4">
+                                               <textarea  name="introduction" class="form-control"></textarea>
+                                                </div>
+                                        </div>
+                                        
+                                        
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">logo:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="headImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										
+										<div class="form-group">
+											<label class="col-md-2 control-label">商家外观:</label>
+											<div class="col-md-7">
+													<span class="btn btn-success fileinput-button"> <i
+														class="glyphicon glyphicon-plus"></i> <span>上传文件</span> <input
+														id="imageupload" type="file" name="file"
+														multiple="multiple">
+													</span>
+												<div id="imageuploadCon" class="row clearfix margin-top-10">
+												</div>
+											</div>
+										</div>
+									    
+                              </fieldset>
+									
+									<fieldset id="product-brand"  style="display: none;">
+									   
+										
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">身份证正面:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="front">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										 
+										 <div class="form-group">
+											<label class="control-label col-md-2">身份证反面:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="opposite">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">身份证图片:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="identifyImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">营业执照图片:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="charterImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">组织机构代码证图片:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="organizationsImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">登记证书图片:</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="registrationImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="control-label col-md-2">纳税人资质证书(图片):</label>
+											<div class="col-md-7">
+												<span class="btn btn-success fileinput-button"> <i
+													class="glyphicon glyphicon-plus"></i> <span>上传文件</span>
+													<input class="fileupload" type="file" name="file">
+													<input id="fileuploadInput" type="hidden" name="aptitudesImage">
+												</span> <img id="img" class="img-thumbnail" src="<#if webSite.value?if_exists>${imageContextPath}/${webSite.value}</#if>" style="width: 100px; height:66px; <#if "" == webSite.value>display: none;</#if>"/>
+											</div>
+										</div>
+										
+									
+									</fieldset>
+									
+                                      <fieldset id="product-content" style="display: none;">
+									   <div class="form-group">
+                                            <label class="control-label col-md-2">手机</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="mobile" data-required="1" placeholder="手机" class="form-control"/></div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">邮箱</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="email" data-required="1" placeholder="邮箱" class="form-control"/></div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">座机</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="telephone" data-required="1" placeholder="座机" class="form-control"/></div>
+                                        </div>
+                                        
+                                        
+									
+									
+									<div class="form-group">
+										<label class="col-md-2 control-label">所在地：</label>
+										<div class="col-md-2" style="width:auto">
+											<select id="provinceId" class="form-control" name="provinceId">
+											</select>
+										</div>
+										<div class="col-md-2" style="width:auto">
+											<select id="cityId" class="form-control" name="cityId" id="selectCity">
+											</select>
+										</div>
+										<div class="col-md-2" style="width:auto">
+											<select id="areaId" class="form-control" name="areaId" id="selecctArea">
+											</select>
+										</div>
+									</div>
+									
+
+                                   <input type="hidden" id="contextPath" value="${contextPath}">
+									<div class="form-group">
+										<label class="control-label col-md-2">详细地址</label>
+										<div class="col-md-4">
+											<input type="text" name="detailAddress" data-required="1"
+												placeholder="详细地址" class="form-control" />
+										</div>
+									</div>
+                                        
+                                    <div class="form-group">
+										<label class="col-md-2 control-label">经度： <span class="required">
+											* </span></label>
+										<div class="col-md-4">
+											<input type="text" name="longitude" id="long" size="30" class="form-control input-large number"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">纬度： <span class="required">
+											* </span></label>
+										<div class="col-md-4">
+											<input type="text" name="latitude" id="lat" size="30" class="form-control input-large number"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">交通指南：</label>
+										<div class="col-md-4">
+											<iframe src="${contextPath}/query/map" style="width: 1000px;height: 360px;"></iframe>
+										</div>
+									</div>
+                                           
+                                        
+                                        
+                                       
+									<div class="form-group">
+										<label class="control-label col-md-2">店铺详情</label>
+										<div class="col-md-7">
+										<script type="text/plain" id="detail" name="detail" style="height:240px;"></script>
+										</div>
+									</div>
+									
+                                </fieldset>
+									<div class="form-actions">
+										<div class="row">
+											<div class="col-md-offset-2 col-md-9"> 
+											   <button id="prve" style="display: none;" type="button" class="btn btn-default"><i class="m-icon-swapleft m-icon-white"></i>上一步</button> 
+											    <button id="prve-product" style="display: none;" type="button" class="btn btn-default"><i class="m-icon-swapleft m-icon-white"></i> 上一步</button>                       
+											    <button id="next" type="button" class="btn btn-primary active"><i class="m-icon-swapright m-icon-white"></i> 下一步</button>
+											    <button id="next-product" style="display: none;" type="button" class="btn btn-primary active"><i class="m-icon-swapright m-icon-white"></i> 下一步</button>
+												<button id="submitForm"  style="display: none;" type="submit" class="btn btn-info ">确认提交</button>
+											</div>
+										</div>
+									</div>
+								</form>
+								<!-- END FORM-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- END PAGE CONTENT-->
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<#include "/admin/resource/add.html">
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+	<script src="${contextPath}/resources/js/address_load.js"></script>
+	
+<script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.all.min.js"></script>
+
+<#include "/public/frame/metrnicjs.html">
+
+<script>
+	jQuery(document).ready(
+			function() {
+				Metronic.init(); // 公共js  必须加入
+				Layout.init(); //   布局js  必须加入
+				QuickSidebar.init(); // 右边sidebar 必须加入
+				
+				
+				$('#imageupload')
+				.fileupload(
+						{
+							url : "${contextPath}/file/upload.html",
+							dataType : 'json',
+							done : function(e, data) {
+								if (data.result.success) {
+									var tr = "<div class='thumbnail col-md-4 image-container'>"
+											+ "<a class='image-preview' href='${contextPath}/imageViewInModal.html?src=${imageContextPath}/"
+											+ data.result.url
+											+ "' data-toggle='modal' data-target='#accountManager'><img src='${imageContextPath}/" 
+							        		+ data.result.url
+							        		+ "' style='max-height: 140px;'></a>"
+											+ "<input type='hidden' name='images' value='" 
+							        		+ data.result.url  
+							        		+ "'><span href='javascript:void(0);' class='glyphicon glyphicon-remove-circle delete-image' style='display: none;'></span></div>";
+											$("#imageuploadCon")
+											.append(tr);
+								} else {
+									alert(data.result.msg);
+								}
+							}
+						});
+				
+				$('.fileupload').fileupload(
+					
+							{
+								url : "${contextPath}/file/upload",
+								dataType : 'json',
+								done : function(e, data) {
+								   $(this).next().attr("value",data.result.url);
+								   $(this).parent().next().attr("src","${imageContextPath}/"+data.result.url).css("display", "inline");
+									 
+								}
+							});
+				
+				var mobileUE = UE.getEditor('detail');
+				
+				
+				$("#form2").validate({
+						rules : {
+							name : {
+								required : !0,
+								minlength : 2
+							},
+							type : {
+								required : true
+							},
+							name : {
+								required : true
+							},
+							headImage : {
+								required : true
+							},
+							mobile : {
+								required : true
+							},
+							email : {
+								required : true
+							},
+							telephone : {
+								required : true
+							},
+							provinceId : {
+								required : true
+							},
+							cityId : {
+								required : true
+							},
+							areaId : {
+								required : true
+							},
+							detail : {
+								required : true
+							},
+							merchantCategoryId : {
+								required : true
+							},
+							detailAddress : {
+								required : true
+							}
+						},
+						messages : {
+							name : {
+								required : e + "请输入正确的商家名称",
+								minlength : e + "资源名称必须两个字符以上"
+							}
+						},
+						submitHandler : function() {
+							$("#form2").ajaxSubmitForm(refurbishCollback);
+						}
+					});
+				
+				/*  $.ajax({
+						type : "post",
+						url : "${contextPath}/merchantCategory/getMerchantCategory",
+						dataType : "json",
+						async : false,
+						success : function(data) {
+							var result = "";
+							if (data.length > 0) {
+								for (var i = 0; i < data.length; i++) {
+									if (i == 0) {
+										result += "<option value=''>请选择</option>";
+									}
+									result += "<option value='" + data[i].id+ "'>"
+											+ data[i].name
+											+ "</option>";
+								}
+							}
+							$("#merchantCategoryId").html("");
+							$("#merchantCategoryId").html(result);
+						}
+					});
+				 */
+				
+				
+				$("#propoty-content").hide();
+				$("#propoty").hide();	
+                $("#product").hide();
+                
+                $("#next").click(function(){
+                    $(this).hide();
+                    $("#product-brand").show();
+                    $("#category-content").hide();
+                    $("#prve").show();
+                    $("#next-product").show();
+                    $("#category").hide();
+                    $("#propoty").show();
+                    
+                });	
+                
+             
+    
+                
+                
+                   
+                
+                 $("#next-product").live("click",function(){
+             
+                    $(this).hide();
+                    $("#product-brand").hide();
+                    $("#product").show();
+                    $("#category-content").hide();
+                    $("#product-content").show();
+                    $("#prve-product").show();
+                    $("#prve").hide();
+                    $("#category").hide();
+                    $("#propoty").hide();
+                     $("#submitForm").show();
+                 });
+                 
+                 
+                 $("#prve-product").live("click",function(){
+                    $(this).hide();
+                    $("#prve").show();
+                    $("#product-brand").show();
+                    $("#product").hide();
+                    $("#category-content").hide();
+                    $("#product-content").hide();
+                    $("#category").hide();
+                    $("#propoty").show();
+                    $("#submitForm").hide();
+                    $("#next-product").show();
+                 });
+                 
+                 
+                 $("#prve").live("click",function(){
+                    $(this).hide();
+                    $("#prve-product").hide();
+                    $("#product-brand").hide();
+                    $("#product").hide();
+                    $("#category-content").show();
+                    $("#product-content").hide();
+                    $("#category").show();
+                    $("#propoty").hide();
+                    $("#submitForm").hide();
+                    $("#next-product").hide();
+                    $("#next").show();
+                 });
+                
+			});
+			
+			//js去掉重复的数据
+			function unique(arr) {
+			    var result = [], hash = {};
+			    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+			        if (!hash[elem]) {
+			            result.push(elem);
+			            hash[elem] = true;
+			        }
+			    }
+			    return result;
+			//http://www.cnblogs.com/sosoft/
+			}
+			
+</script> 
+
+</body>
+</html>

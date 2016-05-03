@@ -1,0 +1,346 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源管理</title>
+
+<#include "/public/frame/metrnic.html">
+
+<link
+	href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
+<!-- jqgrid-->
+<link
+	href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0"
+	rel="stylesheet">
+
+<link
+	href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+
+li{list-style: none;margin-right:10px;}
+li label{cursor: pointer;}
+.Father_Title{float: left;}
+</style>
+<link rel="stylesheet" href="${contextPath}/resources/ueditor/themes/default/css/ueditor.min.css" />
+<script type="text/javascript">
+  	var contextPath = '${contextPath}';
+    var plugins_webuploader = '${contextPath}/resources/js/plugins/webuploader';
+    var image_servler_url = '${contextPath}/upload_image';
+</script>
+</head>
+<script type="text/javascript" src="${contextPath}/resources/productSKU/js/jquery1.7.2/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/productSKU/js/liandong.js"></script>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+				         <div class="row">
+							<div class="col-md-12">
+								<div class="tabbable tabbable-custom">
+									<ul class="nav nav-tabs">
+										<li id="product" class="active"><a href="javascript:void(0);">商品编辑</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane active fontawesome-demo">
+											<div class="portlet-body form">
+												<!-- BEGIN FORM-->
+												<form action="${contextPath}/oneBuy/modify"
+													class="form-horizontal" method="post" id="form2">
+													<input type="hidden" name="id" value="${cloundPurchase.id!''}" />
+													
+													<input type="hidden" name="productStatisticsId" value="${pds.id}" />
+				                                        <div class="form-group">
+				                                            <label class="control-label col-md-2">商品名称:</label>
+				                                            <div class="col-md-4">
+				                                               <input type="text" name="name" value="${cloundPurchase.baseInfo.name!''}" data-required="1" placeholder="商品名称" class="form-control"/>
+				                                             </div>
+				                                        </div>
+														  <div class="form-group">
+					                                            <label class="control-label col-md-2">市场价</label>
+					                                            <div class="col-md-4">
+					                                               <input type="text" name="originalPrice" value="${(cloundPurchase.baseInfo.originalPrice)?c}" data-required="1" placeholder="市场价" class="form-control"/>
+					                                             </div>
+					                                        </div>
+					                                        
+				                                        <div class="form-group">
+														    <label class="control-label col-md-2">现价</label>
+															<div class="col-md-4">
+																<input type="text" name="price" value="${cloundPurchase.baseInfo.price!''}" data-required="1"
+																	placeholder="现价"  class="form-control" />
+															</div>
+													    </div> 
+				                                        
+				                                        <div class="form-group">
+				                                            <label class="control-label col-md-2">商品首图</label>
+				                                            <div class="col-md-7">
+				                                                <span class="btn btn-success fileinput-button">
+				                                                 <i class="glyphicon glyphicon-plus"></i>
+				                                                    <span>上传文件</span>
+				                                                    <input id="fileupload" type="file" name="file">
+				                                                    <input id="fileuploadInput" type="hidden" value="${cloundPurchase.baseInfo.titleImage!''}" name="titleImage">
+				                                                </span>
+				                                                <img id="img" class="img-thumbnail" src="${imageContextPath}/${cloundPurchase.baseInfo.titleImage!''}" style="width: 100px; height:66px;"/>
+				                                            </div>
+				                                        </div>
+				                                        
+				                                        <div class="form-group">
+															<label class="col-md-2 control-label">图片集</label>
+															<div class="col-md-7">
+																	<span class="btn btn-success fileinput-button"> <i
+																		class="glyphicon glyphicon-plus"></i> <span>上传文件</span> <input
+																		id="imageupload" type="file" name="file"
+																		multiple="multiple">
+																	</span>
+																<div id="imageuploadCon" class="row clearfix margin-top-10">
+																  <#if imageList?exists> <#list imageList?keys
+																		as key>
+																		<div class="thumbnail col-md-4 image-container">
+																			<a class="image-preview"
+																				href="javascript:(0)"><img
+																				src="${imageContextPath}/${imageList[key]}"
+																				style="max-height: 140px;">
+																			</a> <input class="imageuploadInput" type="hidden"
+																				name="images" value="${imageList[key]}"> <span
+																				class="glyphicon glyphicon-remove-circle delete-image"
+																				style="display: none;"></span>
+																		</div>
+																		</#list>
+																	</#if>
+																
+																</div>
+															</div>
+														</div>
+																			
+													<div class="form-group">
+														<label class="control-label col-md-2">商品简介</label>
+														<div class="col-md-4">
+															<textarea name="intro" data-required="1" class="form-control" rows="4">${cloundPurchase.baseInfo.intro!''}</textarea>
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-sm-2 control-label">详情：</label>
+														<div class="col-sm-9">
+															<div class="panel blank-panel">
+																<div class="panel-heading">
+																	<div class="panel-options">
+																		<ul class="nav nav-tabs">
+																			<li class="active"><a data-toggle="tab"
+																				href="tabs_panels.html#tab-pc" aria-expanded="true"><i
+																					class="fa fa-desktop" style="width: 100px;">&nbsp;电脑端详情</i></a></li>
+																			<li class=""><a data-toggle="tab"
+																				href="tabs_panels.html#tab-mobile" aria-expanded="false"><i
+																					class="fa fa-laptop" style="width: 100px;">&nbsp;手机端详情</i></a></li>
+																		</ul>
+																	</div>
+																</div>
+																<div class="panel-body">
+																	<div class="tab-content">
+																		<div id="tab-pc" class="tab-pane active">
+																			<script type="text/plain" id="pcDetail" name="pcDetail" style="height: 240px;">${cloundPurchase.baseInfo.pcDetail!''}</script>
+																		</div>
+																		<div id="tab-mobile" class="tab-pane">
+																			<script type="text/plain" id="mobileDetail" name="mobileDetail"
+																				style="height: 150px;">${cloundPurchase.baseInfo.mobileDetail!''}</script>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="form-actions">
+														<div class="row">
+															<div class="col-md-offset-2 col-md-9"> 
+																<button  id="submitForm"   type="submit" class="btn btn-info ">确认提交</button>
+															</div>
+														</div>
+													</div>
+												</form>
+												<!-- END FORM-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+		               </div>
+			<!-- END PAGE CONTENT-->
+               </div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+	<#include "/admin/resource/add.html">
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.all.min.js"></script>
+
+<#include "/public/frame/metrnicjs.html">
+
+<script>
+	jQuery(document).ready(
+			function() {
+			var pcUE = UE.getEditor('pcDetail');
+		    var mobileUE = UE.getEditor('mobileDetail');
+				Metronic.init(); // 公共js  必须加入
+				Layout.init(); //   布局js  必须加入
+				QuickSidebar.init(); // 右边sidebar 必须加入
+				
+				
+			
+				$('#imageupload')
+				.fileupload(
+						{
+							url : "${contextPath}/file/upload.html",
+							dataType : 'json',
+							done : function(e, data) {
+								if (data.result.success) {
+									var tr = "<div class='thumbnail col-md-4 image-container'>"
+											+ "<a class='image-preview' href='${contextPath}/imageViewInModal.html?src=${imageContextPath}/"
+											+ data.result.url
+											+ "' data-toggle='modal' data-target='#accountManager'><img src='${imageContextPath}/" 
+							        		+ data.result.url
+							        		+ "' style='max-height: 140px;'></a>"
+											+ "<input type='hidden' name='images' value='" 
+							        		+ data.result.url  
+							        		+ "'><span href='javascript:void(0);' class='glyphicon glyphicon-remove-circle delete-image' style='display: none;'></span></div>";
+											$("#imageuploadCon")
+											.append(tr);
+								} else {
+									alert(data.result.msg);
+								}
+							}
+						});
+				
+				//显示隐藏图片删除按钮
+						$(".image-container").live(
+								"mouseover",
+								function() {
+									$(this).children(".delete-image").css(
+											"display", "block");
+								});
+						$(".image-container").live(
+								"mouseleave",
+								function() {
+									$(this).children(".delete-image").css(
+											"display", "none");
+								});
+						//删除图片
+						$(".delete-image").live("click", function() {
+							$(this).parents(".image-container").remove();
+						});
+
+						$("#isDelivery").change(function() {
+							if (1 == $(this).val()) {
+								$("#deliveryFee").slideDown();
+							} else {
+								$("#deliveryFee").slideUp();
+							}
+						});
+
+						$("#isLimitUser").change(function() {
+							if (1 == $(this).val()) {
+								$("#limitUser").slideDown();
+							} else {
+								$("#limitUser").slideUp();
+							}
+						});
+				
+				
+				$('#fileupload').fileupload({
+	                url: "${contextPath}/file/upload/",
+	                dataType: 'json',
+	                done: function (e, data) {
+	                    $("#img").attr("src", "${imageContextPath}/" + data.result.url).css("display", "inline");
+	                    $("#fileuploadInput").val(data.result.url);
+	                }
+	            });
+				
+				
+				
+             
+             
+             $("#form2").validate({
+						rules : {
+							name : {
+								required : !0,
+								minlength : 2
+							}, 
+							titleImage : {
+								required : true
+							},
+							intro : {
+								required : true
+							},
+							
+							detail : {
+								required : true
+							},
+							merchantCategoryId : {
+								required : true
+							},
+							originalPrice : {
+								required : true
+							},
+							lowestPrice : {
+								required : true
+							}
+						},
+						messages : {
+							name : {
+								required : e + "请输入正确的商家名称",
+								minlength : e + "资源名称必须两个字符以上"
+							}
+						},
+						submitHandler : function() {
+							$("#form2").ajaxSubmitForm(refurbishCollback);
+						}
+					});
+                
+			});
+			
+			//js去掉重复的数据
+			function unique(arr) {
+			    var result = [], hash = {};
+			    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+			        if (!hash[elem]) {
+			            result.push(elem);
+			            hash[elem] = true;
+			        }
+			    }
+			    return result;
+			//http://www.cnblogs.com/sosoft/
+			}
+			
+</script> 
+
+</body>
+</html>

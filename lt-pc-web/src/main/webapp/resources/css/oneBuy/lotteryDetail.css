@@ -1,0 +1,400 @@
+/*<!--期数-->*/
+.lottery{
+    margin-top:15px;
+    border: solid #c9def7;
+    border-width: 1px 0 0 1px;
+}
+
+.lottery ul li{
+    width:132px;
+    height:31px;
+    float:left;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 31px;
+}
+
+.lottery ul li a{
+    display: inline-block;
+    width:100%;
+    height:100%;
+    font-size: 16px;
+    border: solid #c9def7;
+    border-width: 0px 1px 1px 0px;
+}
+
+.lottery ul li a:hover{
+    width:131px;
+    height:30px;
+    border: 1px solid #c9def7;
+    background:#f1f1f1;
+}
+
+.lottery ul li a img{
+    margin: 5px 8px 5px 0px;
+    float:right;
+}
+
+.red{
+    color:#f00;
+}
+
+.lottery ul li a.curr{
+    width: 131px;
+    height: 30px;
+    background: #0f5489;
+    color: #fff;
+    box-sizing: content-box;
+    border: solid #c9def7;
+    border-width: 1px 1px 1px 1px;
+}
+
+/*<!-- end 期数-->*/
+
+/*<!--详情-->*/
+
+.partic_all{
+    margin-top:15px;
+}
+
+.partic_all .partic_left .bigimg{
+    width:520px;
+    height:410px;
+    border:1px solid #b5b9bc;
+}
+
+.partic_all .partic_left .bigimg img{
+    width:492px;
+    height:370px;
+    margin:19px 14px;
+}
+
+.partic_all .partic_left ul li{
+    float:left;
+    margin-right:15px;
+}
+
+.partic_all .partic_left ul.imgs{
+    margin-top:10px;
+}
+
+.partic_all .partic_left ul.imgs li{
+    width:110px;
+    height:87px;
+    border:1px solid #b5b9bc;
+}
+
+.partic_all .partic_left ul.imgs li:hover{
+    border:1px solid #f00;
+}
+
+.partic_all .partic_left ul.imgs li img{
+    width:102px;
+    height:76px;
+    margin: 5px 4px;
+}
+
+.partic_all .partic_left ul.share{
+    margin-top:30px;
+}
+
+.partic_all .partic_right p.title{
+    font-size: 24px;
+}
+
+.partic_all .partic_right{
+    width:653px;
+    margin-left:10px;
+}
+
+.partic_all .partic_right p{
+    width:527px;
+}
+
+.partic_all .partic_right .lucno{
+/*    height:386px;*/
+    border:1px solid #b5b9bc;
+}
+
+.lucno .number{
+    height:220px;
+    margin-top:10px;
+    background:url(../../images/luck%7F.png) no-repeat 40px 0px;
+}
+
+.lucno .number span{
+    display: inline-block;
+    font-size: 80px;
+    color: #fff;
+    margin: 89px 0 0 166px;
+}
+
+.lucno .user .head{
+    width:108px;
+    height:150px;
+    float:left;
+    margin-left: 53px;
+}
+
+.lucno .user .head img{
+    width:108px;
+    height:108px;
+    margin-top: 20px;
+}
+
+.lucno .user .user_data{
+    width:430px;
+    margin:10px 0 0 20px;
+    float:left;
+}
+
+.lucno .user .user_data p{
+    width:430px;
+    height:30px;
+    overflow: hidden;
+    font-size:14px;
+    line-height: 30px;
+}
+
+.lucno .user .user_data p span.name{
+    color:#0f5489;
+}
+
+.lucno .user .user_data p span.idd{
+    color:#ca083b;
+}
+
+.lucno .user .user_data p span.date{
+    color:#333;
+}
+
+.lucno .user .user_data p span.time{
+    color:#333;
+}
+
+.nu_pepo{
+    height:94px;
+    margin-top:12px;
+    padding-left:15px;
+    overflow: scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    background:#e3e5e6;
+}
+
+.nu_pepo p{
+    font-size:16px;
+    line-height: 28px;
+}
+
+.nu_pepo dl dt{
+    float:left;
+    font-size: 15px;
+    font-weight:bold;
+    height:50px;
+}
+
+.nu_pepo dl dd{
+    float:left;
+    margin: 2px 0 5px 10px;
+}
+
+/*<!-- end 详情-->*/
+/*<!--计算公式-->*/
+
+.calc{
+    height:115px;
+    margin-top:10px;
+    padding-left:70px;
+    border: 1px solid #b5b9bc;
+}
+
+.calc p.calc_title{
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.calc p i{
+    display: inline-block;
+    width:5px;
+    height:5px;
+    float:left;
+    margin: 13px 9px 0 0;
+    background:#333;
+    border-radius:50%;
+}
+
+.calc ul li{
+    float:left;
+}
+
+.calc ul li.item{
+    width:140px;
+    height:65px;
+    text-align: center;
+    background:#eaf0f3;
+    border:1px solid #b5b9bc;
+}
+
+.calc ul li p{
+    color:#ca083b;
+}
+
+.calc ul li p.num{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.calc ul li p.tnum{
+    font-size:14px;
+}
+
+/*<!-- end/计算公式-->*/
+/*<!--计算结果-->*/
+
+.record{
+    margin-top:15px;
+    border:1px solid #b5b9bc;
+}
+
+.record>ul{
+    border-bottom:1px solid #b5b9bc;
+    position: relative;
+}
+
+.record>ul>li{
+    width:150px;
+    float:left;
+    color:#333;
+    cursor:pointer;
+    font-size:20px;
+    border-right:1px solid #b5b9bc;
+    line-height: 50px;
+    background:#eaf0f3;
+    text-align: center;
+}
+
+.record ul li.curr{
+    background:#fff;
+    border-top:1px solid #0f5489;
+    border-bottom: 1px solid #fff;
+    margin:-1px 0;
+}
+
+.record_box{
+    display: none;
+}
+
+.record .publish{
+    padding:30px;
+}
+
+.record .publish .rule{
+    height:180px;
+    border: 1px solid #b5b9bc;
+}
+
+.rule .rule_title{
+    width:132px;
+    height:180px;
+    float:left;
+    overflow: hidden;
+    background:#0f5489;
+}
+
+.rule .rule_title p{
+    width: 96px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin: 53px 0 0 17px;
+}
+
+.rule .rule_title_r{
+    width:950px;
+    padding-top:5px;
+    float:left;
+    margin-left:20px;
+}
+
+.rule .rule_title_r p{
+    font-size:15px;
+    margin-bottom: 7px;
+}
+
+.rule .rule_title_r p i{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 12px;
+    text-align: center;
+    line-height: 19px;
+    background: url(../../images/icon.png)no-repeat -118px -1150px;
+}
+
+.rule .rule_title_r p span{
+    color:#0f5489;
+}
+
+
+.publish>ul{
+    margin-top:20px;
+    border-top: 1px solid #b5b9bc;
+}
+
+.publish>ul>li{
+    height:34px;
+    line-height: 34px;
+    background:#f2f5f7;
+    border-bottom: 1px solid #b5b9bc;
+}
+
+.publish ul li div{
+    height:34px;
+    float:left;
+    text-align: center;
+    overflow:hidden;
+    border-right: 1px solid #b5b9bc;
+}
+
+.publish ul li div.name{
+    width:185px;
+    
+}
+
+.publish ul li div.acc{
+    width:225px;
+}
+
+.publish ul li div.acc i{
+    display: inline-block;
+    width:10px;
+    height:10px;
+    margin: 0 5px;
+    background:url(../../images/icon.png) no-repeat -147px -1155px;
+}
+
+.publish ul li div.tro{
+    width:533px;
+}
+
+.publish ul li div.peop{
+    width:173px;
+    border-right:0;
+}
+
+.publish ul li div.r0{
+    font-weight: 600;
+    font-size: 14px;
+    border-right:0;
+}
+
+.publish ul li div.r1{
+    width:100%;
+    border-right:0;
+}
+
+/*<!-- end 计算结果-->*/
+

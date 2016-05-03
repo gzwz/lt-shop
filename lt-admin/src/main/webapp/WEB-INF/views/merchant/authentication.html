@@ -1,0 +1,105 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/public/frame/jqgridcss.html"> 
+<#include "/public/frame/jqgridjs.html">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+						<div class="row m-b-sm m-t-sm">
+
+							<form id="serchform">
+                                    <div class="col-md-8">
+									<div class="input-group">
+                                    <input type="text" name="name" placeholder="请输入店名" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" onclick="search();" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                   	</div>
+									</div>
+										
+                            </form>
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+      grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/merchant/query_authen",
+	     colNames:['店名', '店铺简介','店铺logo','操作'],
+	     colModel:[
+			{name:'baseInfo.name',label:'baseInfo.name',width:40},
+			{name:'baseInfo.introduction',label:'baseInfo。introduction', width:90},
+			{name:'baseInfo.headImage',label:'baseInfo.headImage', width:90,formatter:function(cellvalue, options, rowObject){
+				return "<img style='width: 100px; height:66px;' src=${imageContextPath}/"+cellvalue+">";
+			}} ,
+			{name:'id',label:'id', width:50,formatter:function(cellvalue, options, rowObject){
+			if (rowObject.domainLink.domainType=="validate_pass") {
+				return "<button type='submit' class='btn btn-sm btn-primary pull-left m-t-n-xs'><strong>已通过审核</strong></button>" ;
+				} else {
+				return "<a href='javascript:;'onclick=check('"+cellvalue+"') class='btn btn-warning'><i class='fa fa-edit'></i>审核 </a>" ;
+				}
+			}}
+		], 
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"商家列表"
+	});
+    
+    </script>
+	<script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	$("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入
+	 }
+ 
+	    
+	     function check(cellvalue){
+	    	layer.open({
+	    	    title:'商家申请审核',
+	    	    type: 2,
+	    	    area: ['1200px', '750px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/merchant/merchant_check?id="+cellvalue
+	    	});
+	    }
+	     
+	     
+ 
+	     
+	     /*	$("#grid-table").trigger("reloadGrid");
+		var index = parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index);*/
+	     
+	     /*删除*/
+	     function fnClickDel(id){
+	     	fnAjaxDel("${contextPath}/system/navigation/" + id + "_delete", '', search);
+	     }
+	  
+	  function refurbish(){
+		  search();
+	  }
+    </script> 
+</body>
+
+</html>

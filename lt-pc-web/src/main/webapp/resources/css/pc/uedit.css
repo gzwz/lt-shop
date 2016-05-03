@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+
+		
+.selectTdClass {
+    background-color: #edf5fa !important;
+}
+table.noBorderTable td, table.noBorderTable th, table.noBorderTable caption {
+    border: 1px dashed #ddd !important;
+}
+table {
+    border-collapse: collapse;
+    display: table;
+    margin-bottom: 10px;
+}
+td, th {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+caption {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #ddd #ddd -moz-use-text-color;
+    border-image: none;
+    border-style: dashed dashed none;
+    border-width: 1px 1px 0;
+    padding: 3px;
+    text-align: center;
+}
+th {
+    background-color: #f7f7f7;
+    border-top: 1px solid #bbb;
+}
+table tr.firstRow th {
+    border-top-width: 2px;
+}
+.ue-table-interlace-color-single {
+    background-color: #fcfcfc;
+}
+.ue-table-interlace-color-double {
+    background-color: #f7faff;
+}
+td p {
+    margin: 0;
+    padding: 0;
+}

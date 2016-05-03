@@ -1,0 +1,83 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/reset.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/master.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/herder.css">
+<!-- 头部 -->
+<script type="text/javascript">
+	
+</script>
+<div class="head">
+       <div class="nav-top">
+            <div class="content">
+               <div class="flt"><a href="${contextPath}">欢迎光临卡车网</a></div>
+               <ul class="flr">
+                   <#if login_user??>
+                   <li> <a class="curr" href="${contextPath}/intercept/userCenter/my_order.html?currentValue="><span id="alreadyLogin">${login_user.nickName}</span></a> </li>
+                   <li><a href="javascript:loginOut();">退出</a></li>
+                   <#else>
+                   <li><a class="curr" href="${contextPath}/login">亲！请登录</a></li>
+                   <li><a href="${contextPath}/register">免费注册</a></li>
+                   </#if>
+                   <li><a href="${contextPath}/intercept/userCenter/my_order.html?currentValue=">我的卡车网</a></li>
+                   <li><a href="${contextPath}/intercept/userCenter/my_order.html?currentValue=">我的订单</a></li>
+                   <li><a href="#">物流中心</a></li>
+                   <li><a href="#">卖家中心</a></li>
+                   <li><a href="#">联系客服</a></li>
+                   <li><a href="#">帮助中心</a></li>
+                   
+               </ul>
+            </div>
+        </div>
+     <!-- 搜索 -->
+        <div class="search">
+            <div class="content catn">
+                <div class="logo">
+                    <a href="${contextPath}/index"><img src="${imageContextPath}/${logo}" alt=""></a>
+                </div>
+                <div class="searchSuggest">
+                    <div class="loupe"></div>
+                    <input class="input_test" type="text" placeholder="搜索您需要的商品" style="color:#333333;" maxlength="100" autocomplete="off" autofocus="true" data-autofocus="true" x-webkit-speech="" x-webkit-grammar="builtin:translate" >
+                    <button class="search_btn">搜索</button>
+                </div>
+                <div class="miniCart">
+                    <a href="${contextPath}/intercept/shoppingCar-view">我的购物车</a>
+                    <i class="cart_icon"></i>
+                    <i class="cart_icon2"></i>
+                    <i class="cart_icon3"></i>
+                    <i class="cart_icon4">${count!"0"}</i>
+                </div>
+            </div>
+        </div>
+     <!-- end 搜索 -->
+</div>
+   <!-- end 导航 -->
+<!-- end 头部 -->
+
+<script type="text/javascript">
+
+    function loginOut(){
+    
+                layer.confirm('您确认退出?', {
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+							    $.ajax({
+								type : "post",
+								url : "${contextPath}/login/logout",
+								dataType : "json",
+								async : true,
+								data : {},
+								success : function(data) {
+								       if(data.success){
+								             window.location.href="${contextPath}/index.html";
+											  layer.msg(data.errorMsg, {icon: 1});
+											}else{
+											  layer.msg(data.errorMsg, {icon: 1});
+										}
+									 }
+							});  
+				 
+				});
+    
+    }
+
+</script>

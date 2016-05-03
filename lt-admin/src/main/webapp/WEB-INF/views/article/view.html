@@ -1,0 +1,124 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/public/frame/jqgridcss.html"> 
+<#include "/public/frame/jqgridjs.html">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+
+						<div class="row m-b-sm m-t-sm">
+
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" href="javascript:void(0);"
+									class="btn btn-primary "><i
+									class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i></a>
+								<!--  <a onclick="fnClickAllDel();" href="javascript:void(0);" class="btn btn-w-m btn-danger ">&nbsp;批量删除</a> -->
+							</div>
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/article/query",
+	     colNames:['文章标题','发表时间','简介','外链','是否下线','操作'],
+	     colModel:[
+	     	
+			{name:'baseInfo.title',label:'showBaseInfo.title',width:40,height:40},
+			{name:'baseInfo.createTime',label:'baseInfo.createTime', width:40},
+			
+			{name:'baseInfo.brief',label:'baseInfo.brief',width:60},
+			{name:'resourseInfo.relUrl',label:'resourseInfo.relUrl',width:60},
+			{name:'isDelete',label:'isDelete',width:30,formatter:function(cellvalue, options, rowObject){
+			if(cellvalue)
+			  return "<a style='margin-left:10px;' href='javascript:;' onclick=fnClickStop('"+cellvalue+"','"+rowObject.id+"') class='btn btn-warning'>已屏蔽 </a>";
+			else
+			  return "<a style='margin-left:10px;' href='javascript:;' onclick=fnClickStart('"+cellvalue+"','"+rowObject.id+"') class='btn btn-primary'>正-常</a>";
+			}},
+			{name:'id',label:'id', width:40,formatter:function(cellvalue, options, rowObject){
+				return "<a href='javascript:;'onclick=modifyUser('"+cellvalue+"') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>"+
+				"";
+			}} 
+		], 
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"文章列表"
+	});
+    
+    </script>
+	<script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	var keyWord = $("input[name=keyWord]").val();  
+		    $("#grid-table").jqGrid('setGridParam',{  
+		        datatype:'json',  
+		        postData:{'name':keyWord}, //发送数据  
+		        page:1  
+		    }).trigger("reloadGrid"); //重新载入 
+	 }
+ 
+	 function modifyUser(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['700px', '530px'],
+	    	    fix: true, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/article/edit?id="+cellvalue
+	    	});
+	    }
+	    
+	     function fnClickAdd(){
+	    	 layer.open({
+	    	    type: 2,
+	    	    area: ['800px', '700px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/article/addView"
+	    	}); 
+	    }
+	     
+ 
+	     
+	     /*停用*/
+	     function fnClickStop(type , id){
+	   //  alert(type+"stop");
+	     	fnAjaxChange("${contextPath}/article/chanageStatus?type=stop&id=" + id , '', search);
+	     }
+	     /*启用*/
+	     function fnClickStart(type , id){
+	   //   alert(type+"start");
+	     	fnAjaxChange("${contextPath}/article/chanageStatus?type=start&id=" + id , '', search);
+	     }
+	     
+	     
+	 	function resertAdd(){
+		  fnClickAdd();
+		}
+	  
+	 	function refurbish(){
+		  search();
+	 		 }
+	 		 
+
+    </script>
+</body>
+
+</html>

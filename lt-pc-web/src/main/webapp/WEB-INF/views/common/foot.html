@@ -1,0 +1,86 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/footer.css">
+<!-- approve/认证-->
+<div class="approve">
+    <div class="content">
+        <ul class="clearfix">
+            <li>
+                <i class="icons1"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li>
+                <i class="icons2"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li>
+                <i class="icons3"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li class="w">
+                <i class="icons4"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li>
+                <i class="icons5"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li>
+                <i class="icons6"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li>
+                <i class="icons7"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+            <li class="w">
+                <i class="icons8"></i>
+                <p><a href="#">100%公平公正</a></p>
+            </li>
+        </ul>
+    </div>
+</div> 
+<!-- end approve/认证-->
+<!-- service/服务-->
+<div class="service clearfix">
+    <div id="content123" class="content">
+        
+    </div>
+</div>
+<!-- end service/服务-->
+<div class="footer">
+    <div class="content">
+        <span>${copyright}</span>
+        <span class="space_l220">${configName}</span>
+        <span class="flr">${record}</span>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function(){
+    
+           $.ajax({
+				type : "post",
+				url : "${contextPath}/menuContent/getBottomMenu",
+				dataType : "json",
+				async : true,
+				success : function(data) {
+				var result = "";
+				       if(data.length>0){
+				              for (var i = 0; i <data.length; i++) {
+				                result +="<dl><dt>"+data[i].name+"</dt>"
+				                for(var j=0;j<data[i].bottomMenuDTO.length;j++){
+				                    result +="<dd><a href='${contextPath}/menuContent/getMenuContent?bottomMenuId="+data[i].bottomMenuDTO[j].id+"'>"+data[i].bottomMenuDTO[j].childrenName+"</a></dd>";
+				                }
+				                 result+="</dl>";
+				              }
+				             
+				             $("#content123").html("");
+				             $("#content123").html(result);
+							}
+					 }
+			}); 
+    
+    });
+
+</script>

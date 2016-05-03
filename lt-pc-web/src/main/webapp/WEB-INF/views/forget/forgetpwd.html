@@ -1,0 +1,122 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>找回密码</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/web/login.css" />
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">	
+	var count = 120;
+	var i;
+	$(function(){
+		$("#sendMsg").click(function(){
+			$(this).css("background","#8F8FBD");
+			 // 设置button效果，开始计时  
+            i = setInterval("SetRemainTime()",1000);  
+			$.ajax({
+				url:"forgetPwdWeb/selUserToAccount",
+				type:"post",
+				dataType: "json",
+				data:{"account":$("#account").val(),"type":2},
+				success:function(json){
+					 if(json.result_code == 1){
+						 $("#accountMess").text(json.result_data.message);
+						 count = 0;
+					 }
+				}
+			});
+		});
+	});
+	var user="${userZhuCe}";
+	if(user!=""){
+		var account="${account}";
+		var password="${password}";
+		login(account,password);
+	}
+	function login(account,password){
+		alert("注册成功");
+		window.location.href="user/webLogin?account="+account+"&password="+password+"";
+	}
+	// 登录页面若在框架内，则跳出框架		
+		if (self != top) {			
+			top.location = parent.location;		
+		};	
+		//timer处理函数  
+		function SetRemainTime() {
+		    if (count == 0) {                   
+		        $("#sendMsg").removeAttr("disabled");// 启用按钮  
+		        $("#sendMsg").val("重新发送验证码");
+		        clearInterval(i);
+		        count = 120;
+		    }else {
+		    	$("#sendMsg").val("剩余" + count + "秒重发");
+		    	$("#sendMsg").attr("disabled","true");
+		        count--;
+		    }
+		} 
+	</script>
+	<style>
+		img{
+		border:0px;}
+	</style>
+  </head>
+  
+  <body>
+	<div id="head">
+    	<div class="head_">
+    		<a href="indexWeb/index">
+    		<img src="${contextPath}/resources/webImg/logo_dd.png" class="img"/></a>&nbsp;&nbsp;&nbsp;<span class="shu"></span></div>
+    </div>
+    <div id="content">
+    	<div class="pic">
+    		<img src="${contextPath}/resources/webImg/login_03.png" />
+        </div>
+		<form action="user/updatePwd" method="post">
+			<div class="input">
+				<p class="hy">忘记密码 <span class="p"><a href="zhuce"><img src="${contextPath}/resources/webImg/login_04.png" /></a></span></p>
+				<a style="color: red;margin-left: 20px;">${mess}</a>
+				<p class="f">
+					<span style="padding-top:-10px;margin-top: 10px;">
+						<input type="text" name="account" id="account" placeholder="用户名/手机号" style="background:url('${contextPath}/resources/webImg/Image_12.png') no-repeat; padding:0px 2px 0px 45px" required="true"/><br />
+						<a id="accountMess" style="color: red;margin-left: 30px;"></a>
+					</span>
+				</p>
+				<p class="f">
+					<span style="padding-top:-10px;margin-top: 10px;">
+						<input type="text" name="code" style="width:160px;" value="${code}"  /><input type="button" value="获取验证码" id="sendMsg" style="width:102px; height:42px; margin-left:7px; border:1px solid #DEDEDE"  required="true"/>
+					</span>
+				</p>
+				<p class="f">
+					<span style="padding-top:-10px">
+						<input type="password" name="password" placeholder="密码" style="background:url('${contextPath}/resources/webImg/Image_11.png') no-repeat;padding:0px 2px 0px 45px" required="true"/>
+					</span>
+				</p>
+				<p class="zc">
+					<input type="submit" value="确认" />
+				</p>
+			</div>
+		</form>
+    </div>
+	<div class="bottom">
+		<div class="bottom_gg" style="width:100%; height:90px; border:1px solid #FFF;">
+			<ul>
+				<li>关于我们</li>
+				<li>广告服务</li>
+				<li>合作媒体</li>
+				<li>隐私保护</li>
+				<li>版权声明</li>
+				<li>诚聘精英</li>
+				<li style="border-right:0px;">网站地图</li>
+			</ul>
+			<br />
+			Copyright 2004-2015 贵州随时随地科技有限公司 版权所有 黔ICP备15369200号-1
+		</div>
+	</div>
+</body>
+</html>

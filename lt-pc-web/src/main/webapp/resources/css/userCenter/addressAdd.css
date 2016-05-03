@@ -1,0 +1,114 @@
+.wrapper{
+    width:750px;
+    margin:0 auto;
+    padding-bottom: 20px;
+}
+
+.main{
+    width: 550px;
+    margin:0 auto;
+}
+
+.ma_left7{
+    margin-left:15px;
+}
+
+.wrapper input{
+    height: 29px;
+    font-size: 16px;
+    margin-left:10px;
+    border:1px solid #aaa;
+}
+
+.wrapper .cont{
+    margin-top:15px;
+}
+
+.wrapper span{
+    font-size:14px;
+    color:#333;
+    line-height: 31px;
+}
+
+.name{
+    width:107px;
+}
+
+.tel{
+    width:251px;
+}
+
+.area{
+    width:134px;
+}
+
+.fixed{
+    width:252px;
+}
+
+.cont select{
+    width:143px;
+    height:29px;
+    margin-right: 52px;
+    border:1px solid #aaa;
+}
+
+.cont p{
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.street{
+    width:539px;
+}
+
+button{
+    width:150px;
+    height:40px;
+    margin: 7% 0 0 33%;
+    font-size:18px;
+    color:#fff;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 600;
+    border-radius: 10px;
+    background:#fb8926;
+    border:0;
+    border-bottom: 2px solid #cd7020;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

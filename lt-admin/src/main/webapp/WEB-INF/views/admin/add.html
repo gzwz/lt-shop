@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title">管理员新增</h5>
+			</div>
+			<form class="form-horizontal add-form" action="${contextPath}/permission/admin/save"
+	method="post">
+	<input name="adminId" type="hidden" value="${pc.id}">
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">管理员姓名：</label>
+					<div class="col-sm-6">
+						<input name="name" placeholder="请输入管理员姓名" type="text"
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">管理员登录名：</label>
+					<div class="col-sm-6">
+						<input name="loginName" placeholder="请输入管理员登录名" type="text"
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group" id="password">
+					<label class="col-sm-3 control-label">管理员登录密码：</label>
+					<div class="col-sm-6">
+						<input name="password" placeholder="请输入管理员登录密码" type="password"
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">电话：</label>
+					<div class="col-sm-6">
+						<input class="form-control" name="telephone" placeholder="请输入电话" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">角色：</label>
+					<div class="col-sm-6">
+					
+				   <#if roleList?exists> 
+           	         <#list roleList as role>
+					    <label class="checkbox-inline">
+					        <input type="radio" name="roleIdsChecked" value="${role.id!''}">${role.name!''}</label>
+					 </#list>
+	              </#if>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+                   <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$(".add-form").validate({
+			rules : {
+				name : {
+					required : !0,
+					minlength : 2
+				},
+				sort : {
+					maxlength : 10,
+					required : true,
+					digits : true
+				}
+			},
+			messages : {
+				name : {
+					required : e + "请输入正确的管理员姓名",
+					minlength : e + "管理员姓名必须两个字符以上"
+				},
+				sort : {
+					required : "请输入排序",
+					maxlength : "长度不能大于10",
+					digits : "必须为整数"
+				}
+			},
+			submitHandler : function() {
+				$(".add-form").ajaxSubmitForm(saveCollback);
+			}
+		});
+	});
+
+</script>

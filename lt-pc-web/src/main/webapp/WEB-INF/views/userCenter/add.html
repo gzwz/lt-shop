@@ -1,0 +1,131 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>弹窗提示</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/reset.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/userCenter/address.css">
+    
+    <link rel="stylesheet" href="${contextPath}/resources/js/sweetalert/sweetalert.css">
+
+</head>
+<body>
+
+   <div class="wrapper">
+      <div class="main clearfix">
+      <form id="addrFromData">
+	        <div class="cont">
+	             <span>收货人姓名：</span><input value="${address.name}" class="name" id="name" name="name" type="text" placeholder="收货人姓名" required="required">
+	        </div>
+            <div class="cont">
+                <span>手机号：</span><input value="${address.mobile}" class="tel" id="mobile" name="mobile" type="tel" placeholder="手机号" required="required">
+            </div>
+          <!--   <div class="cont">
+                <span>固定电话：</span><input value="${address.name}" class="fixed" id="fixed" type="text" placeholder="固定电话（可选）" >
+            </div> -->
+            <div class="cont">
+                <span>邮政编码：</span><input value="${address.zipCode}" class="fixed" id="zipcode" name="zipCode" type="text" placeholder="邮政编码（可选）" >
+            </div>
+            <div class="cont">
+               <span>选择省/市/区：</span>
+                <select class="ma_left6" name="provinceId" id="province" onclick="getCity(value)">
+                </select>
+                <select name="cityId" id="city" onclick="getArea(value)">  
+                </select>
+                <select style="margin-right:0;" name="areaId" id="area">
+                </select>
+            </div>
+            <div class="cont">
+                <span>详细地址：</span><input value="${address.detail}" class="fixed" id="detail" type="text" name="detail" placeholder="详细地址：街道，小区" required="required">
+            </div>
+            </form>
+            <div class="cont">
+                <button onclick="javascript:submitData();">保存</button>
+            </div>
+      </div>
+   </div>
+   
+   <script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+   <script type="text/javascript" src="${contextPath}/resources/js/sweetalert/sweetalert.min.js"></script>
+   <script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+   <script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+
+    <script>
+
+    //加载省市区
+   	$(function(){
+   		var url = "${contextPath}/intercept/userAddesses/getProvince"
+   		fnAjax(url, "post", "json", "", function(data){
+   			for (var int = 0; int < data.length; int++) {
+				$("#province").append("<option value="+data[int].code+">"+data[int].name+"</option>")
+			}
+   		});
+   	});
+    function getCity(value){
+    	$("#city").html("");
+    	$("#area").html("");
+    	var url = "${contextPath}/intercept/userAddesses/getCity.html?provinceId="+value;
+    	fnAjax(url, "post", "json", "", function(data){
+   			for (var int = 0; int < data.length; int++) {
+				$("#city").append("<option value="+data[int].code+">"+data[int].name+"</option>")
+			}
+   		});
+    }
+     function getArea(value){
+     	$("#area").html("");
+    	var url = "${contextPath}/intercept/userAddesses/getArea.html?cityId="+value
+    	fnAjax(url, "post", "json", "", function(data){
+   			for (var int = 0; int < data.length; int++) {
+				$("#area").append("<option value="+data[int].code+">"+data[int].name+"</option>")
+			}
+   		});
+    }
+    //
+    function submitData(){
+    if ($("#name").val()==null || $("#name").val()=="") {
+		tips("用户名不能为空！", "#name", "78BA32");
+		return false;
+	}
+	if ($("#mobile").val()==null || $("#mobile").val()=="") {
+		tips("手机号不能为空！", "#mobile", "78BA32");
+		return false;
+	}
+	if ($("#province").val()==null || $("#detail").val()=="") {
+		tips("省还没有选择！", "#province", "78BA32");
+		return false;
+	}
+	if ($("#city").val()==null || $("#detail").val()=="") {
+		tips("所在城市还没有选择！", "#city", "78BA32");
+		return false;
+	}
+	if ($("#detail").val()==null || $("#detail").val()=="") {
+		tips("详细地址不能为空", "#detail", "78BA32");
+		return false;
+	}
+    var url = "${contextPath}/intercept/userAddesses/save";
+    var param = $("#addrFromData").serialize();
+    fnAjax(url, "post", "json", param, function(result){
+    	if (result.success) {
+		//	swal(result.errorMsg, "", "success");
+			swal( {
+				title : result.errorMsg,
+				type : "success",
+				confirmButtonColor : "#A5DC86",
+				confirmButtonText : "完成"
+			}, function() {
+				parent.window.location.reload();
+				var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+				parent.layer.close(index); 
+				
+			});
+		} else {
+			swal(result.errorMsg, "请检查填写的数据是否合法！", "error")
+		}
+	});
+	}
+				</script>
+</body>
+</html>

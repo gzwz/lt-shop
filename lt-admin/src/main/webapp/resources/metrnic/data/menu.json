@@ -1,0 +1,306 @@
+[{
+        "id": 4,
+        "text": "会员管理",
+        "url": "/user/list.html",
+        "icon": "fa-plus",
+        "children": [
+            {
+                "id": 5,
+                "text": "会员管理",
+                "url": "",
+                "icon": "fa-building",
+                "children": [
+                    {
+                        "id": 6,
+                        "text": "会员列表",
+                        "url": "/user/list.html",
+                        "icon": "fa-plus"
+                    },{
+                        "id": 7,
+                        "text": "会员等级",
+                        "url": "/user/userLevel/list.html",
+                        "icon": "fa-plus"
+                    },{
+                        "id": 8,
+                        "text": "实名认证审核 ",
+                        "url": "/user/identify.html",
+                        "icon": "fa-plus"
+                    }
+                ]
+            }
+        ]
+    },{
+    	"id": 13,
+        "text": "项目管理",
+        "url": "/deal/list.html",
+        "icon": "fa-bar-chart-o",
+        "children": [
+            {
+                "id": 14,
+                "text": "项目管理",
+                "url": "",
+                "icon": "fa-file-text-o",
+                "children": [
+		            {
+		                "id": 15,
+		                "text": "分类列表",
+		                "url": "/deal/cate/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 16,
+		                "text": "上线项目列表",
+		                "url": "/deal/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 17,
+		                "text": "未审核项目",
+		                "url": "/deal/notAuditList.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 22,
+		                "text": "审核不通过项目",
+		                "url": "/deal/auditNotPassList.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 24,
+		                "text": "结束的项目",
+		                "url": "/deal/failList.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 20,
+                "text": "项目统计",
+                "url": "",
+                "icon": "fa-file-text-o",
+                "children": [
+		            {
+		                "id": 21,
+		                "text": "项目支持列表",
+		                "url": "/deal/support/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 72,
+		                "text": "项目关注列表",
+		                "url": "/deal/focus/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 73,
+		                "text": "项目访问列表",
+		                "url": "/deal/visit/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    },{
+		"id": 25,
+        "text": "支付管理",
+        "url": "/payManager/user/refund/list.html",
+        "icon": "fa-coffee",
+        "children": [{
+                "id": 30,
+                "text": "提现记录",
+                "url": "/payManager/user/refund/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 31,
+		                "text": "提现记录",
+		                "url": "/payManager/user/refund/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 66,
+		                "text": "资金记录",
+		                "url": "/payManager/user/log/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 67,
+		                "text": "用户收货地址",
+		                "url": "/payManager/user/address/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 64,
+                "text": "订单列表",
+                "url": "",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 65,
+		                "text": "订单列表",
+		                "url": "/payManager/deal/order/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 68,
+                "text": "支付列表",
+                "url": "",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 69,
+		                "text": "支付列表",
+		                "url": "/payManager/payment/payList.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    },{
+		"id": 32,
+        "text": "前端设置",
+        "url": "/nav/list.html",
+        "icon": "fa-coffee",
+        "children": [
+            {
+                "id": 33,
+                "text": "菜单设置",
+                "url": "/nav/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 34,
+		                "text": "导航菜单列表",
+		                "url": "/nav/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 35,
+                "text": "广告设置",
+                "url": "/nav/adv/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 36,
+		                "text": "广告列表",
+		                "url": "/nav/adv/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 37,
+                "text": "友情链接",
+                "url": "/nav/link/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 38,
+		                "text": "友情链接列表",
+		                "url": "/nav/link/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            },{
+                "id": 39,
+                "text": "文章管理",
+                "url": "/nav/article/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 40,
+		                "text": "文章列表",
+		                "url": "/nav/article/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 43,
+		                "text": "文章分类列表",
+		                "url": "/nav/articleCate/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    },{
+		"id": 45,
+        "text": "短信管理",
+        "url": "/message/list",
+        "icon": "fa-coffee",
+        "children": [
+            {
+                "id": 46,
+                "text": "消息列表",
+                "url": "",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 47,
+		                "text": "消息列表",
+		                "url": "/message/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    },{
+		"id": 57,
+        "text": "系统设置",
+        "url": "/setting/list.html",
+        "icon": "fa-coffee",
+        "children": [
+            {
+                "id": 58,
+                "text": "系统设置",
+                "url": "/setting/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 59,
+		                "text": "系统配置",
+		                "url": "/setting/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 60,
+		                "text": "轮播广告设置",
+		                "url": "/setting/banner/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 61,
+		                "text": "帮助列表",
+		                "url": "/setting/help/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 63,
+		                "text": "提现银行设置",
+		                "url": "/setting/bank/list",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    },{
+		"id": 70,
+        "text": "权限管理",
+        "url": "/auth/oper/list.html",
+        "icon": "fa-coffee",
+        "children": [
+            {
+                "id": 71,
+                "text": "权限管理",
+                "url": "/auth/oper/list.html",
+                "icon": "fa-plus",
+                "children": [
+		            {
+		                "id": 72,
+		                "text": "管理员列表",
+		                "url": "/auth/oper/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 73,
+		                "text": "角色列表",
+		                "url": "/auth/role/list.html",
+		                "icon": "fa-plus"
+		            },{
+		                "id": 74,
+		                "text": "资源列表",
+		                "url": "/auth/perm/list.html",
+		                "icon": "fa-plus"
+		            }
+		        ]
+            }
+        ]
+    }
+]

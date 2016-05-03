@@ -1,0 +1,123 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>个人中心</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/addr.css" />  
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/orderList.css" />    
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/UCenter.css" />
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/userCenter/collect.css" />
+	
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+ 	<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+
+    <!--[if IE]> 
+        <script src="${contextPath}/resources/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!--head/头部-->
+<!--<div class="includemoudle" link="../inc/harderone.html"></div>  /头部引入-->
+<#include "common/head.html">
+
+<!-- end head/头部-->
+<!--个人信息 -->
+<#include "userCenter/userInfo.html">
+<!-- end 个人信息-->
+<!-- 主体 -->
+<div class="main">
+    <div class="content clearfix">
+<!--侧边栏-->
+<#include "userCenter/leftSite.html">
+<!-- end 侧边栏-->
+<!-- 列表侧边栏-->
+<div class="column-r" id="content">
+<!--此div下引入-->
+
+   <p class="text1">宝贝收藏</p>
+                <p class="text2">全部商品<span>666</span></p>
+                <div id="collect_component">
+                    <ul>
+                        <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                         <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                         <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                         <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                         <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                         <li>
+                             <div class="pic">
+                                 <img src="${contextPath}/resources/images/pac_3.png" alt="">
+                                 <a href="#"><i class="icon1 show">加入购物车</i></a>
+                                 <a href="#"><i class="icon2 show"></i></a>
+                             </div>
+                             <p class="t1"><a href="#">卡车网 隆腾嘉业</a></p>
+                             <p class="t2"><a href="#">30 ACR50 2.0 2AZ RAV4 发动机</a></p>
+                             <div class="but">￥12500</div>
+                        </li>
+                    </ul>
+                </div>
+<!--此div上引入-->
+        </div>
+<!-- 分页 -->
+
+    </div>
+</div>
+
+<!--foot/脚部-->
+	<#include "common/foot.html">
+<!-- end foot/脚部-->
+
+</body>
+<script>
+	$('.comm2').height($('.comm').height());
+</script>
+
+</html>

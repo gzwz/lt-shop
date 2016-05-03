@@ -1,0 +1,316 @@
+.percenter{
+    position: relative;
+    border-top:2px solid #0f5489;
+    overflow: hidden;
+}
+
+.percenter > img{
+    width:100%;
+    min-width: 1920px;
+    vertical-align:middle;
+}
+
+/*<!--个人信息 -->*/
+
+.percenter .infor{
+    width:457px;
+    height:482px;
+    background:url(../../images/infor.png) no-repeat ;
+    position: absolute;
+    left:17.8%;
+    top:0;
+}
+
+
+.inforC3Cartoon{
+    opacity: 0;
+    animation:infC3Cartoon 1.5s linear 1s forwards; 
+    -moz-animation:infC3Cartoon 1.5s linear 1s forwards; /* Firefox */
+    -webkit-animation:infC3Cartoon 1.5s linear 1s forwards;/* Safari 和 Chrome */
+    -o-animation:infC3Cartoon 1.5s linear 1s forwards; /* Opera */
+}
+
+@keyframes infC3Cartoon
+{
+    form{ left:17.8%;opacity: 0;}
+    to{ left:18.8%;opacity: 1;}
+
+}
+
+@-moz-keyframes AvatarsC3Cartoon
+{
+    form{ left:17.8%;opacity: 0;}
+    to{ left:18.8%;opacity: 1;}
+
+}
+
+@-webkit-keyframes AvatarsC3Cartoon
+{
+    form{ left:17.8%;opacity: 0;}
+    to{ left:18.8%;opacity: 1;}
+
+}
+
+@-o-keyframes AvatarsC3Cartoon
+{
+    form{ left:17.8%;opacity: 0;}
+    to{ left:18.8%;opacity: 1;}
+
+}
+
+
+
+
+.percenter .infor p{
+    font-size: 18px;
+    color:#fff;
+    text-align: center;
+    margin-top:20px;
+}
+
+.percenter .infor .grade{
+    margin-top:10px;
+}
+
+.percenter .infor .grade span{
+    font-size: 18px;
+    color:#fff;
+    float:left;
+    padding-left:30px;
+    line-height: 42px;
+    margin-bottom: 10px;
+}
+
+.percenter .infor .portrait{
+    width:100px;
+    height:100px;
+    margin:0 auto;
+}
+
+.percenter .infor .portrait{
+    margin-top:30px;
+}
+
+.percenter .infor .portrait > img{
+    width:110px;
+    height:110px;
+    border:2px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.percenter .infor .grade > img{
+    width:50px;
+    height:50px;
+    margin: 0 -4px;
+    
+}
+
+.percenter .infor .card ul{
+    padding-left:30px;
+}
+
+.percenter .infor .card ul li{
+    float:left;
+    width:50%;
+    line-height: 300%;
+    font-size:18px;
+}
+
+.percenter .infor .card ul li a{
+    color:#fff
+}
+
+.percenter .infor .card ul li a:hover{
+    color:#f00;
+}
+
+/*<!--end 个人信息 -->*/
+
+
+
+/*<!-- 主体 -->*/
+/*<!--侧边栏-->*/
+.main .leftsidebar{
+    width:248px;
+    float:left;
+    margin-top:17px;
+}
+
+.main .leftsidebar .column{
+    height:100px;
+    color:#fff;
+    padding-top:20px;
+    background:#0f5489;
+    text-align: center;
+}
+
+.main .leftsidebar .column p.text1{
+    font-size: 28px;
+}
+
+.main .leftsidebar .column p.text2{
+    font-size: 18px;
+    margin-top: 13px;
+}
+
+.main .leftsidebar .sidebar ul{
+    padding-bottom: 12px;
+    overflow: hidden;
+}
+
+.main .leftsidebar .sidebar ul li a{
+    color:#333;
+}
+
+/*定单 按钮动画*/
+
+.main .leftsidebar .sidebar ul li:hover{
+    width:630px;
+    border-left: 4px solid #0f5489;
+}
+
+.main .leftsidebar .sidebar ul li{
+    width:510px;
+    height:66px;
+    line-height: 66px;
+    text-align: center;
+    margin-top:11px;
+    font-size:22px;
+    color:#333;
+    position:relative;
+    -webkit-transition: all .2s ease-in-out 0.2s;
+    -o-transition: all .2s ease-in-out 0.2s;
+    -moz-transition: all .2s ease-in-out 0.2s;
+    transition: all .2s ease-in-out 0.2s;
+}
+
+.main .leftsidebar .sidebar ul li .back2{
+    width:280px;
+    height:66px;
+    float:left;
+}
+
+.main .leftsidebar .sidebar ul li:hover .back{
+    width:248px;
+}
+
+.main .leftsidebar .sidebar ul li .back{
+    width:0px;
+    height:66px;
+    float:left;
+    background:#f2f3f7;
+    -webkit-transition: width .3s ease-in-out 0.1s;
+    -o-transition: width .3s ease-in-out 0.1s;
+    -moz-transition: width .3s ease-in-out 0.1s;
+    transition: width .3s ease-in-out 0.1s;
+}
+
+.main .leftsidebar .sidebar ul li:hover i{
+    left:80px;
+}
+
+
+.main .leftsidebar .sidebar ul li i{
+    display: inline-block;
+    width:45px;
+    height:45px;
+    float:left;
+    margin: 12px 17px;
+    background:url(../../images/icon.png) no-repeat;
+    position:absolute;
+    left: 0;
+    top:0;
+    z-index: 2;
+    -webkit-transition: left .2s ease-in-out 0.2s;
+    -o-transition: left .2s ease-in-out 0.2s;
+    -moz-transition: left .2s ease-in-out 0.2s;
+    transition: left .2s ease-in-out 0.2s;
+}
+
+/* end 定单按钮动画*/
+
+
+/*定单图标*/
+.main .leftsidebar .sidebar ul li i.icon1{
+    background-position:-3px -1037px;
+}
+
+.main .leftsidebar .sidebar ul li i.icon2{
+    background-position:-65px -1037px;
+}
+
+.main .leftsidebar .sidebar ul li i.icon3{
+    background-position:-127px -1037px;
+}
+
+.main .leftsidebar .sidebar ul li i.icon4{
+    background-position:-188px -1037px;
+}
+
+.main .leftsidebar .sidebar ul li i.icon5{
+    background-position:-253px -1037px;
+}
+
+.main .leftsidebar .sidebar ul li i.icon6{
+    background-position:-6px -1098px;
+}
+
+/* end 定单图标*/
+
+
+.main .leftsidebar .sidebar-1 .sidebar-top{
+    line-height: 48px;
+    border-left:4px solid #0f5489;
+    color:#333;
+    font-size:20px;
+    background:#f2f3f7;
+    text-align: center;
+}
+
+.main .sidebar{
+    padding-top:7px;
+    border:solid #a0a0a0;
+    border-width: 0px 2px 2px 2px;
+}
+
+.sidebar-1{
+    margin-top:20px;
+}
+
+.sidebar-1 ul li{
+    float:left;
+    margin-top:5px;
+}
+
+.sidebar-1 ul li .title{
+    width:98px;
+    font-size: 16px;
+    float:left;
+    margin-left:10px;
+    font-weight: bolder;
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    overflow:hidden;
+}
+
+.sidebar-1 ul li .summary{
+    width:118px;
+    margin-left: 22px;
+    font-size: 14px;
+    float:left;
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    overflow:hidden;
+}
+
+/*<!-- end 侧边栏-->*/
+/*<!-- 列表侧边栏-->*/
+.column-r{
+    float:left;
+    padding-bottom: 10px;
+}
+
+/*<!-- end 列表侧边栏-->*/
+/*<!-- end 主体 -->*/
+

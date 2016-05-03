@@ -1,0 +1,77 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+<link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<!-- jqgrid-->
+<link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+<link href="${contextPath}/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+</head>
+<body class="gray-bg">
+	<div class="col-sm-6">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="dropdown-toggle" data-toggle="dropdown"
+						href="typography.html#"> <i class="fa fa-wrench"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="typography.html#">选项1</a></li>
+						<li><a href="typography.html#">选项2</a></li>
+					</ul>
+					<a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="list-group">
+					<a class="list-group-item active" href="javascript:void(0);">
+						<h3 class="list-group-item-heading">店名:${merchant.baseInfo.name}</h3>
+					</a> <a class="list-group-item" href="javascript:void(0);">
+						<h4 class="list-group-item-text">
+							logo:<img style="width: 100px;"
+								src="${imageContextPath}/${merchant.baseInfo.headImage!''}" />
+						</h4>
+						<h4 class="list-group-item-text">联系电话:${merchantContactInfo.mobile!''}</h4>
+						<h4 class="list-group-item-text">座机:${merchantContactInfo.telephone!''}</h4>
+						<h4 class="list-group-item-text">地址:${merchantContactInfo.province.name!''}${merchantContactInfo.city.name!''}${merchantContactInfo.area.name!''}${merchantContactInfo.detailAddress!''}</h4>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+	<script
+		src="${contextPath}/resources/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/cropper/cropper.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/demo/form-advanced-demo.min.js"></script>
+</body>
+
+</html>

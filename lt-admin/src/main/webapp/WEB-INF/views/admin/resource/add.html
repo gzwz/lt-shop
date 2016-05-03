@@ -1,0 +1,1440 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+	
+	
+
+	<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+			<div class="modal-header">
+				<h5 class="modal-title">资源新增</h5>
+			</div>
+			<form class="form-horizontal add-form"
+	action="${contextPath}/permission/resource/save" method="post">
+	<input name="resourceId" type="hidden" value="${pc.id}">
+			<div class="modal-body">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">资源名称：</label>
+						<div class="col-sm-6">
+							<input name="name" placeholder="请输入资源名称" type="text"
+								class="form-control">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">资源路径：</label>
+						<div class="col-sm-6">
+							<input name="url"  id="url" placeholder="请输入资源路径" type="text"
+								class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+												<label class="col-sm-3 control-label">上级资源</label>
+												<div class="col-sm-6">
+													<div class="input-group">
+														<div class="input-icon">
+															<i class="fa fa-search fa-fw"></i>
+															<input id="newpassword"  class="text-input form-control" type="text" placeholder="请选择上级分类" readonly value="">
+															<input type="hidden" id="parentId" name="parentId" class="hidden-input" value=""/>
+														</div>
+														<span class="input-group-btn">
+															<a class="btn blue" type="button" data-url='${contextPath}/permission/resource/getPermData.html?type=1' data-current-id='' data-toggle='iceModal' data-target='#MyModalPerm'><i class="fa fa-search fa-fw"></i>选择</a>
+														</span>
+													</div>
+												</div>
+											</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">备注：</label>
+						<div class="col-sm-6">
+							<textarea name="remark" id="remark" placeholder="请输入备注"
+								class="form-control"></textarea>
+						</div>
+					</div>
+					
+					 <div class="form-group">
+								<label class="col-sm-3 control-label">排序：</label>
+								<div class="col-sm-6">
+								    <input id="sort" class="form-control" name="sort" type="text" >
+								</div>
+							</div>
+					
+					
+					<div class="form-group">
+												<label class="col-sm-3 control-label">图标</label>
+												<div class="col-sm-6" style="overflow: auto; height: 200px;">
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-automobile"><i class="fa fa-automobile"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bank"><i class="fa fa-bank"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-behance"><i class="fa fa-behance"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-behance-square"><i class="fa fa-behance-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bomb"><i class="fa fa-bomb"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-building"><i class="fa fa-building"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cab"><i class="fa fa-cab"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-car"><i class="fa fa-car"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-child"><i class="fa fa-child"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-o-notch"><i class="fa fa-circle-o-notch"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-thin"><i class="fa fa-circle-thin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-codepen"><i class="fa fa-codepen"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cube"><i class="fa fa-cube"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cubes"><i class="fa fa-cubes"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-database"><i class="fa fa-database"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-delicious"><i class="fa fa-delicious"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-deviantart"><i class="fa fa-deviantart"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-digg"><i class="fa fa-digg"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-drupal"><i class="fa fa-drupal"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-empire"><i class="fa fa-empire"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-envelope-square"><i class="fa fa-envelope-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fax"><i class="fa fa-fax"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-archive-o"><i class="fa fa-file-archive-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-audio-o"><i class="fa fa-file-audio-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-code-o"><i class="fa fa-file-code-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-excel-o"><i class="fa fa-file-excel-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-image-o"><i class="fa fa-file-image-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-movie-o"><i class="fa fa-file-movie-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-pdf-o"><i class="fa fa-file-pdf-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-photo-o"><i class="fa fa-file-photo-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-picture-o"><i class="fa fa-file-picture-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-powerpoint-o"><i class="fa fa-file-powerpoint-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-sound-o"><i class="fa fa-file-sound-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-video-o"><i class="fa fa-file-video-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-word-o"><i class="fa fa-file-word-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-zip-o"><i class="fa fa-file-zip-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ge"><i class="fa fa-ge"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-git"><i class="fa fa-git"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-git-square"><i class="fa fa-git-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-google"><i class="fa fa-google"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-graduation-cap"><i class="fa fa-graduation-cap"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hacker-news"><i class="fa fa-hacker-news"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-header"><i class="fa fa-header"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-history"><i class="fa fa-history"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-institution"><i class="fa fa-institution"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-joomla"><i class="fa fa-joomla"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-jsfiddle"><i class="fa fa-jsfiddle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-language"><i class="fa fa-language"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-bouy"><i class="fa fa-life-bouy"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-ring"><i class="fa fa-life-ring"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-saver"><i class="fa fa-life-saver"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mortar-board"><i class="fa fa-mortar-board"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-openid"><i class="fa fa-openid"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paper-plane"><i class="fa fa-paper-plane"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paper-plane-o"><i class="fa fa-paper-plane-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paragraph"><i class="fa fa-paragraph"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paw"><i class="fa fa-paw"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper"><i class="fa fa-pied-piper"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper-alt"><i class="fa fa-pied-piper-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper-square"><i class="fa fa-pied-piper-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-qq"><i class="fa fa-qq"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ra"><i class="fa fa-ra"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rebel"><i class="fa fa-rebel"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-recycle"><i class="fa fa-recycle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reddit"><i class="fa fa-reddit"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reddit-square"><i class="fa fa-reddit-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-send"><i class="fa fa-send"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-send-o"><i class="fa fa-send-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt"><i class="fa fa-share-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt-square"><i class="fa fa-share-alt-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-slack"><i class="fa fa-slack"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sliders"><i class="fa fa-sliders"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-soundcloud"><i class="fa fa-soundcloud"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-space-shuttle"><i class="fa fa-space-shuttle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spoon"><i class="fa fa-spoon"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spotify"><i class="fa fa-spotify"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-steam"><i class="fa fa-steam"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-steam-square"><i class="fa fa-steam-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stumbleupon"><i class="fa fa-stumbleupon"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stumbleupon-circle"><i class="fa fa-stumbleupon-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-support"><i class="fa fa-support"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-taxi"><i class="fa fa-taxi"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tencent-weibo"><i class="fa fa-tencent-weibo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tree"><i class="fa fa-tree"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-university"><i class="fa fa-university"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-vine"><i class="fa fa-vine"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wechat"><i class="fa fa-wechat"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-weixin"><i class="fa fa-weixin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wordpress"><i class="fa fa-wordpress"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-yahoo"><i class="fa fa-yahoo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-adjust"><i class="fa fa-adjust"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-anchor"><i class="fa fa-anchor"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-archive"><i class="fa fa-archive"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows"><i class="fa fa-arrows"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-h"><i class="fa fa-arrows-h"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-v"><i class="fa fa-arrows-v"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-asterisk"><i class="fa fa-asterisk"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-automobile"><i class="fa fa-automobile"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ban"><i class="fa fa-ban"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bank"><i class="fa fa-bank"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bar-chart-o"><i class="fa fa-bar-chart-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-barcode"><i class="fa fa-barcode"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bars"><i class="fa fa-bars"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-beer"><i class="fa fa-beer"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bell"><i class="fa fa-bell"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bell-o"><i class="fa fa-bell-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bolt"><i class="fa fa-bolt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bomb"><i class="fa fa-bomb"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-book"><i class="fa fa-book"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bookmark"><i class="fa fa-bookmark"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bookmark-o"><i class="fa fa-bookmark-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-briefcase"><i class="fa fa-briefcase"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bug"><i class="fa fa-bug"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-building"><i class="fa fa-building"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-building-o"><i class="fa fa-building-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bullhorn"><i class="fa fa-bullhorn"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bullseye"><i class="fa fa-bullseye"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cab"><i class="fa fa-cab"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-calendar"><i class="fa fa-calendar"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-calendar-o"><i class="fa fa-calendar-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-camera"><i class="fa fa-camera"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-camera-retro"><i class="fa fa-camera-retro"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-car"><i class="fa fa-car"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-down"><i class="fa fa-caret-square-o-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-left"><i class="fa fa-caret-square-o-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-right"><i class="fa fa-caret-square-o-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-up"><i class="fa fa-caret-square-o-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-certificate"><i class="fa fa-certificate"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check"><i class="fa fa-check"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-circle"><i class="fa fa-check-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-circle-o"><i class="fa fa-check-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-square"><i class="fa fa-check-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-square-o"><i class="fa fa-check-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-child"><i class="fa fa-child"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle"><i class="fa fa-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-o"><i class="fa fa-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-o-notch"><i class="fa fa-circle-o-notch"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-thin"><i class="fa fa-circle-thin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-clock-o"><i class="fa fa-clock-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cloud"><i class="fa fa-cloud"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cloud-download"><i class="fa fa-cloud-download"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cloud-upload"><i class="fa fa-cloud-upload"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-code"><i class="fa fa-code"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-code-fork"><i class="fa fa-code-fork"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-coffee"><i class="fa fa-coffee"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cog"><i class="fa fa-cog"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cogs"><i class="fa fa-cogs"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-comment"><i class="fa fa-comment"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-comment-o"><i class="fa fa-comment-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-comments"><i class="fa fa-comments"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-comments-o"><i class="fa fa-comments-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-compass"><i class="fa fa-compass"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-credit-card"><i class="fa fa-credit-card"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-crop"><i class="fa fa-crop"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-crosshairs"><i class="fa fa-crosshairs"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cube"><i class="fa fa-cube"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cubes"><i class="fa fa-cubes"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cutlery"><i class="fa fa-cutlery"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dashboard"><i class="fa fa-dashboard"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-database"><i class="fa fa-database"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-desktop"><i class="fa fa-desktop"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dot-circle-o"><i class="fa fa-dot-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-download"><i class="fa fa-download"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-edit"><i class="fa fa-edit"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ellipsis-h"><i class="fa fa-ellipsis-h"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ellipsis-v"><i class="fa fa-ellipsis-v"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-envelope"><i class="fa fa-envelope"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-envelope-o"><i class="fa fa-envelope-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-envelope-square"><i class="fa fa-envelope-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eraser"><i class="fa fa-eraser"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-exchange"><i class="fa fa-exchange"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-exclamation"><i class="fa fa-exclamation"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-exclamation-circle"><i class="fa fa-exclamation-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-exclamation-triangle"><i class="fa fa-exclamation-triangle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-external-link"><i class="fa fa-external-link"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-external-link-square"><i class="fa fa-external-link-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eye"><i class="fa fa-eye"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eye-slash"><i class="fa fa-eye-slash"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fax"><i class="fa fa-fax"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-female"><i class="fa fa-female"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fighter-jet"><i class="fa fa-fighter-jet"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-archive-o"><i class="fa fa-file-archive-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-audio-o"><i class="fa fa-file-audio-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-code-o"><i class="fa fa-file-code-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-excel-o"><i class="fa fa-file-excel-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-image-o"><i class="fa fa-file-image-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-movie-o"><i class="fa fa-file-movie-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-pdf-o"><i class="fa fa-file-pdf-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-photo-o"><i class="fa fa-file-photo-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-picture-o"><i class="fa fa-file-picture-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-powerpoint-o"><i class="fa fa-file-powerpoint-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-sound-o"><i class="fa fa-file-sound-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-video-o"><i class="fa fa-file-video-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-word-o"><i class="fa fa-file-word-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-zip-o"><i class="fa fa-file-zip-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-film"><i class="fa fa-film"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-filter"><i class="fa fa-filter"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fire"><i class="fa fa-fire"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fire-extinguisher"><i class="fa fa-fire-extinguisher"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flag"><i class="fa fa-flag"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flag-checkered"><i class="fa fa-flag-checkered"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flag-o"><i class="fa fa-flag-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flash"><i class="fa fa-flash"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flask"><i class="fa fa-flask"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-folder"><i class="fa fa-folder"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-folder-o"><i class="fa fa-folder-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-folder-open"><i class="fa fa-folder-open"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-folder-open-o"><i class="fa fa-folder-open-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-frown-o"><i class="fa fa-frown-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gamepad"><i class="fa fa-gamepad"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gavel"><i class="fa fa-gavel"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gear"><i class="fa fa-gear"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gears"><i class="fa fa-gears"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gift"><i class="fa fa-gift"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-glass"><i class="fa fa-glass"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-globe"><i class="fa fa-globe"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-graduation-cap"><i class="fa fa-graduation-cap"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-group"><i class="fa fa-group"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hdd-o"><i class="fa fa-hdd-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-headphones"><i class="fa fa-headphones"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-heart"><i class="fa fa-heart"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-heart-o"><i class="fa fa-heart-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-history"><i class="fa fa-history"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-home"><i class="fa fa-home"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-image"><i class="fa fa-image"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-inbox"><i class="fa fa-inbox"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-info"><i class="fa fa-info"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-info-circle"><i class="fa fa-info-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-institution"><i class="fa fa-institution"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-key"><i class="fa fa-key"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-keyboard-o"><i class="fa fa-keyboard-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-language"><i class="fa fa-language"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-laptop"><i class="fa fa-laptop"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-leaf"><i class="fa fa-leaf"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-legal"><i class="fa fa-legal"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-lemon-o"><i class="fa fa-lemon-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-level-down"><i class="fa fa-level-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-level-up"><i class="fa fa-level-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-bouy"><i class="fa fa-life-bouy"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-ring"><i class="fa fa-life-ring"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-life-saver"><i class="fa fa-life-saver"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-lightbulb-o"><i class="fa fa-lightbulb-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-location-arrow"><i class="fa fa-location-arrow"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-lock"><i class="fa fa-lock"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-magic"><i class="fa fa-magic"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-magnet"><i class="fa fa-magnet"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mail-forward"><i class="fa fa-mail-forward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mail-reply"><i class="fa fa-mail-reply"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mail-reply-all"><i class="fa fa-mail-reply-all"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-male"><i class="fa fa-male"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-map-marker"><i class="fa fa-map-marker"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-meh-o"><i class="fa fa-meh-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-microphone"><i class="fa fa-microphone"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-microphone-slash"><i class="fa fa-microphone-slash"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus"><i class="fa fa-minus"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus-circle"><i class="fa fa-minus-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus-square"><i class="fa fa-minus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus-square-o"><i class="fa fa-minus-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mobile"><i class="fa fa-mobile"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mobile-phone"><i class="fa fa-mobile-phone"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-money"><i class="fa fa-money"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-moon-o"><i class="fa fa-moon-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-mortar-board"><i class="fa fa-mortar-board"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-music"><i class="fa fa-music"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-navicon"><i class="fa fa-navicon"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paper-plane"><i class="fa fa-paper-plane"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paper-plane-o"><i class="fa fa-paper-plane-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paw"><i class="fa fa-paw"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pencil"><i class="fa fa-pencil"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pencil-square"><i class="fa fa-pencil-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pencil-square-o"><i class="fa fa-pencil-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-phone"><i class="fa fa-phone"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-phone-square"><i class="fa fa-phone-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-photo"><i class="fa fa-photo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-picture-o"><i class="fa fa-picture-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plane"><i class="fa fa-plane"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus"><i class="fa fa-plus"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-circle"><i class="fa fa-plus-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-square"><i class="fa fa-plus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-square-o"><i class="fa fa-plus-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-power-off"><i class="fa fa-power-off"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-print"><i class="fa fa-print"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-puzzle-piece"><i class="fa fa-puzzle-piece"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-qrcode"><i class="fa fa-qrcode"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-question"><i class="fa fa-question"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-question-circle"><i class="fa fa-question-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-quote-left"><i class="fa fa-quote-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-quote-right"><i class="fa fa-quote-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-random"><i class="fa fa-random"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-recycle"><i class="fa fa-recycle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-refresh"><i class="fa fa-refresh"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reorder"><i class="fa fa-reorder"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reply"><i class="fa fa-reply"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reply-all"><i class="fa fa-reply-all"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-retweet"><i class="fa fa-retweet"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-road"><i class="fa fa-road"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rocket"><i class="fa fa-rocket"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rss"><i class="fa fa-rss"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rss-square"><i class="fa fa-rss-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-search"><i class="fa fa-search"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-search-minus"><i class="fa fa-search-minus"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-search-plus"><i class="fa fa-search-plus"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-send"><i class="fa fa-send"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-send-o"><i class="fa fa-send-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share"><i class="fa fa-share"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt"><i class="fa fa-share-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt-square"><i class="fa fa-share-alt-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-square"><i class="fa fa-share-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-square-o"><i class="fa fa-share-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-shield"><i class="fa fa-shield"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-shopping-cart"><i class="fa fa-shopping-cart"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sign-in"><i class="fa fa-sign-in"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sign-out"><i class="fa fa-sign-out"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-signal"><i class="fa fa-signal"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sitemap"><i class="fa fa-sitemap"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sliders"><i class="fa fa-sliders"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-smile-o"><i class="fa fa-smile-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort"><i class="fa fa-sort"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-alpha-asc"><i class="fa fa-sort-alpha-asc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-alpha-desc"><i class="fa fa-sort-alpha-desc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-amount-asc"><i class="fa fa-sort-amount-asc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-amount-desc"><i class="fa fa-sort-amount-desc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-asc"><i class="fa fa-sort-asc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-desc"><i class="fa fa-sort-desc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-down"><i class="fa fa-sort-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-numeric-asc"><i class="fa fa-sort-numeric-asc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-numeric-desc"><i class="fa fa-sort-numeric-desc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sort-up"><i class="fa fa-sort-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-space-shuttle"><i class="fa fa-space-shuttle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spinner"><i class="fa fa-spinner"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spoon"><i class="fa fa-spoon"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-square"><i class="fa fa-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-square-o"><i class="fa fa-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star"><i class="fa fa-star"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star-half"><i class="fa fa-star-half"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star-half-empty"><i class="fa fa-star-half-empty"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star-half-full"><i class="fa fa-star-half-full"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star-half-o"><i class="fa fa-star-half-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-star-o"><i class="fa fa-star-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-suitcase"><i class="fa fa-suitcase"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-sun-o"><i class="fa fa-sun-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-support"><i class="fa fa-support"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tablet"><i class="fa fa-tablet"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tachometer"><i class="fa fa-tachometer"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tag"><i class="fa fa-tag"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tags"><i class="fa fa-tags"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tasks"><i class="fa fa-tasks"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-taxi"><i class="fa fa-taxi"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-terminal"><i class="fa fa-terminal"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-thumb-tack"><i class="fa fa-thumb-tack"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-thumbs-down"><i class="fa fa-thumbs-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-thumbs-o-down"><i class="fa fa-thumbs-o-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-thumbs-o-up"><i class="fa fa-thumbs-o-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-thumbs-up"><i class="fa fa-thumbs-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ticket"><i class="fa fa-ticket"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-times"><i class="fa fa-times"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-times-circle"><i class="fa fa-times-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-times-circle-o"><i class="fa fa-times-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tint"><i class="fa fa-tint"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-down"><i class="fa fa-toggle-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-left"><i class="fa fa-toggle-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-right"><i class="fa fa-toggle-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-up"><i class="fa fa-toggle-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-trash-o"><i class="fa fa-trash-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tree"><i class="fa fa-tree"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-trophy"><i class="fa fa-trophy"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-truck"><i class="fa fa-truck"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-umbrella"><i class="fa fa-umbrella"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-university"><i class="fa fa-university"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-unlock"><i class="fa fa-unlock"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-unlock-alt"><i class="fa fa-unlock-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-unsorted"><i class="fa fa-unsorted"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-upload"><i class="fa fa-upload"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-user"><i class="fa fa-user"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-users"><i class="fa fa-users"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-video-camera"><i class="fa fa-video-camera"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-volume-down"><i class="fa fa-volume-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-volume-off"><i class="fa fa-volume-off"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-volume-up"><i class="fa fa-volume-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-warning"><i class="fa fa-warning"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wheelchair"><i class="fa fa-wheelchair"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wrench"><i class="fa fa-wrench"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file"><i class="fa fa-file"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-archive-o"><i class="fa fa-file-archive-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-audio-o"><i class="fa fa-file-audio-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-code-o"><i class="fa fa-file-code-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-excel-o"><i class="fa fa-file-excel-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-image-o"><i class="fa fa-file-image-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-movie-o"><i class="fa fa-file-movie-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-o"><i class="fa fa-file-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-pdf-o"><i class="fa fa-file-pdf-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-photo-o"><i class="fa fa-file-photo-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-picture-o"><i class="fa fa-file-picture-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-powerpoint-o"><i class="fa fa-file-powerpoint-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-sound-o"><i class="fa fa-file-sound-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-text"><i class="fa fa-file-text"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-text-o"><i class="fa fa-file-text-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-video-o"><i class="fa fa-file-video-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-word-o"><i class="fa fa-file-word-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-zip-o"><i class="fa fa-file-zip-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-o-notch"><i class="fa fa-circle-o-notch"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cog"><i class="fa fa-cog"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gear"><i class="fa fa-gear"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-refresh"><i class="fa fa-refresh"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spinner"><i class="fa fa-spinner"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-square"><i class="fa fa-check-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-check-square-o"><i class="fa fa-check-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle"><i class="fa fa-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-circle-o"><i class="fa fa-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dot-circle-o"><i class="fa fa-dot-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus-square"><i class="fa fa-minus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-minus-square-o"><i class="fa fa-minus-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-square"><i class="fa fa-plus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-square-o"><i class="fa fa-plus-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-square"><i class="fa fa-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-square-o"><i class="fa fa-square-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bitcoin"><i class="fa fa-bitcoin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-btc"><i class="fa fa-btc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cny"><i class="fa fa-cny"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dollar"><i class="fa fa-dollar"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eur"><i class="fa fa-eur"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-euro"><i class="fa fa-euro"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gbp"><i class="fa fa-gbp"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-inr"><i class="fa fa-inr"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-jpy"><i class="fa fa-jpy"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-krw"><i class="fa fa-krw"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-money"><i class="fa fa-money"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rmb"><i class="fa fa-rmb"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rouble"><i class="fa fa-rouble"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rub"><i class="fa fa-rub"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ruble"><i class="fa fa-ruble"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rupee"><i class="fa fa-rupee"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-try"><i class="fa fa-try"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-turkish-lira"><i class="fa fa-turkish-lira"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-usd"><i class="fa fa-usd"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-won"><i class="fa fa-won"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-yen"><i class="fa fa-yen"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-align-center"><i class="fa fa-align-center"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-align-justify"><i class="fa fa-align-justify"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-align-left"><i class="fa fa-align-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-align-right"><i class="fa fa-align-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bold"><i class="fa fa-bold"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chain"><i class="fa fa-chain"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chain-broken"><i class="fa fa-chain-broken"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-clipboard"><i class="fa fa-clipboard"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-columns"><i class="fa fa-columns"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-copy"><i class="fa fa-copy"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-cut"><i class="fa fa-cut"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dedent"><i class="fa fa-dedent"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eraser"><i class="fa fa-eraser"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file"><i class="fa fa-file"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-o"><i class="fa fa-file-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-text"><i class="fa fa-file-text"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-file-text-o"><i class="fa fa-file-text-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-files-o"><i class="fa fa-files-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-floppy-o"><i class="fa fa-floppy-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-font"><i class="fa fa-font"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-header"><i class="fa fa-header"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-indent"><i class="fa fa-indent"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-italic"><i class="fa fa-italic"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-link"><i class="fa fa-link"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-list"><i class="fa fa-list"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-list-alt"><i class="fa fa-list-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-list-ol"><i class="fa fa-list-ol"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-list-ul"><i class="fa fa-list-ul"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-outdent"><i class="fa fa-outdent"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paperclip"><i class="fa fa-paperclip"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paragraph"><i class="fa fa-paragraph"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-paste"><i class="fa fa-paste"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-repeat"><i class="fa fa-repeat"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rotate-left"><i class="fa fa-rotate-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rotate-right"><i class="fa fa-rotate-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-save"><i class="fa fa-save"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-scissors"><i class="fa fa-scissors"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-strikethrough"><i class="fa fa-strikethrough"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-subscript"><i class="fa fa-subscript"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-superscript"><i class="fa fa-superscript"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-table"><i class="fa fa-table"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-text-height"><i class="fa fa-text-height"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-text-width"><i class="fa fa-text-width"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-th"><i class="fa fa-th"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-th-large"><i class="fa fa-th-large"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-th-list"><i class="fa fa-th-list"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-underline"><i class="fa fa-underline"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-undo"><i class="fa fa-undo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-unlink"><i class="fa fa-unlink"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-double-down"><i class="fa fa-angle-double-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-double-left"><i class="fa fa-angle-double-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-double-right"><i class="fa fa-angle-double-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-double-up"><i class="fa fa-angle-double-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-down"><i class="fa fa-angle-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-left"><i class="fa fa-angle-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-right"><i class="fa fa-angle-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-angle-up"><i class="fa fa-angle-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-down"><i class="fa fa-arrow-circle-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-left"><i class="fa fa-arrow-circle-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-o-down"><i class="fa fa-arrow-circle-o-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-o-left"><i class="fa fa-arrow-circle-o-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-o-right"><i class="fa fa-arrow-circle-o-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-o-up"><i class="fa fa-arrow-circle-o-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-right"><i class="fa fa-arrow-circle-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-circle-up"><i class="fa fa-arrow-circle-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-down"><i class="fa fa-arrow-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-left"><i class="fa fa-arrow-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-right"><i class="fa fa-arrow-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrow-up"><i class="fa fa-arrow-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows"><i class="fa fa-arrows"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-alt"><i class="fa fa-arrows-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-h"><i class="fa fa-arrows-h"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-v"><i class="fa fa-arrows-v"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-down"><i class="fa fa-caret-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-left"><i class="fa fa-caret-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-right"><i class="fa fa-caret-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-down"><i class="fa fa-caret-square-o-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-left"><i class="fa fa-caret-square-o-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-right"><i class="fa fa-caret-square-o-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-square-o-up"><i class="fa fa-caret-square-o-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-caret-up"><i class="fa fa-caret-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-circle-down"><i class="fa fa-chevron-circle-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-circle-left"><i class="fa fa-chevron-circle-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-circle-right"><i class="fa fa-chevron-circle-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-circle-up"><i class="fa fa-chevron-circle-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-down"><i class="fa fa-chevron-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-left"><i class="fa fa-chevron-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-right"><i class="fa fa-chevron-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-chevron-up"><i class="fa fa-chevron-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hand-o-down"><i class="fa fa-hand-o-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hand-o-left"><i class="fa fa-hand-o-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hand-o-right"><i class="fa fa-hand-o-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hand-o-up"><i class="fa fa-hand-o-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-long-arrow-down"><i class="fa fa-long-arrow-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-long-arrow-left"><i class="fa fa-long-arrow-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-long-arrow-right"><i class="fa fa-long-arrow-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-long-arrow-up"><i class="fa fa-long-arrow-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-down"><i class="fa fa-toggle-down"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-left"><i class="fa fa-toggle-left"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-right"><i class="fa fa-toggle-right"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-toggle-up"><i class="fa fa-toggle-up"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-arrows-alt"><i class="fa fa-arrows-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-backward"><i class="fa fa-backward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-compress"><i class="fa fa-compress"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-eject"><i class="fa fa-eject"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-expand"><i class="fa fa-expand"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fast-backward"><i class="fa fa-fast-backward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-fast-forward"><i class="fa fa-fast-forward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-forward"><i class="fa fa-forward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pause"><i class="fa fa-pause"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-play"><i class="fa fa-play"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-play-circle"><i class="fa fa-play-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-play-circle-o"><i class="fa fa-play-circle-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-step-backward"><i class="fa fa-step-backward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-step-forward"><i class="fa fa-step-forward"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stop"><i class="fa fa-stop"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-youtube-play"><i class="fa fa-youtube-play"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-adn"><i class="fa fa-adn"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-android"><i class="fa fa-android"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-apple"><i class="fa fa-apple"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-behance"><i class="fa fa-behance"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-behance-square"><i class="fa fa-behance-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bitbucket"><i class="fa fa-bitbucket"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bitbucket-square"><i class="fa fa-bitbucket-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-bitcoin"><i class="fa fa-bitcoin "></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-btc"><i class="fa fa-btc"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-codepen"><i class="fa fa-codepen"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-css3"><i class="fa fa-css3"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-delicious"><i class="fa fa-delicious"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-deviantart"><i class="fa fa-deviantart"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-digg"><i class="fa fa-digg"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dribbble"><i class="fa fa-dribbble"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-dropbox"><i class="fa fa-dropbox"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-drupal"><i class="fa fa-drupal"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-empire"><i class="fa fa-empire"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-facebook"><i class="fa fa-facebook"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-facebook-square"><i class="fa fa-facebook-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-flickr"><i class="fa fa-flickr"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-foursquare"><i class="fa fa-foursquare"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ge"><i class="fa fa-ge "></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-git"><i class="fa fa-git"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-git-square"><i class="fa fa-git-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-github"><i class="fa fa-github"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-github-alt"><i class="fa fa-github-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-github-square"><i class="fa fa-github-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-gittip"><i class="fa fa-gittip"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-google"><i class="fa fa-google"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-google-plus"><i class="fa fa-google-plus"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-google-plus-square"><i class="fa fa-google-plus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hacker-news"><i class="fa fa-hacker-news"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-html5"><i class="fa fa-html5"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-instagram"><i class="fa fa-instagram"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-joomla"><i class="fa fa-joomla"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-jsfiddle"><i class="fa fa-jsfiddle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-linkedin"><i class="fa fa-linkedin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-linkedin-square"><i class="fa fa-linkedin-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-linux"><i class="fa fa-linux"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-maxcdn"><i class="fa fa-maxcdn"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-openid"><i class="fa fa-openid"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pagelines"><i class="fa fa-pagelines"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper"><i class="fa fa-pied-piper"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper-alt"><i class="fa fa-pied-piper-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pied-piper-square"><i class="fa fa-pied-piper-square "></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pinterest"><i class="fa fa-pinterest"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-pinterest-square"><i class="fa fa-pinterest-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-qq"><i class="fa fa-qq"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ra"><i class="fa fa-ra "></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-rebel"><i class="fa fa-rebel"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reddit"><i class="fa fa-reddit"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-reddit-square"><i class="fa fa-reddit-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-renren"><i class="fa fa-renren"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt"><i class="fa fa-share-alt"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-share-alt-square"><i class="fa fa-share-alt-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-skype"><i class="fa fa-skype"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-slack"><i class="fa fa-slack"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-soundcloud"><i class="fa fa-soundcloud"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-spotify"><i class="fa fa-spotify"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stack-exchange"><i class="fa fa-stack-exchange"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stack-overflow"><i class="fa fa-stack-overflow"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-steam"><i class="fa fa-steam"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-steam-square"><i class="fa fa-steam-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stumbleupon"><i class="fa fa-stumbleupon"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stumbleupon-circle"><i class="fa fa-stumbleupon-circle"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tencent-weibo"><i class="fa fa-tencent-weibo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-trello"><i class="fa fa-trello"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tumblr"><i class="fa fa-tumblr"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-tumblr-square"><i class="fa fa-tumblr-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-twitter"><i class="fa fa-twitter"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-twitter-square"><i class="fa fa-twitter-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-vimeo-square"><i class="fa fa-vimeo-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-vine"><i class="fa fa-vine"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-vk"><i class="fa fa-vk"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wechat"><i class="fa fa-wechat "></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-weibo"><i class="fa fa-weibo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-weixin"><i class="fa fa-weixin"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-windows"><i class="fa fa-windows"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wordpress"><i class="fa fa-wordpress"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-xing"><i class="fa fa-xing"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-xing-square"><i class="fa fa-xing-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-yahoo"><i class="fa fa-yahoo"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-youtube"><i class="fa fa-youtube"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-youtube-play"><i class="fa fa-youtube-play"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-youtube-square"><i class="fa fa-youtube-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-ambulance"><i class="fa fa-ambulance"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-h-square"><i class="fa fa-h-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-hospital-o"><i class="fa fa-hospital-o"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-medkit"><i class="fa fa-medkit"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-plus-square"><i class="fa fa-plus-square"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-stethoscope"><i class="fa fa-stethoscope"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-user-md"><i class="fa fa-user-md"></i></label>
+													<label class="radio-inline">
+													<input type="radio" name="icon" value="fa-wheelchair"><i class="fa fa-wheelchair"></i></label>
+													
+
+												</div>
+					
+			</div>
+			<div class="modal-footer">
+                   <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+		</div>
+		</form>
+	</div>
+	</div>
+
+</div>
+
+<!-- 对话框 start -->
+<div class="modal fade bs-example-modal-sm" id="MyModalPerm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加信息</h4>
+      </div>
+      <div class="modal-body">
+       		<div class="jstree"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default calcel" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary save">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 对话框 end -->
+
+
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+
+<script type="text/javascript">
+   $(function() {
+		$(".add-form").validate({
+			rules : {
+				name : {
+					required : !0,
+					minlength : 2
+				},
+				
+				clientType:{
+				required : true
+				},sort : {
+							maxlength : 10,
+							required : true,
+							digits : true
+						}
+			},
+			messages : {
+				name : {
+					required : e + "请输入正确的资源名称",
+					minlength : e + "资源名称必须两个字符以上"
+				},sort:{
+				required : "请输入排序",
+							maxlength : "长度不能大于10",
+							digits : "必须为整数"
+				}
+			},
+			submitHandler : function() {
+				$(".add-form").ajaxSubmitForm(saveCollback);
+			}
+		});
+	});
+
+
+</script>

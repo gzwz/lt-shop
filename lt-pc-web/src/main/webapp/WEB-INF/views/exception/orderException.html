@@ -1,0 +1,34 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>orderException.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/error.css">
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+	<!-- 头部 -->
+	<#include "common/top.html">
+	<!--/*出错页面*/-->
+	<div class="wrap">
+		<div class="content">
+			<div class="error">
+			
+				<p>${exception}</p>
+				<span class="marg"><a href="javascript:history.go(-1)">返回上一级页面</a></span>
+				<span><a href="${contextPath}/index">返回首页</a></span>
+			</div>
+		</div>
+	</div>
+
+	<!--/* end 出错页面*/-->
+	<!-- 尾部 -->
+	<#include "common/foot.html">
+</body>
+</html>

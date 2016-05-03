@@ -1,0 +1,146 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#include "/public/frame/jqgridcss.html"> 
+<#include "/public/frame/jqgridjs.html">
+ 
+<link href="${contextPath}/resources/css/order/orderlist.css" rel="stylesheet"> 
+
+<div class="ibox-content">
+	<table class="table table-bordered" style="text-align: center;">
+		<thead>
+			<tr class="alert alert-success">
+				<th style="text-align: center;"><label class="">订单ID:</label>
+				</th>
+				<th style="text-align: center;"><span>${order.id!''}</span></th>
+				<th style="text-align: center;"><label class="">支付时间: </label>
+				</th>
+				<th style="text-align: center;"><span>${order.baseInfo.payDate!''}</span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="width: 25%;"><label class="">订单状态: </label></td>
+				<td style="width: 25%;"><span> <#if
+						order.status.currentValue == 'create'> 待付款<#elseif
+						order.status.currentValue == "cancel"> 已取消<#elseif
+						order.status.currentValue == "paid"> 已发货<#elseif
+						order.status.currentValue == "delivery"> 待收货<#elseif
+						order.status.currentValue == "finish"> 交易成功 <#elseif 
+						order.status.currentValue=="remove"> 已删除</#if> </span></td>
+				<td style="width: 25%;"><label class="">收货人: </label></td>
+				<td style="width: 25%;"><span>${buyerInfo.buyerName!''}</span>
+				</td>
+
+			</tr>
+			<tr>
+				<td><label class="">订单总价: </label></td>
+				<td><span>￥{order.baseInfo.totalPrice!''}</span></td>
+				<td><label class="">订单编号: </label></td>
+				<td><span>15647489784514</span></td>
+			</tr>
+			<tr>
+				<td colspan="4"><span>
+				
+					<p>: ${buyerInfo.province.name!''}-${buyerInfo.city.name!''}-${buyerInfo.area.name!''}-${buyerInfo.detail!''}
+					---邮政编码: ${buyerInfo.zipCode!''}</p>
+					<p>收货人姓名{buyerInfo.consigneeName!''}---收货人电话: ${buyerInfo.mobile!''}</p>
+						</span></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<div class="w">
+						<div class="content">
+							<ul>
+								<li>
+									<#list order.orderSKUItems as bb>
+									<div class="list_body curr">
+										<div class="icon">
+											<img src="${imageContextPath}/order/${bb.imageUrl!''}" alt="图片不在">
+										</div>
+										<div class="text">
+											<div class="text_p">
+												<P>${bb.productName!''}</P>
+												<p class="p1">库存编码： ${bb.stockId!''}</p>
+											</div>
+											<div class="text_1">单价：${bb.price!''}</div>
+											<div class="text_1">数量：${bb.num!''}</div>
+											<div class="text_2">
+												<p>
+													<#if order.status.currentValue == 'create'> 
+													 待付款
+													<#elseif order.status.currentValue == "cancel">
+													 已取消
+													<#elseif order.status.currentValue == "paid">  
+													 已发货
+													<#elseif order.status.currentValue == "delivery">
+													 待收货
+													<#elseif order.status.currentValue == "finish">
+													交易成功
+													<#elseif order.status.currentValue=="remove">
+													已删除
+													</#if>
+												</p>
+												<!-- <p class="p1">退运保险</p> -->
+											</div>
+										</div>
+									</div>
+									 
+								</#list> 
+								</li>
+							</ul>
+						</div>
+					</div>  
+				</td>
+			<tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	 
+</script>	</div>  
+						<#list order.orderSKUItems as bb>
+						<div class="list_body curr">
+							<div class="icon">
+								<img src="${imageContextPath}/order/${bb.imageUrl!''}" alt="图片不存在">
+							</div>
+							<div class="text">
+								<div class="text_p">
+									<P>${bb.productName!''}</P>
+									<p class="p1">>库存编码${bb.stockId!''}</p>
+								</div>
+								<div class="text_1">单价{bb.price!''}</div>
+								<div class="text_1">数量{bb.num!''}</div>
+								<div class="text_2">
+									<p>
+										<#if order.status.currentValue == 'create'> 
+										待付款
+										<#elseif order.status.currentValue == "cancel">
+										已经取消
+										<#elseif order.status.currentValue == "paid">  
+										待收货
+										<#elseif order.status.currentValue == "delivery">
+										待评价
+										<#elseif order.status.currentValue == "finish">
+										订单完成
+										<#elseif order.status.currentValue=="remove">
+										已经删除
+										</#if>
+								</p>
+									<!-- <p class="p1">閫�繍淇濋櫓</p> -->
+								</div>
+							</div>
+						</div>
+									 
+								</#list> 
+								</li>
+							</ul>
+						</div>
+					</div>  
+				</td>
+			<tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	 
+</script>

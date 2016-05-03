@@ -1,0 +1,112 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                      
+                    	<div class="row m-b-sm m-t-sm">
+                    	
+                    	     <div class="col-md-4">
+                    			<a onclick="fnClickAdd();" href="javascript:void(0);" class="btn btn-primary "><i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i></a>
+                    		</div>
+                        </div> 
+                        <div class="project-list">
+	                        <table id="grid-table"></table>
+	                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <#include "/public/frame/jqgridjs.html">
+    <script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/productExterior/query?productId=${productId}",
+	     colNames:['名称', '类型','操作'],
+	     colModel:[
+			{name:'name',label:'name',width:40},
+			{name:'type',label:'type', width:90,formatter:function(cellvalue, options, rowObject){
+			   if(cellvalue=="EXTERIOR"){
+			   
+			   return "外观";
+			   }else if(cellvalue=="DRIVERCAB"){
+			    return "驾驶室";
+			   }else if(cellvalue=="TERRITORY"){
+			    return "地盘";
+			   }
+			
+			}},
+			{name:'id',label:'id', width:90,formatter:function(cellvalue, options, rowObject){
+				return "<a href='javascript:;'onclick=modifyNavigation('"+cellvalue+"') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>"+
+				"<a style='margin-left:10px;' href='javascript:;' onclick=fnClickDel('"+cellvalue+"') class='btn btn-xs btn-primary'>删除</a>";
+			}} 
+		], 
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"图片列表"
+	});
+    
+    </script>
+ <script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	var keyWord = $("input[name=keyWord]").val();  
+		    $("#grid-table").jqGrid('setGridParam',{  
+		        datatype:'json',  
+		        postData:{'name':keyWord}, //发送数据  
+		        page:1  
+		    }).trigger("reloadGrid"); //重新载入 
+	 }
+ 
+	 function modifyNavigation(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['700px', '530px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/productExterior/edit?id="+cellvalue
+	    	});
+	    }
+	    
+	     function fnClickAdd(){
+	    	 layer.open({
+	    	    type: 2,
+	    	    area: ['700px', '530px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/productExterior/add?productId=${productId}"
+	    	}); 
+	    }
+	     
+	     
+	   function resertAdd(){
+		  fnClickAdd();
+		}
+	     
+	     /*删除*/
+	     function fnClickDel(id){
+			
+	     	fnAjaxDel("${contextPath}/productExterior/" + id + "_delete", '', search);
+	     }
+	  
+	  function refurbish(){
+		  search();
+	  }
+    </script> 
+</body>
+
+</html>

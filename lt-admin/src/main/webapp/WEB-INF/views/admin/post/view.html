@@ -1,0 +1,201 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帖子管理</title>
+<#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" href="javascript:void(0);" class="btn btn-primary"> <i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增帖子</i>
+								</a>
+								
+								<!-- <button class="btn btn-primary" onclick="fnClickQuery();" type="button">帖子版块</button> -->
+								<!-- <button class="btn btn-primary" onclick="fnClickShowDY();" type="button">批量发送</button>-->
+								 <a onclick="fnClickAllDel();" href="javascript:void(0);" class="btn btn-w-m btn-danger ">&nbsp;批量删除</a> 
+							</div>
+							
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<#include "/public/frame/jqgridjs.html">
+
+	<script type="text/javascript">
+		function closed() {
+			$('#myModal').hide();
+			search();
+		}
+		$(function() {
+			$('.btn-search').on('click', function(e) {
+				search();
+			});
+			grid = $('#grid-table')
+					.myJqGrid(
+							{
+								url : "${contextPath}/system/post/query",
+								colNames : [ '标题','内容','发贴人','类型','创建时间','显隐','操作' ],
+								colModel : [
+										{
+											name : 'baseInfo.title',
+											label : 'baseInfo.title',
+											width : 40
+										},
+										{
+											name : 'baseInfo.content',
+											label : 'baseInfo.content',
+											width : 90
+										},
+										{
+											name : 'baseInfo.author.domainName',
+											label : 'baseInfo.author.domainName',
+											width : 40
+										},
+										{
+											name : 'forum.type',
+											label : 'forum.type',
+											width : 40
+										},
+										{
+											name : 'baseInfo.createDate',
+											label : 'baseInfo.createDate',
+											width : 40
+										},
+										{name:'show',label:'show', width:20,formatter:function(cellvalue, options, rowObject){
+										   if(cellvalue==true){
+										   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickHide('"+rowObject.id+"'); type='button'>隐藏</button>";
+										   }else
+										   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickShow('"+rowObject.id+"'); type='button'>显示</button>";
+										}},
+										{
+											name : 'id',
+											label : 'id',
+											width : 90,
+											formatter : function(cellvalue,
+													options, rowObject) {
+												return "<a href='javascript:void();' onclick=fnClickModify('"
+														+ cellvalue
+														+ "') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>"
+														+ "<a style='margin-left:10px;' href='javascript:;' onclick=fnClickDel('"
+														+ cellvalue
+														+ "') class='btn btn-xs btn-primary'>删除</a>";
+											}
+										} ],
+								styleUI : 'Bootstrap',
+								pager : '#grid-pager',
+								height:"auto",
+						        viewrecords:true,
+						        caption:"帖子列表"
+							});
+							
+
+		});
+	</script>
+	<script type="text/javascript">
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+		/*修改*/
+		function fnClickModify(id) {
+			layer.open({
+	    	    type: 2,
+	    	    title:'帖子板块',
+	    	    area: ['1000px', '730px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/system/post/edit?id="+id
+	    	});
+		}
+
+        /*帖子版块*/
+		function fnClickQuery(){
+	    	 layer.open({
+	    	    type: 2,
+	    	    title:'帖子板块',
+	    	    area: ['1000px', '730px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/system/post/viewforum"
+	    	}); 
+	    }
+
+
+		/*添加*/
+		function fnClickAdd() {
+		    layer.open({
+	    	    type: 2,
+	    	    title:'帖子新增',
+	    	    area: ['1000px', '730px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/system/post/add"
+	    	}); 
+		}
+
+		 /*批量删除*/
+	     function fnClickAllDel(){
+		　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+			swal("请选择要删除的行!", "");
+			return;
+		  }
+            fnAjaxDel("${contextPath}/system/post/" + id + "_delete", '', search);
+	     }
+		
+		/*删除*/
+		function fnClickDel(id) {
+			fnAjaxDel("${contextPath}/system/post/" + id + "_delete", '',
+					search);
+		}
+		
+		 function refurbish(){
+		  search();
+	     }
+	     //隐藏
+	     function fnClickHide(id){
+	       fnAjax("${contextPath}/system/post/hide?postId="+id, "post", "json", '', search)
+	     }
+		
+		//显示
+		function fnClickShowDY(){
+		  　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+			swal("请选择要显示的行!", "");
+			return;
+		  }
+		  fnAjax("${contextPath}/system/post/show?commandId="+id, "post", "json", '', search)
+		}
+		
+		//显示
+		function fnClickShow(id){
+		  fnAjax("${contextPath}/system/post/show?commandId="+id, "post", "json", '', search)
+		}
+		</script>	
+	
+</body>
+</html>

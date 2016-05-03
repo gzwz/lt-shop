@@ -1,0 +1,184 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理员管理</title>
+</head>
+<#include "/public/frame/jqgridcss.html">
+<#include "/public/frame/jqgridjs.html">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" data-toggle="modal" data-target="#myModal5" href="javascript:void(0);"
+									class="btn btn-primary "> <i
+									class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i>
+								</a>
+								<!-- <button class="btn btn-primary" onclick="edite();" type="button"><i class='fa fa-edit'></i> 编辑</button> -->
+								<!-- <a onclick="fnClickAllDel();" href="javascript:void(0);" class="btn btn-w-m btn-danger ">&nbsp;批量删除</a>  -->
+							</div>
+							
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+	<#include "/admin/add.html">
+	<script type="text/javascript">
+		
+		$(function() {
+			$('.btn-search').on('click', function(e) {
+				search();
+			});
+			grid = $('#grid-table')
+					.myJqGrid(
+							{
+								url : "${contextPath}/permission/admin/query",
+								colNames : [ '姓名','帐号','电话', '操作' ],
+								colModel : [
+										{
+											name : 'name',
+											label : 'name',
+											width : 40
+										},
+										{
+											name : 'loginName',
+											label : 'loginName',
+											width : 40
+										},
+										{
+											name : 'telephone',
+											label : 'telephone',
+											width : 90
+										},
+										{
+											name : 'id',
+											label : 'id',
+											width : 90,
+											formatter : function(cellvalue,
+													options, rowObject) {
+												return "<a href='javascript:void();' data-toggle='modal' data-target='#myModal5' onclick=fnClickModify('"
+														+ cellvalue
+														+ "') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>"
+														+ "<a style='margin-left:10px;' href='javascript:;' onclick=fnClickDel('"
+														+ cellvalue
+														+ "') class='btn btn-xs btn-primary'>删除</a>";
+											}
+										} ],
+								styleUI : 'Bootstrap',
+								pager : '#grid-pager',
+								 height:"auto",
+					           viewrecords:true,
+					           caption:"管理员列表"
+							});
+
+		});
+	</script>
+	<script type="text/javascript">
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+		/*修改*/
+		function fnClickModify(adminId) {
+			var collback = function(d) {
+				$(".modal-title").html("");
+				$("#clientType").val(d.clientType);
+				$(".modal-title").html("管理员编辑");
+				$('input[name=adminId]').val(d.id);
+				$('input[name=name]').val(d.name);
+				$("#password").hide();
+				$('input[name=loginName]').val(d.loginName);
+				$('input[name=telephone]').val(d.telephone);
+				
+				if(d.roles.length>0){
+						 $("input[name=roleIdsChecked]").each(function(i){ 
+							 for(i=0;i<d.roles.length;i++){
+								    var b=$(this).val();
+								    if(d.roles[i].id==b){
+								    	 $(this).attr("checked",true);
+								    }
+							       }
+					    });
+					 }
+				
+				
+				$(".add-form").attr('action',
+						'${contextPath}/permission/admin/modify')
+				$('#myModal').show();
+			}
+			fnAjaxGet("${contextPath}/permission/admin/edit?id="+adminId, '',
+					collback);
+		}
+
+
+		/*添加*/
+		function fnClickAdd(id) {
+		    $(".modal-title").html("");
+			$(".modal-title").html("管理员新增");
+			$("#password").show();
+			$('input[name=resourceId]').val('');
+			$('input[name=name]').val('');
+			$(".add-form").attr('action', '${contextPath}/permission/admin/save')
+		}
+		
+		/*编辑*/
+		function edite(){
+			var id=$('#grid-table').jqGrid("getGridParam", "selarrrow");
+			  if(id.length<1){
+				swal("请选择要编辑的行!", "");
+				return;
+			  }
+			  if(id.length>1){
+				  swal("只能选择一行!", "");
+					return;  
+			  }
+			  fnClickModify(id);
+			
+		}
+
+		 /*批量删除*/
+	     function fnClickAllDel(){
+		　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+		  /* layer.alert('请选择要删除的行!', {
+			    skin: 'layui-layer-molv' //样式类名
+			    ,closeBtn: 0
+			}); */
+			swal("请选择要删除的行!", "");
+			return;
+		  }
+            fnAjaxDel("${contextPath}/permission/admin/" + id + "_delete", '', search);
+	     }
+		
+		/*删除*/
+		function fnClickDel(id) {
+			fnAjaxDel("${contextPath}/permission/admin/" + id + "_delete", '',
+					search);
+		}
+		
+	</script>
+</body>
+</html>

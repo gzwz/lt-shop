@@ -1,0 +1,459 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>shoppingCar.html</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/pc/reset.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/pc/harderone.css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/pc/master.sho.css">
+<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+<script type="text/javascript"
+	src="${contextPath}/resources/js/jquery191.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+</head>
+
+<body>
+	<#include "common/shop-top.html">
+	<!-- end 头部 -->
+	<!-- 浮动条-->
+	<!-- <div class="suspen clearfix">
+		<div class="total-l flt">
+			         <input id="checkall" type="checkbox"><span><a href="javascript:void(0);">全选</a></span>
+			<span><a class='delall' href="javascript:void(0);">删除</a></span>
+		</div>
+		<div class="total-r flr">
+			商品合计：<span>1.00</span>元
+		</div>
+	</div> -->
+	<!-- end 浮动条-->
+
+	<div class="shopcurlist">
+		<div class="content">
+			<h2>全部商品</h2>
+			
+			<div class="main">
+				<div id="mainbodybox" class="mainbody clearfix">
+					
+				</div>
+				<form id="submitForm" action="${contextPath}/intercept/fill-information-car" method="post">
+				<div class="total">
+					<div class="total-top clearfix">
+						<div class="total-l flt">
+							<input id="checkall" type="checkbox"><span><a
+								href="javascript:void(0);">全选</a></span><span><a class='delall'
+								href="javascript:void(0);">删除</a></span>
+						</div>
+						<div class="total-r flr">
+							商品合计：<span id="totatlePrice">0.00</span><input type="hidden" name="totale" id="reckon"/>元
+						</div>
+					</div>
+					<div class="total-pay clearfix">
+						<input type="checkbox">
+						<div class="total-pay-r flt">
+							使用代金券余额支付，代金券余额：<span>0.00</span>元
+						</div>
+					</div>
+					<div class="total-pay clearfix totop">
+						<input type="checkbox">
+						<div class="total-pay-r flt">
+							使用账户余额支付，账户余额：<span>0.00</span>元
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="shoppingCarItems" id="shoppingCarItems"/>
+				<input type="hidden" name="shoppingNume" id="shoppingNume"/>
+				<input type="hidden" name="merchantId" id="merchantId"/>
+				</form>
+				<div class="totalb clearfix">
+					
+					<div class="confirm clearfix flr">
+						<div class="consent clearfix">
+							<input id="check" type="checkbox"><span>我已阅读并同意<a
+								href="#" style="color:#f00;">《服务协议》</a></span>
+						</div>
+						<div class="but">
+							<input id="confirmbut" type="button" value="确认支付">
+						</div>
+					</div>
+					<div class="text">
+						<p>付款遇到问题:</p>
+						<p>1、如您未开通网上银行，即可以使用储蓄卡快捷支付轻松完成付款；</p>
+						<p>2、如果银行卡已经扣款，但您的账户中没有显示，有可能因为网络原因导致，请及时联系客服400-000-0000。</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	
+	
+
+	<#include "common/foot.html">
+
+	<!-- jQuery1.7以上 或者 Zepto 二选一，不要同时都引用 -->
+	
+	<!--  <script src="${contextPath}/resources/js/effect.sho.js"></script> -->
+ <script src="${contextPath}/resources/js/layer/layer.js"></script>
+	<script type="text/javascript">
+	//当前页
+	 var page = 1;
+	$(function() {
+	   $("#checkall").prop("checked", false);
+	        //首次加载
+		pagtion();
+			//滚动加载事件
+			$(window).scroll(function () {
+				if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				 pagtion();
+				  }
+				});
+			
+			
+			$('body').on("click",".deleteShoppingCar",function(){
+			var shoppingId=$(this);
+			
+			
+			layer.confirm('您确认移除购物车?', {
+				  btn: ['确定','取消'] //按钮
+				}, function(){
+				    $.ajax({
+						type : "post",
+						url : "${contextPath}/intercept/deleteShoppingCarItem?shoppingCarItemIds="+shoppingId.attr("accesskey"),
+						dataType : "json",
+						success : function(data) {
+							  if(data.success){
+								  layer.msg(data.errorMsg, {icon: 1}); 
+
+								  if(shoppingId.parent().parent().parent().parent().children().siblings("li").length==3){
+									  shoppingId.parent().parent().parent().parent().remove();
+									  oneDelete(shoppingId.parent().parent().parent().parent().children().siblings("li").find(".shop-select").val());
+								  }
+								  shoppingId.parent().parent().parent().remove();
+								   var sum=0;
+								    shoppingId.parent().siblings("li").find(".checkboxCar").prop('checked', false);
+								    checkbox(); 
+								    
+								}else{
+								  layer.msg(data.errorMsg, {icon: 1});
+								}
+						}
+					}); 
+				 
+				});
+			
+			});
+			
+			
+			//全选
+			$('body').on("click","#checkall",function(){
+			     if($(this).is(':checked')){
+			    	 
+			    	 $("[name='shoppingCarIds']:checkbox").prop("checked", true);
+			         $("[name='shoppingCarItems']:checkbox").prop("checked", true);
+			     }else{
+			    	 $("[name='shoppingCarIds']:checkbox").prop("checked", false);
+			         $("[name='shoppingCarItems']:checkbox").prop('checked', false);
+			     }
+			     checkbox();
+			});
+			
+			
+			//选择店铺 子级全选
+			$('body').on("click",".shop-select",function(){
+			     if($(this).is(':checked')){
+			    	 $(this).parent().siblings("li").find("ul li").find("[name='shoppingCarItems']:checkbox").prop("checked", true);
+			     }else{
+			    	 $(this).parent().siblings("li").find("ul li").find("[name='shoppingCarItems']:checkbox").prop("checked", false);
+			     }
+			     
+			     if($(".checkboxCar").length==($("[name='shoppingCarItems']:checked").length+$("[name='shoppingCarIds']:checked").length)){
+	                   $("#checkall").prop("checked", true);
+	                 } else{
+	                   $("#checkall").prop("checked", false);
+	                }
+			     
+			     checkbox();
+			});
+			
+			
+			//单击某个子级复选框时父级复选框不选中或全选中
+			$('body').on("click",".select",function(){
+	              if($(this).parent().parent().parent().parent().children().siblings("li").find("ul li").find("[name='shoppingCarItems']:checkbox").length==$(this).parent().parent().parent().parent().children().siblings("li").find("ul li").find("[name='shoppingCarItems']:checked").length){
+	            	  $(this).parent().parent().parent().siblings("li").find("[name='shoppingCarIds']:checkbox").prop("checked", true);
+	                 } else{
+	                  $(this).parent().parent().parent().siblings("li").find("[name='shoppingCarIds']:checkbox").prop("checked", false);
+	                }
+	                
+	              
+	              if($(".checkboxCar").length==($("[name='shoppingCarItems']:checked").length+$("[name='shoppingCarIds']:checked").length)){
+	                   $("#checkall").prop("checked", true);
+	                 } else{
+	                   $("#checkall").prop("checked", false);
+	                }
+	              
+	                checkbox();
+				});
+			
+			
+			$('.delall').click(function (){
+		         if($("[name='shoppingCarItems']:checked").length=="0"&&$("[name='shoppingCarIds']:checked").length=="0"){
+		          layer.msg("请选择要移除的项", {icon: 1});
+		          return;
+		         }
+		         
+		         
+			      
+			      
+			    var shoppingCarIds="";
+			    $(".shop-select").each(function(){
+			         if($(this).is(":checked")){
+			        	 shoppingCarIds+= $(this).val()+",";
+			        }
+			    });
+			    
+			    if(shoppingCarIds!=""){
+			    	oneDelete(shoppingCarIds);
+			    }else{
+			    	var shoppingCarItemIds="";
+			    	$(".select").each(function(){
+				         if($(this).is(":checked")){
+				        	 shoppingCarItemIds+= $(this).val()+",";
+				        }
+				    });
+			    	manyDelete(shoppingCarItemIds);
+			    }
+			    checkbox(); 
+			});
+			
+			
+			function manyDelete(shoppingCarItemIds){
+				
+				layer.confirm('您确认移除购物车?', {
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+					    $.ajax({
+							type : "post",
+							url : "${contextPath}/intercept/deleteShoppingCarItem?shoppingCarItemIds="+shoppingCarItemIds,
+							dataType : "json",
+							success : function(data) {
+								  if(data.success){
+									  layer.msg(data.errorMsg, {icon: 1});
+									    $("input:checkbox:checked").parents('li').hide(500);
+									    $("#checkall").prop("checked", false);
+									    for(var i=0;i<shoppingCarIds.split(",").length;i++){
+									    	if(shoppingCarIds.split(",")[i]!=""){
+									    		$("#"+shoppingCarIds.split(",")[i]).hide(500);
+									    	}
+									    	
+									    }
+									    $("#totatlePrice").html("");
+								        $("#totatlePrice").html("0.00");
+								        $("#reckon").val("");
+								        $("#reckon").val("0.00");
+									  
+									}else{
+									  layer.msg(data.errorMsg, {icon: 1});
+									}
+							}
+						});  
+					 
+					});
+				
+			}
+			
+			
+			function oneDelete(shoppingCarIds){
+				
+				layer.confirm('您确认移除购物车?', {
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+					    $.ajax({
+							type : "post",
+							url : "${contextPath}/intercept/deleteShoppingCar?shoppingCarId="+shoppingCarIds,
+							dataType : "json",
+							success : function(data) {
+								  if(data.success){
+									  layer.msg(data.errorMsg, {icon: 1});
+									    $("#checkall").prop("checked", false);
+									    for(var i=0;i<shoppingCarIds.split(",").length;i++){
+									    	if(shoppingCarIds.split(",")[i]!=""){
+									    		$("#"+shoppingCarIds.split(",")[i]).hide(500);
+									    	}
+									    	
+									    }
+									    $("#totatlePrice").html("");
+								        $("#totatlePrice").html("0.00");
+								        $("#reckon").val("");
+								        $("#reckon").val("0.00");
+									  
+									}else{
+									  layer.msg(data.errorMsg, {icon: 1});
+									}
+							}
+						});  
+					 
+					});
+				
+			}
+			
+			//加
+			$("body").on("click",".increase",function(){
+			   var increa=$(this);
+			   $.ajax({
+						type : "post",
+						url : "${contextPath}/product/selectSkuProduct",
+						dataType : "json",
+						async : true,
+						 data : {productId:increa.val(),skuSpecInfo:increa.attr("accesskey")}, 
+						 success : function(data) {
+							if(data!=null){
+							   if(parseInt(increa.siblings(".spinner").val())>=parseInt(data.number)){
+							      increa.siblings(".spinner").val(data.number);
+								  increa.parent().parent().parent().siblings("li").find(".sumPrice").html("");
+								  increa.parent().parent().parent().siblings("li").find(".sumPrice").html((parseFloat($.trim(increa.parent().parent().parent().siblings("li").find(".orgSkuPrice").text()))*parseFloat(increa.siblings(".spinner").val())).toFixed(2));
+								  checkbox();
+							     layer.msg("对不起！库存不足");
+							   }else{
+							      increa.siblings(".spinner").val(parseInt(increa.siblings(".spinner").val())+1);
+								  increa.parent().parent().parent().siblings("li").find(".sumPrice").html("");
+								  increa.parent().parent().parent().siblings("li").find(".sumPrice").html((parseFloat($.trim(increa.parent().parent().parent().siblings("li").find(".orgSkuPrice").text()))*parseFloat(increa.siblings(".spinner").val())).toFixed(2));
+								  checkbox();
+							   }
+							}
+						}
+					});
+			 
+			});
+			
+			
+			//减
+			$("body").on("click",".decrease",function(){
+			  if($(this).siblings(".spinner").val()=="1"){
+			    layer.msg("对不起！最少是1");
+			  }else{
+			  
+			    $(this).siblings(".spinner").val(parseInt($(this).siblings(".spinner").val())-1);
+			    $(this).parent().parent().parent().siblings("li").find(".sumPrice").html("");
+			    $(this).parent().parent().parent().siblings("li").find(".sumPrice").html((parseFloat($.trim($(this).parent().parent().parent().siblings("li").find(".orgSkuPrice").text()))*parseFloat($(this).siblings(".spinner").val())).toFixed(2));
+			    checkbox();
+			  }
+			  
+			});
+			
+			
+			// 服务协议
+			
+			if($('#check').is(':checked')){
+			        $("#confirmbut").css({"background":"#c8002e"});
+			    }else{
+			        $("#confirmbut").css({"background":"#aaa"});
+			       
+			    }
+			
+			
+			$("#check").on("click",function(){
+			
+			   if($(this).is(":checked")){
+			        $("#confirmbut").css({"background":"#c8002e"});
+			        
+			    }else{
+			        $("#confirmbut").css({"background":"#aaa"});
+			        
+			    }
+			
+			});
+			
+			
+			
+			//提交数据
+			
+			$("#confirmbut").bind("click",function(){
+			   var b=true;
+			   if(!$('#check').is(':checked')){
+			       layer.msg("请同意服务协议");
+			       return;
+			    }
+			   var shoppingCarItems="";
+			   var shoppingNume="";
+			   var merchantId="";
+			   $(".select").each(function(){
+					         if($(this).is(":checked")){
+					        	 shoppingCarItems+=$(this).val()+",";//取得选择的购物车项id
+					        	 shoppingNume+=$(this).parent().siblings("li").children().children().find(".spinner").val()+",";//取得购物车项选择的数量
+					        	 merchantId+=$(this).parent().parent().parent().siblings("li").find("[name='shoppingCarIds']:checkbox").val()+",";//获得选中的购物车项里的商家id
+					             b=false;
+					        }
+					    });
+			   
+					   $("#merchantId").val(""); 
+					   $("#merchantId").val(merchantId);
+					   $("#shoppingNume").val(""); 
+					   $("#shoppingNume").val(shoppingNume);
+					   $("#shoppingCarItems").val(""); 
+					   $("#shoppingCarItems").val(shoppingCarItems); 
+				if(b){
+					layer.msg("请选择要购买的商品");
+				    return;
+				}	
+				
+				$("#submitForm").submit();    
+			    $(this).unbind("click");
+			});
+			
+		});
+		
+		
+		function checkbox(){
+		   var sum=0;
+		    $(".select").each(function(){
+		         if($(this).is(":checked")){
+		         sum+= parseFloat($.trim($(this).parent().siblings("li").find(".sumPrice").text()));
+		         }
+		    });
+		   
+		    $("#totatlePrice").html("");
+		    $("#totatlePrice").html(sum.toFixed(2));
+		    
+	        $("#reckon").val("");
+	        $("#reckon").val(sum.toFixed(2));
+		}
+		
+		function pagtion(){
+			$.ajax({
+						type : "post",
+						url : "${contextPath}/intercept/ajaxQueryShoppingCar?pageNo="+page,
+						dataType : "json",
+						success : function(data) {
+							var result = "";
+							if(data.list.length){
+								
+								
+								for(var i = 0; i <data.list.length; i++){
+									 result +="<ul class='shop-style' id='"+data.list[i].id+"'><li id='shop-info' class='clearfix'><input type='checkbox' class='checkboxCar shop-select' name='shoppingCarIds' value='"+data.list[i].id+"'><span class='shop'>店铺：</span><span class='shopname'><a href='javascript:void(0)'>"+data.list[i].marketingInfo.operationMerchantName+"</a></span></li><li class='mainhead'><ul class='clearfix'><li class='curr'>商品</li><li>参数</li><li>购买价格</li><li>购买人次</li><li>小计</li><li>操作</li></ul></li>";
+								   for(var j=0;j<data.list[i].items.length;j++){
+									   if(data.list[i].items[j].valid){
+									       result += "<li><ul class='buybox clearfix'><li class='curr2'><input class='checkboxCar select' value='"+data.list[i].items[j].id+"' name='shoppingCarItems' type='checkbox'><a href='${contextPath}/product/detaile?id="+data.list[i].items[j].skuProductId+"&productCatoryName="+data.list[i].items[j].productCatoryName+"'><img width='138px' src='${imageContextPath}/"+data.list[i].items[j].titleImageUrl+"' /></a><span><a href='${contextPath}/product/detaile?id="+data.list[i].items[j].skuProductId+"&productCatoryName="+data.list[i].items[j].productCatoryName+"'>"+data.list[i].items[j].productName+"</a></span></li><li class='curr7'>"+data.list[i].items[j].skuSpecInfo+"</li><li class='curr3'><span>￥</span><span class='orgSkuPrice'>"+data.list[i].items[j].originalPrice.toFixed(2)+"</span></li><li class='curr4'><div class='maine'><div class='demo clearfix'><button type='button' class='but left decrease' ></button><input type='text' readonly='readonly' value='"+data.list[i].items[j].num+"' name='shoppingNume' class='spinner'/><button type='button' class='but increase' value='"+data.list[i].items[j].skuProductId+"' accesskey='"+data.list[i].items[j].skuSpecInfo+"'/></button></div></div></li><li class='curr5'><span>￥</span><span class='sumPrice'>"+(parseInt(data.list[i].items[j].num)*parseFloat(data.list[i].items[j].originalPrice)).toFixed(2)+"</span></li><li class='curr6'><a class='deleteShoppingCar' accesskey='"+data.list[i].items[j].id+"' href='javascript:void(0);'>删除</a></li></ul></li>";
+									    }else{
+									       result += "<li style='background: rgb(242, 242, 242);'><ul class='buybox clearfix'><li class='curr2'><span class='vain'>无效</span><a href='${contextPath}/product/detaile?id="+data.list[i].items[j].skuProductId+"&productCatoryName="+data.list[i].items[j].productCatoryName+"'><img width='138px' src='${imageContextPath}/"+data.list[i].items[j].titleImageUrl+"' /></a><span><a href='${contextPath}/product/detaile?id="+data.list[i].items[j].skuProductId+"&productCatoryName="+data.list[i].items[j].productCatoryName+"'>"+data.list[i].items[j].productName+"</a></span></li><li class='curr7'>"+data.list[i].items[j].skuSpecInfo+"</li><li class='curr3'><span>￥</span><span class='orgSkuPrice'>"+data.list[i].items[j].originalPrice.toFixed(2)+"</span></li><li class='curr4'><div class='maine'><div class='demo clearfix'><button type='button' class='but left decrease' ></button><input type='text' readonly='readonly' value='"+data.list[i].items[j].num+"' name='shoppingNume' class='spinner'/><button type='button' class='but increase' value='"+data.list[i].items[j].skuProductId+"' accesskey='"+data.list[i].items[j].skuSpecInfo+"'/></button></div></div></li><li class='curr5'><span>￥</span><span class='sumPrice'>"+(parseInt(data.list[i].items[j].num)*parseFloat(data.list[i].items[j].originalPrice)).toFixed(2)+"</span></li><li class='curr6'><a class='deleteShoppingCar' accesskey='"+data.list[i].items[j].id+"' href='javascript:void(0);'>删除</a></li></ul></li>";
+									    }
+									   
+								   }
+								   result +="</ul>";
+								}
+								
+							page++;
+							}
+							$("#mainbodybox").append(result);
+						}
+					}); 
+		
+		}
+		
+		
+	</script>
+</body>
+</html>

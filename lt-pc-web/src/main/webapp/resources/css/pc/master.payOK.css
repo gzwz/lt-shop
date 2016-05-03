@@ -1,0 +1,153 @@
+
+.recordset{
+    margin-top:30px;
+}
+
+.recordset .outline{
+    padding:20px 50px;
+    border:1px solid #ddd;
+}
+
+.recordset .outline .hint{
+    width:400px;
+    margin: 0 auto;
+    margin-top:30px;
+}
+
+.recordset .outline .hint i{
+    display: inline-block;
+    width:75px;
+    height:88px;
+    padding:0 10px;
+    float:left;
+    background:url(../../images/icon.png) no-repeat -224px -365px;
+}
+
+.recordset .outline .hint .hint-l{
+    float:left;
+    font-size:14px;
+    color:#333;
+    line-height: 30px;
+    text-align: center;
+}
+
+.recordset .outline .hint .hint-l .p1{
+    color:#f00;
+    font-size:20px;
+    font-weight: bold;
+}
+
+.recordset .outline .hint .hint-l span a{
+    color:#329beb;
+}
+
+.recordset .outline .hint .hint-l span a:hover{
+    color:#f00;
+}
+
+.recordset .outline .foot{
+    width:748px;
+    height:78px;
+    margin: 48px auto;
+    border:1px solid #ddd;
+}
+
+.recordset .outline .foot .footlist{
+    width:183px;
+    float:left;
+    text-align:center;
+    font-size:12px;
+    color:#999;
+}
+
+.recordset .outline .foot .footlist1{
+    width: 307px;
+    float: left;
+    font-size: 12px;
+    color: #999;
+}
+
+.recordset .outline .foot .footlist3{
+    width:128px;
+    float:left;
+    text-align:center;
+    font-size:12px;
+    color:#999;
+}
+
+.recordset .outline .foot .footlist4{
+    width:130px;
+    float:left;
+    text-align:center;
+    font-size:12px;
+    color:#999;
+}
+
+
+
+.recordset .outline .foot .p2 {
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.recordset .outline .foot .p3 {
+    line-height: 47px;
+}
+
+.recordset .outline .foot .p4 a{
+    width:295px;
+    color: #329beb;
+    display: inline-block;
+    padding-top: 9px;
+}
+
+.recordset .outline .foot .p4 a:hover{
+    color:#f00;
+}
+
+.recordset .comm{
+    margin-top:20px;
+    border:1px solid #ddd; 
+}
+
+.recordset .comm .comm-top{
+    height:31px;
+    color:#c8002e;
+    font-size:14px;
+    padding-left:30px;
+    line-height: 31px;
+    background:#f4f4f4;
+}
+
+.recordset .comm .commlist ul li{
+    float:left;
+}
+
+.recordset .comm .commlist ul li .commimg{
+    padding:10px;
+}
+
+.recordset .comm .commlist ul li .commimg img{
+    border:1px solid #ddd;
+}
+
+.recordset .comm .commlist ul li .commtext{
+    padding:10px 0;
+    color:#4c4c4c;
+}
+
+.recordset .comm .commlist ul li p{
+    margin-top:5px;
+}
+
+.recordset .comm .commlist ul li p a{
+    display:inline-block;
+    width: 145px;
+    color: #329beb;
+    margin-bottom: 14px;
+}
+
+.recordset .comm .commlist ul li p a:hover{
+    color: #f00;
+}
+

@@ -1,0 +1,79 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>contents.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/news.css">
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+  <!-- 头部 -->
+	<#include "common/head.html">
+    <div class="wrap">
+    <div class="content clearfix">
+        <div class="sidebar_a ">
+            <dl id="category">
+                <#if articleCateList?exists><#list articleCateList as articleCate>
+				    <#if articleCate.id==articleCate.parent.id>
+				      <dt><i class="icon"></i>${articleCate.name}</dt>
+				               <#else>
+				                <dd><a  href="${contextPath}/article/article-list?id=${articleCate.id}"  <#if article.articleCate.id==articleCate.id>class="curr"</#if>>${articleCate.name}</a></dd>
+				  </#if>
+				</#list></#if>
+            </dl>
+        </div>
+        <div class="summary">
+            <div class="nav">
+                <span><#if articleCateList?exists><#list articleCateList as articleCate>
+				    <#if articleCate.id==articleCate.parent.id><a href="javascript:void(0);">${articleCate.name}</a> </#if>
+				</#list></#if></span>>
+                <span><a href="javascript:void(0);">${article.articleCate.name}</a></span>>
+                <span><a class="at" href="javascript:void(0);">${article.baseInfo.title}</a></span>
+            </div>
+            <div class="main">
+                <div class="column">
+                    ${article.baseInfo.title}
+                </div>
+                <div class="description">
+                ${article.baseInfo.content}
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+    
+  <#include "common/foot.html">
+  
+  <script type="text/javascript">
+  
+       $("#category dd a").on("click",function(){
+			       $(this).parent().siblings().find("a").removeClass("curr");
+			       $(this).addClass("curr");
+			   });
+			   
+		function getSelect(){
+        
+        var articleCId="";
+         $("#category dd a").each(function(){
+         
+           if($(this).attr("class")=="curr"){
+             articleCId=$(this).attr("accesskey");
+             $(".at").html("");
+             $(".at").html($(this).text());
+           }
+         
+         });
+        return articleCId;
+        }	   
+			   
+  </script>
+  </body>
+</html>

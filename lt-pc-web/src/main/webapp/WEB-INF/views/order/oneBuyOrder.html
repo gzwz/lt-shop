@@ -1,0 +1,184 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>确认订单详情页</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/order/oneBuyOrderConfirm.css">
+	<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+  </head>
+  <body>
+  <!-- 头部 -->
+	<#include "common/top.html">
+	<!-- 小头部 -->
+	<div class="bodyDiv">
+		<form action="">
+		<div class="topDiv">
+			<div class="topLogo">
+				<a href="${contextPath}/">
+				<img alt="卡车网" src="${imageContextPath}/logo.png">
+				</a>
+			</div>
+			<div class="topMsg">
+				<img alt="" src="${imageContextPath}/liucheng.png">
+			</div>
+		</div>
+		<div class="bankDiv"></div>
+		<div class="contentDiv">
+			<div>
+				<div class="shouhuodiz">
+					<div class="wenziTile">
+						<span >收货人信息：</span>
+					</div>
+					<div class="dizhi">
+						贵州省	贵阳市	南明区	
+					</div>
+				</div>
+				<div class="hr"></div>
+			</div>
+			<div>
+				<div class="shouhuodiz">
+					<div class="wenziTile">
+						<span >配送方式：</span>
+					</div>
+					<div class="peisong">
+						<div onclick="javascript:void();"  class="zhifufangshi">
+							<span>物流配送</span>
+						</div>
+					</div>
+					<div class="peisong">
+						<div onclick="javascript:void();"  class="zhifufangshi">
+							<span>上门自提</span> 
+						</div>
+					</div>
+					<div class="peisong">
+						<div onclick="javascript:void();"  class="zhifufangshi">
+							<span>货到付款</span>
+						</div>
+					</div>
+				</div>
+				<div class="hr"></div>
+			</div>
+			<div>
+			<!-- 产品列表 -->
+				<div class="qingdanliebiao">
+					<div class="qingdan">
+						<span > 配送清单：</span>
+					</div>
+					<div class="chanpin">
+						<div  class="goods-item goods-item-extra">
+
+							<div class="p-img">
+								<a href="${contextPath}/one-detaile?id=${oneBuy.id}" target="_blank">
+								<img alt="" src="${imageContextPath}/${oneBuy.baseInfo.titleImage!''}"></a>
+							</div>
+							<div class="goods-msg">
+								<div class="goods-msg-gel">
+									<div class="p-name">
+										<a target="_blank" href="${contextPath}/one-detaile?id=${oneBuy.id}">
+											【 ${oneBuy.cloudBrand.brandName!'品牌'} 】   ${oneBuy.baseInfo.name!''} </a>
+									</div>
+									<div class="p-price">
+										<!--增加预售金额显示 begin   预售分阶段支付类型（1：一阶梯全款支付；2：一阶梯定金支付(全款或定金可选)；3：三阶梯(仅定金)；4：三阶梯(全款或定金可选)；5：一阶梯仅定金支付） -->
+
+										<strong class="jd-price"> ${oneBuy.baseInfo.price!''}</strong>
+										<!--增加预售金额显示 end-->
+										<span class="p-num"> X ${num!1}</span> <span class="p-state" id="pre-state">有货</span>
+
+									</div>
+								</div>
+							</div>
+							<div>
+								<i class="p-icon p-icon-w"></i><span class="ftx-04">7天无理由退货</span>
+							</div>
+
+							<div class="gift-item ftx-03">
+								<p>【赠品】&nbsp;iNSIST Mars 45b 鼠标垫 ×1</p>
+							</div>
+							<!-- 京券和东券显示 -->
+
+							<!-- 延保显示 -->
+							<div class="gift-item ftx-03">
+								<p>
+									【延保】&nbsp;<span name="167694" class="vendor_name_yanbao">【京东金融保障服...】</span>第二年换新（笔记本电脑特惠第二年换新2501-3000元）&nbsp;<strong
+										style="color: #e4393c;font-family: verdana;">￥629.00</strong>&nbsp;x
+									1
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 产品列表 -->
+				<div class="hr"></div>
+			</div>
+			<div>
+				<div class="dingdanbeizhu">
+					<div class="wenziTile">
+						<span >添加订单备注：</span>
+						<input class="remark" type="text">
+					</div>
+				</div>
+				<div class="hr"></div>
+			</div>
+			<div id="pay" class="clearfix">
+				<span class="flt">支付方式：</span>
+				<ul class="flt">
+					<li class="icon1" id="">微信支付 <i class=""></i>
+					</li>
+					<li class="icon2" id="curricon">支付宝 <i class="currs"></i>
+					</li>
+					<li class="icon3">网银在线 <i></i>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<div class="zongji">
+					<ul>
+						<li> 	4 件商品，总商品金额： ￥6225.00</li><br>
+						<li> 	返现：-￥10.00</li>	<br>
+						<li>	运费：￥0.00</li>	<br>
+					<li>
+					<button id="order-submit" class="checkout-submit"
+						onclick="javascript:submit_Order();" type="submit">
+						提交订单 <b></b>
+					</button>
+					</li>
+					</ul>
+				</div>
+			</div>
+		<div>
+		</div>
+			
+		</div>
+	</form>
+	</div>
+	  <!-- 尾部 -->
+	<#include "common/foot.html">
+</body>
+    <!--   头部JS-->
+    
+    <script type="text/javascript">
+var oPay = document.getElementById('pay');
+var aLi = oPay.getElementsByTagName('li');
+var aIa = oPay.getElementsByTagName('i');
+for (var i=0; i<aLi.length; i++){
+    aLi[i].index = i;
+    aLi[i].onclick = function () {
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].id = '';
+            aIa[i].className = '';
+        }
+        aLi[this.index].id = 'curricon';
+        aIa[this.index].className = 'currs';
+    }
+}
+    </script>
+    
+</html> 
+
+
+

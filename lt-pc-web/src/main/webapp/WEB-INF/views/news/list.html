@@ -1,0 +1,134 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+    <title>新闻公告</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/news.css"> 
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/myPagination/page.css" /> 
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/msgbox/msgbox.css" /> 
+     <!--[if IE]> 
+        <script src="../../servers/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- 头部 -->
+	<#include "common/head.html">
+<div class="wrap">
+    <div class="content clearfix">
+        <div class="sidebar_a ">
+            <dl id="category">
+               <#if articleCateList?exists><#list articleCateList as articleCate>
+				    <#if articleCate.id==articleCate.parent.id>
+				      <dt><i class="icon"></i>${articleCate.name}</dt>
+				               <#else>
+				                <dd><a href="javascript:void(0);" accesskey="${articleCate.id}" <#if qo.id==articleCate.id>class="curr"</#if>>${articleCate.name}</a></dd>
+				  </#if>
+				</#list></#if>
+            </dl>
+        </div>
+        <div class="summary">
+            <div class="nav">
+                <span><#if articleCateList?exists><#list articleCateList as articleCate>
+				    <#if articleCate.id==articleCate.parent.id><a href="javascript:void(0);">${articleCate.name}</a> </#if>
+				</#list></#if></span>>
+                <span><a class="at"  href="#">公告</a></span>
+            </div>
+            <div class="news_main">
+                <ul id="article-list">
+                    
+                </ul>
+            </div>
+                     <div id="demo5" class="pages">
+                         
+                     </div>
+        </div>
+    
+    </div>
+</div>
+  
+  
+  <#include "common/foot.html">
+  
+  <script type="text/javascript" src="${contextPath}/resources/js/myPagination/jquery.myPagination6.0.js "></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/msgbox/min.js"></script>
+	<script type="text/javascript" src="${contextPath}/resources/js/msgbox/msgbox.js"></script>
+  
+  <script type="text/javascript">
+  
+    var jsonMyPagination;
+    
+    
+		  $(function(){
+		  loadTitle(getSelect());
+			  $("#category dd a").on("click",function(){
+			       $(this).parent().siblings().find("a").removeClass("curr");
+			       $(this).addClass("curr");
+			        loadTitle(getSelect());
+			  
+			   });
+		  });
+  
+        function loadTitle(id){
+              jsonMyPagination = $("#demo5").myPagination({
+          panel: {
+            tipInfo_on: true,
+            tipInfo: '  跳{input}/{sumPage}页',
+            tipInfo_css: {
+              width: '25px',
+              height: "20px",
+              border: "2px solid #f0f0f0",
+              padding: "0 0 0 5px",
+              margin: "0 5px 0 5px",
+              color: "#48b9ef"
+            }
+		},
+          ajax: {
+            on: true,
+             url: "${contextPath}/article/ajaxLoad?artickeCateId="+id, 
+            dataType: 'json',
+            ajaxStart: function() {
+             ZENG.msgbox.show(" 正在加载中，请稍后...", 6, 500); 
+            },
+            callback: function(data) {
+            var result="";
+            if("undefined" !=typeof data.list){
+               if(data.list.length>0){
+					 for(var i=0;i<data.list.length;i++){
+					     result+="<li><a href='${contextPath}/article/article-contents?id="+data.list[i].id+"'>"+data.list[i].baseInfo.title+"</a><span class='flr'>"+data.list[i].baseInfo.createTime+"</span></li>";
+					 }
+					
+				}
+            }
+             
+				$("#article-list").html("");
+				$("#article-list").html(result);
+            }
+            ,onClick:function(page){
+            }
+          }
+          
+        });
+        
+        }
+        
+        
+        function getSelect(){
+        
+        var articleCId="";
+         $("#category dd a").each(function(){
+         
+           if($(this).attr("class")=="curr"){
+             articleCId=$(this).attr("accesskey");
+             $(".at").html("");
+             $(".at").html($(this).text());
+           }
+         
+         });
+        return articleCId;
+        }
+  </script>
+</body>
+</html>

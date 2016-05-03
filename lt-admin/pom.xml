@@ -1,0 +1,470 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>lt</groupId>
+		<artifactId>lt-all</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>lt-admin</artifactId>
+	<packaging>war</packaging>
+	<name>lt-admin</name>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>gzlazypack</groupId>
+			<artifactId>gzlazypack-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lt</groupId>
+			<artifactId>lt-application</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+     <!-- 二维码生成工具jar -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+		</dependency>
+        <dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+		</dependency>
+        <dependency>  
+            <groupId>junit</groupId>  
+            <artifactId>junit</artifactId> 
+        </dependency>  	
+        
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- utils -->
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+		</dependency>
+
+		<!-- BEAN 拷贝工具 -->
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+		<!-- spring -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<!-- <scope>test</scope> -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+
+		<!-- security -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-xc</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+	</dependencies>
+
+
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>system.properties</include>
+					<include>jdbc.properties</include>
+					<include>log4j.properties</include>
+					<include>applicationContext.xml</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>system.properties</exclude>
+					<exclude>**/*.svn</exclude>
+					<exclude>**/Thumbs.db</exclude>
+					<exclude>**/.gitignore</exclude>
+					<exclude>**/.gitkeep</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- war -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<SVN-version>${buildNumber}</SVN-version>
+						</manifestEntries>
+					</archive>
+					<!-- <packagingExcludes>resources/**</packagingExcludes> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.10.v20150310</version>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>foo</stopKey>
+					<stopWait>10</stopWait>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- 本地 -->
+		<profile>
+			<id>LOCALHOST</id>
+			<properties>
+				<!-- log -->
+				<logger_level>info</logger_level>
+				<logger_file>/log/ice/ice-admin.log</logger_file>
+				<!-- jdbc -->
+				<jdbc_url>jdbc:mysql://localhost:3306/gz_lt</jdbc_url>
+				<db_username>root</db_username>
+				<db_password>root</db_password>
+				<!-- redis -->
+				<redis_ip>127.0.0.1</redis_ip>
+				<redis_port>3306</redis_port>
+				<!-- image -->
+				<imageTempPath>/ice-cms/temp/</imageTempPath>
+				<imageContextPath>http://hlydev.oss-cn-hangzhou.aliyuncs.com/</imageContextPath>
+				<!-- 远程配置 -->
+				<remoteConfigUrl>http://192.168.2.228:15007/cc-admin/property-config/map</remoteConfigUrl>
+				<environmentName>ICE_CMS_ADMIN_DEV</environmentName>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<!-- 外网开发 -->
+		<profile>
+			<id>OUT-LOCALHOST-QY</id>
+			<properties>
+				<!-- 远程配置 -->
+				<remoteConfigUrl>http://115.238.43.242:8581/cc-admin/property-config/map</remoteConfigUrl>
+				<environmentName>ICE_CMS_ADMIN-QY</environmentName>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<!-- 测试 -->
+		<profile>
+			<id>TEST</id>
+			<properties>
+				<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>C:/hsl-admin-log/application.log</logger_file>
+				<!-- 远程配置 -->
+				<remoteConfigUrl>http://192.168.2.228:15007/cc-admin/property-config/map</remoteConfigUrl>
+				<environmentName>ICE_CMS_ADMIN_TEST</environmentName>
+			</properties>
+		</profile>
+
+		<!-- 预览 -->
+		<profile>
+			<id>PREVIEW</id>
+			<properties>
+				<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hsl-admin.log</logger_file>
+				<!-- 远程配置 -->
+				<remoteConfigUrl>http://183.129.207.7:8180/property-config/map</remoteConfigUrl>
+				<environmentName>ICE_CMS_ADMIN_PREVIEW</environmentName>
+			</properties>
+		</profile>
+
+		<!-- 发布 -->
+		<profile>
+			<id>RELEASE</id>
+			<properties>
+				<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hsl-admin.log</logger_file>
+				<!-- 远程配置 -->
+				<remoteConfigUrl>http://183.129.207.7:8180/property-config/map</remoteConfigUrl>
+				<environmentName>ICE_CMS_ADMIN_RELEASE</environmentName>
+			</properties>
+		</profile>
+
+	</profiles>
+</project>

@@ -1,0 +1,97 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告位管理</title>
+   <#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>广告位列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="row m-b-sm m-t-sm">
+                    		<div class="col-md-4">
+                    		<a onclick="fnClickAdd();" href="javascript:void(0);" class="btn btn-primary ">
+                    			<i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i>
+                    		</a>
+                    		</div>
+                        </div>
+                        <div class="project-list">
+	                        <table id="grid-table"></table>
+	                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+       
+    <#include "/public/frame/jqgridjs.html">
+	
+      <#include "/adPosition/add.html"> 
+
+    <script type="text/javascript">
+    $(function(){
+    	$('.btn-search').on('click',function(e){
+    		search();
+    	});
+    	grid = $('#grid-table').myJqGrid({
+	   	     url: "${contextPath}/ad/adPosition/query",
+	   	     height:300,
+	   	     colNames:['名称', '操作'],
+	   	     colModel:[
+	   			{name:'name',label:'name',width:40},
+	   			{name:'id',label:'id', width:90,formatter:function(cellvalue, options, rowObject){
+	   				return "<a href='javascript:void();' onclick=fnClickModify('" + cellvalue + "') class='btn default btn-xs purple btn-primary'><i class='fa fa-edit'></i>编辑 </a>";
+	   			}} 
+	   		], 
+	   		styleUI : 'Bootstrap',
+	   		pager:'#grid-pager'
+	   	});
+    });
+    </script>
+    <script type="text/javascript">
+    /*搜索*/
+    function search(){
+    	var keyWord = $("input[name=keyWord]").val();  
+	    $("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:{'name':keyWord}, //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入 
+    }
+    /*修改*/
+    function fnClickModify(id){
+    	var collback = function(d){
+    		$('input[name=productCategoryId]').val(d.id);
+    		$('input[name=name]').val(d.name);
+    		$(".add-form").attr('action', '${contextPath}/ad/adPosition/modify')
+    		$('#myModal').show();
+    	}
+    	fnAjaxGet("${contextPath}/ad/adPosition/" + id + "/edit",'', collback);
+    }
+    
+    /*添加*/
+    function fnClickAdd(id){
+   		$('input[name=productCategoryId]').val('');
+   		$('input[name=name]').val('');
+   		$(".add-form").attr('action', '${contextPath}/ad/adPosition/save')
+   		$('#myModal').show();
+    }
+    
+    /*删除*/
+    function fnClickDel(id){
+    	fnAjaxDel("${contextPath}/ad/adPosition/" + id + "_delete", '', search);
+    }
+    </script>
+</body>
+</html>

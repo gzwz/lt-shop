@@ -1,0 +1,168 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源管理</title>
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5"
+	rel="stylesheet">
+<link
+	href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
+<!-- jqgrid-->
+<link
+	href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0"
+	rel="stylesheet">
+
+<link
+	href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="row m-b-sm m-t-sm">
+
+							<div class="col-md-4">
+								<a onclick="fnClickAllSave();" href="javascript:void(0);"
+									class="btn btn-primary ">&nbsp;保存</i></a>
+							</div>
+						</div>
+						<div class="project-list">
+							<table id="grid-table"></table>
+							<div id="grid-pager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+	<script type="text/javascript">
+		function closed() {
+			$('#myModal').hide();
+		}
+		$(function() {
+			$('.btn-search').on('click', function(e) {
+				search();
+			});
+			grid = $('#grid-table')
+					.myJqGrid(
+							{
+								url : "${contextPath}/permission/resource/query",
+								height : 300,
+								colNames : [ '名称', 'url', '资源所属客户端类型', '备注'],
+								colModel : [
+										{
+											name : 'name',
+											label : 'name',
+											width : 50
+										},
+										{
+											name : 'url',
+											label : 'url',
+											width : 90
+										},
+										{
+											name : 'clientType',
+											label : 'clientType',
+											width : 40
+										},
+										{
+											name : 'remark',
+											label : 'remark',
+											width : 60
+										}],
+								gridComplete:function(){
+									var resourses="${resourses}";
+									if(resourses!=""){
+										var strs=resourses.split(","); //字符分割
+								         for (i=0;i<strs.length ;i++ ) 
+										{ 
+											$('#grid-table').jqGrid('setSelection',strs[i]);
+										} 
+									}
+								},
+								styleUI : 'Bootstrap',
+								pager : '#grid-pager',
+								 height:"auto",
+					           viewrecords:true,
+					           caption:"资源列表"
+							});
+
+		});
+	</script>
+	<script type="text/javascript">
+	
+	   function fnClickAllSave(){
+		　var id=$('#grid-table').jqGrid('getGridParam','selarrrow');
+		  if(id.length<1){
+			swal("请选择行!", "");
+			return;
+		  }
+		  
+		  swal({   title: "确定选择吗?", 
+		    text: "",  
+		     type: "warning",  
+		      showCancelButton: true, 
+		        confirmButtonColor: "#DD6B55", 
+		          confirmButtonText: "确定",  
+		           cancelButtonText: "取消",  
+		            closeOnConfirm: false,  
+		             closeOnCancel: false }, 
+		             function(isConfirm){   
+		             if (isConfirm) {    
+		               parent.getResourseIds(id);
+		               var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                         parent.layer.close(index); //再执行关闭 
+		                 } else {    
+		                  swal("取消", "", "error");
+		                     } 
+		                     });
+		  
+		 
+	     }
+		/*搜索*/
+		function search() {
+			var keyWord = $("input[name=keyWord]").val();
+			$("#grid-table").jqGrid('setGridParam', {
+				datatype : 'json',
+				postData : {
+					'name' : keyWord
+				}, //发送数据  
+				page : 1
+			}).trigger("reloadGrid"); //重新载入 
+		}
+	</script>
+</body>
+</html>

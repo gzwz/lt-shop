@@ -1,0 +1,84 @@
+.wrapper{
+    width:700px;
+    margin:0 auto;
+ 	margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+.main{
+    width: 550px;
+    margin:0 auto;
+}
+
+.wrapper input{
+    height: 29px;
+    font-size: 16px;
+    margin-left:10px;
+    border:1px solid #aaa;
+}
+
+.wrapper .cont{
+    margin-top:15px;
+}
+
+.wrapper span{
+    display: inline-block;
+    width:97px;
+    text-align: right;
+    font-size:14px;
+    color:#333;
+    line-height: 31px;
+}
+
+.wrapper .ma_left6{
+    margin-left:6px;
+}
+
+.name{
+    width:428px;
+}
+
+.tel{
+    width:428px;
+}
+
+.area{
+    width:428px;
+}
+
+.fixed{
+    width:428px;
+}
+
+.cont select{
+    width: 117px;
+    height: 29px;
+    margin-right: 36px;
+    border: 1px solid #aaa;
+}
+
+.cont p{
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.street{
+    width:539px;
+}
+
+button:hover{
+	cursor: pointer;
+}
+.wrapper .main .cont button{
+	height:40px;
+    width:150px;
+    margin: 7% 0 0 33%;
+    font-size:18px;
+    color:#fff;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 10px;
+    background:#fb8926;
+    border:0;
+    border-bottom: 2px solid #cd7020;
+}

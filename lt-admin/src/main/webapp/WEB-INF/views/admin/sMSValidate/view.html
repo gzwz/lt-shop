@@ -1,0 +1,123 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短信流程管理</title>
+     <link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+    <link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+    <link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+    <link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+     <link href="${contextPath}/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <style>
+        /* Additional style to fix warning dialog position */
+        #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+    </style>
+       
+   
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                       <div class="row m-b-sm m-t-sm">
+                    		
+                            <div class="col-md-8">
+                             <form id="serchform">
+                                <div class="input-group" style="width: 600px;">
+                                    <label style="float: left;margin-top: 6px;">时间范围:</label>
+                                    <div class="form-group" id="data_5">
+                                    <div class="col-md-10">
+                                       <div class="input-daterange input-group" id="datepicker" style="float: left;">
+			                                <input name="geCreateDate" class="input-sm form-control"  placeholder="开始时间"  type="text">
+			                                <span class="input-group-addon">到</span>
+			                                <input name="leCreateDate" class="input-sm form-control"  placeholder="结束时间"  type="text">
+			                            </div>
+                                    &nbsp; <button type="button" class="btn btn-sm btn-primary btn-search" onclick="search();"> 搜索</button>
+                    		         </div>
+			                            
+                                    </div>
+                                    
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="project-list">
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+    <script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+    <script src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+    <script src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+    <script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+    <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    
+    <!--时间  -->
+<script src="${contextPath}/resources/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${contextPath}/resources/js/plugins/cropper/cropper.min.js"></script>
+<script src="${contextPath}/resources/js/demo/form-advanced-demo.min.js"></script>
+    <script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/smsValidat/sMSValidate/query",
+	     colNames:['验证手机号','验证码','当前已校验失败次数','最大可校验失败次数','最晚失效时间','是否已被使用过'],
+	     colModel:[
+			{name:'mobile',label:'mobile',width:40},
+			{name:'validCode',label:'validCode', width:30},
+			{name:'currentValidateFailTimes',label:'currentValidateFailTimes', width:40},
+			{name:'maxValidateFailTimes',label:'maxValidateFailTimes', width:40},
+			{name:'failDate',label:'failDate', width:40},
+			{name:'used',label:'used', width:40,formatter:function(cellvalue, options, rowObject){
+			   if(cellvalue==true)
+				   return "是";
+				else 
+				   return "否";
+			}} 
+		], 
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"短信流程列表"
+	});
+   
+    </script>
+    
+    <script type="text/javascript">
+    /*搜索*/
+    function search(){
+    	var keyWord = $("input[name=keyWord]").val();  
+	    $("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入 
+    }
+    
+    
+    /*删除*/
+    function fnClickDel(id){
+    	fnAjaxDel("${contextPath}/sMSValidate/" + id + "_delete", '', search);
+    }
+    </script>
+</body>
+
+</html>

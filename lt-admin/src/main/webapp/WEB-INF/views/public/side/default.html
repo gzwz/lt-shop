@@ -1,0 +1,49 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!--菜单栏-->
+<nav class="navbar-default navbar-static-side" role="navigation">
+	<div class="nav-close">
+		<i class="fa fa-times-circle"></i>
+	</div>
+	<div class="sidebar-collapse">
+		<ul class="nav" id="side-menu">
+			<li class="nav-header">
+				<div class="dropdown profile-element">
+					<span><img alt="image" class="img-circle"
+						src="${contextPath}/resources/img/icon-02.png" /></span> <a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <span class="clear">
+							<span class="block m-t-xs"><strong class="font-bold">贵州隆腾嘉业</strong></span>
+							<span class="text-muted text-xs block">${Session["login_admin"].name}<b
+								class="caret"></b></span>
+					</span>
+					</a>
+					<ul class="dropdown-menu animated fadeInRight m-t-xs">
+						<li><a class="J_menuItem" href="${contextPath}/permission/admin/password_page">修改密码</a></li>
+						<li class="divider"></li>
+						<li><a href="logout.html">退出</a></li>
+					</ul>
+				</div>
+				<div class="logo-element">12</div>
+			</li>
+			<#if listParent?exists> 
+				<#list listParent as pt>
+					<li>
+					   <#if pt.id ==pt.parent.id>
+					     <a href="javascript:void(0);"> <i class="fa ${pt.icon}"></i> <span
+							class="nav-label">${pt.name!''}</span> <span class="fa arrow"></span>
+					    </a>
+					    </#if>
+							<ul class="nav nav-second-level">
+					          <#list listResource as resource>
+					             <#if resource.id !=resource.parent.id && pt.id==resource.parent.id>
+									<li><a class="J_menuItem"  href="${contextPath}/${resource.url!''}" data-index="0">${resource.name!''}</a>
+									</li>
+								 </#if>
+						       </#list>
+							</ul>
+					</li>
+				</#list>
+			</#if>
+		</ul>
+	</div>
+</nav>
+<!--菜单栏-->

@@ -1,0 +1,259 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>提交订单付款</title>
+    <link rel="stylesheet" href="${contextPath}/resources/pc/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/pay/master.cas.css" />
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+	<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+    <!--[if IE]> 
+        <script src="${contextPath}/resources/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+   <!--head/头部-->
+<#include "common/top.html">
+   <!-- end head/头部-->
+<!--   logo-->
+   <div class="logo clearfix">
+       <div class="content">
+           <div class="logon">
+               <img src="${imageContextPath}/logo.png" alt="">
+           </div>
+           <div class="sum flr">应付金额：<span class="money">￥${order.baseInfo.totalPrice!''}</span></div>
+       </div>
+   </div>
+<!-- end / logo-->
+
+<!--  bank/银行-->
+   <div class="bank">
+       <div class="content">
+           <div class="network clearfix">
+               <ul>
+                   <li class="pitch ba1">
+                       <label>
+                           <input type="radio" name="payment" value="weixin">
+                           <span>微信支付</span>
+                       </label>
+                       <i></i>
+                   </li>
+                   <li class="pitch ba2 currt">
+                       <label>
+                           <input type="radio" name="payment" value="alipay">
+                           <span>支付宝</span>
+                       </label>
+                       <i class="curr"></i>
+                   </li>
+                   <li class="ba3">
+                       <label>
+                           <input type="radio">
+                           <span>网银在线</span>
+                       </label>
+                   </li>
+               </ul>
+               <div class="help">
+                    <span><a href="#">支付帮助</a></span>
+           <!--        <span><a href="#">意见反馈</a></span> -->
+               </div>
+           </div>
+<!--线下银行-->
+           <div class="below clearfix">
+               <p>网上银行支付</p>
+               <ul class="aggr">
+                   <li value="ICBCB2C">
+                      <img src="${imageContextPath}/bank_1.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="BOCB2C">
+                      <img src="${imageContextPath}/bank_2.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="CITIC">
+                      <img src="${imageContextPath}/bank_3.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAA">
+                      <img src="${imageContextPath}/bank_4.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAA">
+                      <img src="${imageContextPath}/bank_5.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="CIB">
+                      <img src="${imageContextPath}/bank_6.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="CMBC">
+                      <img src="${imageContextPath}/bank_7.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAA">
+                      <img src="${imageContextPath}/bank_8.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="CEBBANK">
+                      <img src="${imageContextPath}/bank_9.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="SPABANK">
+                      <img src="${imageContextPath}/bank_10.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="HZCBB2C">
+                      <img src="${imageContextPath}/bank_11.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="ABCBTB">
+                      <img src="${imageContextPath}/bank_12.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="SPDB">
+                      <img src="${imageContextPath}/bank_13.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAAA">
+                      <img src="${imageContextPath}/bank_14.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAAA">
+                      <img src="${imageContextPath}/bank_15.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="COMM">
+                      <img src="${imageContextPath}/bank_16.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAAA">
+                      <img src="${imageContextPath}/bank_17.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAAA">
+                      <img src="${imageContextPath}/bank_18.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="AAAAAAA">
+                      <img src="${imageContextPath}/bank_19.png" alt="">
+                       <i></i>
+                   </li>
+                   <li value="CCBBTB">
+                      <img src="${imageContextPath}/bank_20.png" alt="">
+                       <i></i>
+                   </li>
+               </ul>
+           </div>
+<!-- end 线下银行-->
+<!-- payment/付款 -->
+        <div class="payment clearfix">
+            <ul class="flr">
+                <li>
+                  <!--    <div class="sum">支付：<span class="money">￥${order.baseInfo.totalPrice!''}</span></div> -->
+                </li>
+                <li>
+                    <button onclick="javascript:submitPay()" style="cursor: pointer;">去付款</button>
+                </li>
+                <li>
+                <!--     <a href="#">返回修改订单</a> -->
+                </li>
+            </ul>
+        </div>
+            
+<!-- end payment/付款-->
+
+       </div>
+   </div>
+   
+<!-- end bank/银行-->
+
+<!--foot/脚部-->
+	<#include "common/foot.html">
+<!-- end foot/脚部-->
+
+<div style="display: none;">
+<form id="payform" action="${contextPath}/pay/alipay/aliPay" method="post">
+<!-- 支付信息 -->
+	<div id="default">
+		<!-- 商户网站订单系统中唯一订单号，必填  -->
+	   	<input type="hidden" name="outTradeNo" value="${order.id!''}" />
+	   	<!-- 订单名称： -->
+	   	<input type="hidden" name="subject" value="一元购商品支付"/>
+	   	<!-- 付款金额： -->
+	   	<input type="hidden" name="totalFee" value="${(order.baseInfo.totalPrice)}"/>
+	   	<!-- 订单描述 ： -->
+	   	<input type="hidden" name="body" value=""/>
+	   	<!-- 商品展示地址： -->
+	   	<input type="hidden" name="showUrl" value=""/>
+	 </div>
+</form>
+</div>
+
+	<div id="alipay" style="display: none;">
+	   	<!-- 商户网站订单系统中唯一订单号，必填  -->
+	   	<input type="hidden" name="outTradeNo" value="${order.id!''}" />
+	   	<!-- 订单名称： -->
+	   	<input type="hidden" name="subject" value="一元购商品支付"/>
+	   	<!-- 付款金额： -->
+	   	<input type="hidden" name="totalFee" value="${(order.baseInfo.totalPrice)}"/>
+	   	<!-- 订单描述 ： -->
+	   	<input type="hidden" name="body" value=""/>
+	   	<!-- 商品展示地址： -->
+	   	<input type="hidden" name="showUrl" value=""/>
+   	</div>
+   	
+   	<div id="alipay_bank"  style="display: none;">
+   		<!-- 商户网站订单系统中唯一订单号，必填 -->
+   		<input size="30" name="WIDout_trade_no" value="${order.id!''}"/>
+   		<!-- 订单名称： 必填-->
+   		<input size="30" name="WIDsubject" value="一元购商品支付" />
+   		<!-- 付款金额：必填 -->
+   		<input size="30" name="WIDtotal_fee" value="${(order.baseInfo.totalPrice)}" />
+   		<!-- 订单描述 -->
+   		<input size="30" name="WIDbody" />
+   		<!-- 默认网银：必填 -->
+   		<input id="bank_code" size="30" name="WIDdefaultbank" />
+   		<!-- 商品展示地址： -->
+   		<input size="30" name="WIDshow_url" />
+   	</div>
+   	
+</body>
+<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery191.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/layer/layer.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/effect.cas.js"></script>
+<script type="text/javascript">
+	function getPayMent(type) {
+		if (type == "weixin") {
+			alert("微信支付待接入，请选择其他支付方式");
+			
+		}else if (type == "alipay") {
+		//	alert("默认支付宝");
+			$("#payform").html("");
+			$("#payform").append($("#alipay").html());
+			$("#payform").attr("action","${contextPath}/pay/alipay/aliPay");
+			
+		}else{
+		//	alert("网银支付"+type);
+			$("#payform").html("");
+			$("#payform").append($("#alipay_bank").html());
+			$("#bank_code").attr("value",type);
+			$("#payform").attr("action","${contextPath}/pay/alipay_bank/bank");
+		}
+	}
+	
+	function submitPay(){
+		var url = "${contextPath}/oneBuyOrder/orderValdate"
+		var param = $("#payform").serialize();
+		fnAjax(url, "post", "json", param, function(result){
+			if (result.success) {
+			//	layer.msg(result.errorMsg, {icon: 1});
+				$("#payform").submit();
+			}else {
+				layer.msg(result.errorMsg, {icon: 2});
+			}
+		});
+	//	$("#payform").submit();
+	}
+</script>
+</html>

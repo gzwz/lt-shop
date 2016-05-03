@@ -1,0 +1,265 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+ <#include "/public/frame/metrnic.html">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+<link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+   <!-- jqgrid-->
+<link href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet">
+<link href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${contextPath}/resources/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<script type="text/javascript">
+	var contextPath = '${contextPath}';
+	var plugins_webuploader = '${contextPath}/resources/js/plugins/webuploader';
+	var image_servler_url = '${contextPath}/upload_image';
+</script>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="portlet-body form">
+							<!-- BEGIN FORM-->
+							<form id="adAddForm" action="${contextPath}/adListView/editSave" method="post" class="form-horizontal add-form">
+							<input type="hidden" name="adId" value="${advertisement.id!''}">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-sm-3 control-label">广告名称：</label>
+										<div class="col-sm-6">
+											<input name="adName" placeholder="请输入广告标题" type="text"
+												class="form-control" value="${advertisement.adName!''}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">广告图片：</label>
+										<div class=" col-md-7">
+											<span class="btn btn-success fileinput-button"> <i
+												class="glyphicon glyphicon-plus"></i> <span>上传文件</span> 
+												<input id="fileupload" type="file" name="file"> 
+												<input id="fileuploadInput" type="hidden" name="image" value="${advertisement.image!''}">
+											</span> <img id="img" class="img-thumbnail" src=""
+												style="width: 100px; height:66px; display: none;" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label">广告图预览：</label>
+										<div class=" col-md-7" onclick="javascript:void(0);">
+											<!-- <span class="form-control">${ad.adName!''}</span> -->
+											<a href="${imageContextPath}/${advertisement.image!''}"
+												title="点击查看大图" target="blank"> 
+												<img id="img" class="img-thumbnail" src="${imageContextPath}/${advertisement.image!''}"
+												style="width: 200px;" />
+											</a>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">广告位：</label>
+										<div class="col-sm-6">
+											<select class="form-control" name="adPosition"> 
+											<option value="index" <#if advertisement.adPosition=="index">selected="selected"</#if>>首页</option>
+											<option value="detail" <#if advertisement.adPosition=="detail">selected="selected"</#if>>详情页</option>
+											<option value="one-buy" <#if advertisement.adPosition=="one-buy">selected="selected"</#if>>一元购</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">URL地址：</label>
+										<div class="col-sm-6">
+											<input name="url" placeholder="请输入路径" type="text"
+												class="form-control" value="${advertisement.url!''}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">开始 — 结束：</label>
+										<div class="col-sm-6" id="data_5">
+											<div class="input-daterange input-group" id="datepicker">
+												<input name="startTime" class="input-sm form-control" value="${advertisement.startTime!''}"
+													placeholder="开始时间" style="width:100%;" type="text" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-%d',firstDayOfWeek:1})"/> 
+													<span class="input-group-addon" style="width:20px;">到</span> 
+												<input name="endTime" placeholder="结束时间" class="input-sm form-control" style="width:100%;" value="${advertisement.endTime!''}"
+													type="text" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'%y-%M-%d',firstDayOfWeek:1})"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">是否立即生效：</label>
+										<div class="col-sm-6">
+										<#if advertisement.status == 'enable'>
+											是:<input name="status" type="radio"
+												class="btn btn-primary btn-outline active" value="enable" checked="checked">
+											&nbsp;&nbsp;&nbsp; 
+											否:<input name="status" type="radio"
+												class="btn btn-primary btn-outline active" value="disable">
+										<#else>
+											是:<input name="status" type="radio"
+												class="btn btn-primary btn-outline active" value="enable">
+											&nbsp;&nbsp;&nbsp; 
+											否:<input name="status" type="radio"
+												class="btn btn-primary btn-outline active" value="disable" checked="checked">
+										</#if>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label">排序：</label>
+										<div class="col-sm-6">
+											<input name="sort"  type="text" class="form-control"  value="${advertisement.sort!''}">
+										</div>
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<div class="col-sm-offset-3 col-sm-8">
+										<button class="btn btn-info" type="submit" >保存</button>
+									</div>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<#include "/public/frame/metrnicjs.html">
+
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+	<script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+	<!--引入开始-->
+<script language="javascript" type="text/javascript" src="${contextPath}/resources/My97DatePicker/WdatePicker.js"></script>
+	
+	<script type="text/javascript">
+		/*搜索*/
+  	 function search(){
+	 	$("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入
+	 }  
+	
+	jQuery(document).ready(
+			function() {
+				Metronic.init(); // 公共js  必须加入
+				Layout.init(); //   布局js  必须加入
+				QuickSidebar.init(); // 右边sidebar 必须加入
+
+				$('#imageupload') .fileupload(
+						{ 	url : "${contextPath}/file/upload.html",
+							dataType : 'json',
+							done : function(e, data) {
+								if (data.result.success) {
+									var tr = "<div class='thumbnail col-md-4 image-container'>"
+											+ "<a class='image-preview' href='${contextPath}/imageViewInModal.html?src=${imageContextPath}/"
+											+ data.result.url
+											+ "' data-toggle='modal' data-target='#accountManager'><img src='${imageContextPath}/" 
+							        		+ data.result.url
+							        		+ "' style='max-height: 140px;'></a>"
+											+ "<input type='hidden' name='images' value='" 
+							        		+ data.result.url  
+							        		+ "'><span href='javascript:void(0);' class='glyphicon glyphicon-remove-circle delete-image' style='display: none;'></span></div>";
+											$("#imageuploadCon")
+											.append(tr);
+								} else {
+									alert(data.result.msg);
+								}
+							}
+						});
+				
+				
+				$('#fileupload').fileupload({
+	                url: "${contextPath}/file/upload/",
+	                dataType: 'json',
+	                done: function (e, data) {
+	                    $("#img").attr("src", "${imageContextPath}/" + data.result.url).css("display", "inline");
+	                    $("#fileuploadInput").val(data.result.url);
+	                }
+	            });
+				
+				
+			});
+	</script>
+
+	<script type="text/javascript">
+	 $(function() {
+		$(".add-form").validate({
+			rules : {
+				adName : {
+					required : true,
+					minlength : 2
+				/* 	remote: {
+                    type: "post",
+                    url: "${contextPath}/user/validateLoginName",
+                    data: {
+                        loginName: function() {
+                            return $("#loginName").val();
+	                        }
+	                    }
+           			 } */
+				},
+				image : {
+					required : true
+				},
+				url : {
+					required : true
+				},
+				
+				startTime : {
+					required : true
+				},
+				endTime : {
+					required : true
+				}
+			},
+			messages : {
+				adName : {
+					required : "请输入广告名称",
+					minlength : "必须两个字符以上"
+				}
+			},
+			submitHandler:function(){
+				$(".add-form").ajaxSubmitForm(collback);
+			}
+		})
+	});
+	var collback = function(d){
+		if(d.success){
+			swal({
+				  title: "恭喜操作成功！",
+				  text: d.errorMsg,
+				  type: "success",
+			//	  showCancelButton: true,
+				  confirmButtonColor: "#1ab394",
+				  confirmButtonText: "完成",
+			//	  cancelButtonText: "完成",
+				  closeOnConfirm: true,
+			//	  closeOnCancel: false
+			//	  closeOnCancel: true
+				},
+				function(isConfirm){
+				 if (isConfirm) {
+				  parent.refurbish();//刷新
+			      var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			      parent.layer.close(index); //再执行关闭 
+				  }
+				});
+		}else{
+			swal(d.errorMsg, '', "error");
+		}
+		}
+	</script>
+</body>
+</html>

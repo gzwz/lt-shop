@@ -1,0 +1,186 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源管理</title>
+
+<#include "/public/frame/metrnic.html">
+<link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5"
+	rel="stylesheet">
+<link
+	href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
+<!-- jqgrid-->
+<link
+	href="${contextPath}/resources/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/animate.min.css"
+	rel="stylesheet">
+<link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0"
+	rel="stylesheet">
+
+<link
+	href="${contextPath}/resources/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<style>
+/* Additional style to fix warning dialog position */
+#alertmod_table_list_2 {
+	top: 900px !important;
+}
+</style>
+
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox ">
+					<div class="ibox-content">
+					
+					<div class="row m-b-sm m-t-sm">
+							<div class="col-md-4">
+								<a onclick="fnClickAdd();" href="javascript:void(0);"
+									class="btn btn-primary "> <i
+									class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#myModal5" aria-hidden="true">&nbsp;新增</i>
+								</a>
+							</div>
+							
+						</div>
+					
+				         <div class="row">
+							<div class="col-md-12">
+								<div class="tabbable tabbable-custom">
+									<div class="tab-content">
+										<div class="tab-pane active fontawesome-demo">
+											<!-- BEGIN TABLE -->
+												 <!-- BEGIN EXAMPLE TABLE PORTLET-->
+													<div class="portlet box green-haze">
+														<div class="portlet-title">
+															<div class="caption">
+																<i class="fa fa-globe"></i>楼层列表
+															</div>
+															<div class="tools">
+																<a href="javascript:;" class="reload">
+																</a>
+																<a href="javascript:;" class="remove">
+																</a>
+															</div>
+														</div>
+														<div class="portlet-body">
+															<table id="treeTable" class="table table-striped table-bordered table-condensed">
+																<tbody>
+																<tr>
+																	<th>名称</th>
+																	<th>排序</th>
+													                <th>操作</th>
+																</tr>
+																<#list floorsList as productCategory>
+																	<tr id="${productCategory.id}"
+																		<#if productCategory.id ==
+																		productCategory.parent.id>pid="0"
+																		<#else>
+																		pid="${productCategory.parent.id}"</#if>>
+																		<td>${productCategory.name}</td>
+																		<td>${productCategory.sort}</td>
+																				<td>
+																			        <a onclick="fnClickModify('${productCategory.id}')" data-toggle="modal" data-target="#myModal5" class="btn default btn-xs purple" >
+																			            <i class="fa fa-edit"></i> 修改
+																			        </a>
+																				</td>
+																			</tr>
+																</#list>
+																
+															</tbody>
+															</table>
+															<div class="form-actions pagination-left">
+															</div>
+														</div>
+													</div>
+													<!-- END EXAMPLE TABLE PORTLET-->
+												 
+											<!-- END TABLE --> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+			<!-- END PAGE CONTENT-->
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+	<script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/peity/jquery.peity.min.js"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="${contextPath}/resources/js/plugins/layer/layer.js"></script>
+	<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+	<script
+		src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="${contextPath}/resources/js/common.js"></script>
+
+<#include "/public/frame/metrnicjs.html">
+<script>	
+    jQuery(document).ready(function() {  
+    Metronic.init(); // init metronic core components
+		Layout.init(); // init current layout
+		QuickSidebar.init(); // init quick sidebar  
+		
+		Datatable.pagination();
+		
+		Ice.modal();  //初始化modal框  如果不需要保存功能可以不初始化
+		
+		Ice.treeTable();
+		
+    });
+</script>
+
+
+<script type="text/javascript">
+   
+   
+
+		
+		/*添加*/
+		 function fnClickAdd(){
+	    	 layer.open({
+	    	    type: 2,
+	    	     area: ['1000px', ($(window).height() - 50) +'px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/floors/add"
+	    	}); 
+	    }
+		/*修改*/
+		function fnClickModify(id) {
+			 layer.open({
+	    	    type: 2,
+	    	     area: ['1000px', ($(window).height() - 50) +'px'],
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/floors/edit?id="+id
+	    	}); 
+		}
+		
+	  function refurbish(){
+		  location.reload();
+	  }
+		
+		
+		function resertAdd(){
+		  fnClickAdd();
+		}
+	</script>
+</body>
+</html>

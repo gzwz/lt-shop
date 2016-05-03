@@ -1,0 +1,160 @@
+.sidebar_a{
+    width:212px;
+    margin-top:15px;
+    float:left;
+    border: 1px solid #c9cacb;
+}
+
+.sidebar_a i{
+    display: inline-block;
+    width:21px;
+    height:21px;
+    float:left;
+    margin:4px 10px 0 0;
+    background:url(../../images/icon.png) no-repeat;
+}
+
+.sidebar_a i.icon{
+    background-position: -177px -1179px;
+}
+
+
+
+
+.sidebar_a dl{
+    padding-bottom: 10px;
+}
+
+.sidebar_a dt{
+    line-height: 30px;
+    padding-left:20px;
+    font-size:16px;
+    font-weight: 600;
+    background:#eceef0;
+}
+
+.sidebar_a dd{
+    line-height: 22px;
+    padding-left:52px;
+}
+
+.sidebar_a dd a{
+    color:#7d7f80;
+}
+
+.sidebar_a dd a:hover{
+    color:#f00;
+}
+
+.sidebar_a .tel{
+    padding:12px;
+    background:#eceef0;
+}
+
+.sidebar_a .tel p{
+    width:184px;
+    line-height: 20px;
+    color:#7d7f80;
+}
+
+.sidebar_a .tel img{
+    width:159px;
+    height:62px;
+    margin: 10px 0 0 15px;
+}
+
+.summary{
+    width:80%;
+    margin:15px 0 0 15px;
+    float:left;
+}
+
+.summary .nav {
+    line-height: 30px;
+    font-size:14px;
+}
+
+.summary .nav a.at{
+    color:#f00;
+}
+
+.summary .main{
+    border:1px solid #c9cacb;
+    padding:20px 50px;
+}
+
+.summary .column{
+    color:#333;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 46px;
+    text-align: center;
+}
+
+.summary .column span.title{
+    color:#333;
+    font-size: 18px;
+    text-align: center;
+}
+
+.summary .description p{
+    font-size: 16px;
+    line-height: 20px;
+    margin-top:10px;
+}
+
+/*//new2*/
+
+.summary .news_main{
+    border:1px solid #c9cacb;
+    padding:20px 17px;
+}
+
+.summary .news_main ul li {
+    line-height: 32px;
+    border-bottom: 1px dashed #333;
+}
+
+.summary .news_main ul li a{
+    font-size: 18px;
+    color:#0f5489;
+}
+
+.summary .news_main ul li a:hover{
+    color:#f00;
+}
+
+.summary .news_main ul li span{
+    font-size: 14px;
+    color:#999;
+}
+
+.summary .page{
+    line-height: 30px;
+    margin: 20px 0 0 214px;
+}
+
+.summary .page a{
+    display: inline-block;
+    padding:0px 15px;
+    border: 1px solid #aaa;
+}
+
+.sidebar_a dd a.curr{
+    color:#f00;
+}
+
+/* end //new2*/
+
+
+
+
+
+
+
+
+
+
+
+
+

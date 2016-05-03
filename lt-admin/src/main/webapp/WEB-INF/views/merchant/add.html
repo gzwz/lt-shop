@@ -1,0 +1,289 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<!DOCTYPE html>
+<html>
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_wizard.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Dec 2015 04:46:12 GMT -->
+<head>
+    <link href="${contextPath}/resources/css/bootstrap.minb16a.css?v=3.3.5" rel="stylesheet">
+    <link href="${contextPath}/resources/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="${contextPath}/resources/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/plugins/steps/jquery.steps.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/animate.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/style.min1fc6.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+	<link rel="stylesheet" href="${contextPath}/resources/ueditor/themes/default/css/ueditor.min.css" />
+	<#include "/public/frame/metrnic.html">
+	<script type="text/javascript">
+	  	var contextPath = '${contextPath}';
+	    var plugins_webuploader = '${contextPath}/resources/js/plugins/webuploader';
+	    var image_servler_url = '${contextPath}/upload_image';
+	</script>
+	
+</head>
+
+<body class="gray-bg">
+<!-- <input type="hidden" value="${contextPath}" id="contextPath_tojs" /> -->
+    <div class="wrapper wrapper-content animated fadeInRight">
+         
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>添加商家向导</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_wizard.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_wizard.html#">选项1</a>
+                                </li>
+                                <li><a href="form_wizard.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content" >
+                        <form id="form" action="${contextPath}" class="wizard-big" >
+                            <h1>商家基本信息</h1>
+                            <fieldset>
+								<div class="row">
+									<div class="col-sm-8" style="width: 350px; float: left;padding-left: 20px;">
+									
+									   <div class="form-group">
+									        <label>用户类型：</label>
+									           <select class="form-control" name="type">
+									             <option value="common_user">普通用户</option>
+									             <option value="member_user">会员用户</option>
+			                                     <option value="driver_user">驾驶员用户</option>
+			                                     <option value="merchant_user">商家用户</option>
+			                                     <option value="owner_user">业主用户</option>
+									            </select>
+									    </div>
+									    
+									    
+									      <div class="form-group">
+										        <label >申请类型：</label>
+										        <div class="col-sm-8">
+										           <select class="form-control" name="merchantCategoryId">
+										            
+										            </select>
+										        </div>
+										    </div>
+													    
+													    
+										<div class="form-group">
+											<label>店名 *</label> <input id="name" name="name" type="text"
+												class="form-control required">
+
+										</div>
+										<div class="form-group">
+											<label>Logo *</label> <input id="headImage" name="headImage"
+												type="file" class="form-control ">
+										</div>
+										<div class="form-group">
+											<label>店铺简介*</label>
+											<textarea rows="4" id="introduction" name="introduction"
+												class="form-control required" placeholder="用几句话描述这家商铺"></textarea>
+										</div>
+									</div>
+									<div class="col-sm-4" style="width: 350px; float: right;">
+										<div class="form-group">
+											<label>手机 </label> <input id="mobile" name="mobile"
+												type="tel" class="form-control ">
+
+										</div>
+										<div class="form-group">
+											<label>邮箱 </label> <input id="email" name="email"
+												type="email" class="form-control ">
+										</div>
+										<div class="form-group">
+											<label>座机*</label> <input id="telephone" name="telephone"
+												class="form-control required" />
+										</div>
+										
+										
+											<div class="form-group">
+				                                <label class="col-sm-2 control-label">地址*</label>
+				
+				                                <div class="col-sm-10">
+				                                    <div class="row">
+				                                        <div class="col-md-2">
+				                                            <select id="provinceId"> </select> 
+				                                        </div>
+				                                        <div class="col-md-3">
+				                                           <select id="cityId"></select>
+				                                        </div>
+				                                        <div class="col-md-4">
+				                                            <select id="areaId"></select>
+				                                        </div>
+				                                    </div>
+				                                </div>
+			                            </div>
+			                            
+			                            
+			                            
+			                            <div class="form-group">
+										<label class="col-md-2 control-label">所在地：</label>
+										<div class="col-md-2" style="width:auto">
+											<select id="provinceId" class="form-control input-small select2me" name="provinceId" data-ref="selectCity" data-ref-url="${contextPath}/publisher/scenicspot/city/list/{value}.html">
+											</select>
+										</div>
+										<div class="col-md-2" style="width:auto">
+											<select id="cityId" class="form-control input-small select2me" name="cityId" id="selectCity" data-ref="selecctArea" data-ref-url="${contextPath}/publisher/scenicspot/area/list/{value}.html">>
+											</select>
+										</div>
+										<div class="col-md-2" style="width:auto">
+											<select id="areaId" class="form-control input-small select2me" name="areaId" id="selecctArea">
+											</select>
+										</div>
+									</div>
+			                            
+			                            <div class="form-group">
+											<label>详细地址*</label> 
+											<input style="width: 320px;" name="detailAddress" placeholder="详细地址" class="form-control required">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+							<h1>商家认证信息</h1>
+                            <fieldset>
+								<div class="row">
+									<div class="col-sm-8" style="width: 350px; float: left;padding-left: 20px;">
+										<div class="form-group">
+											<label>身份证正面 *</label> 
+											<input name="front" type="file" class="form-control required">
+										</div>
+										<div class="form-group">
+											<label>身份证反面 *</label> 
+											<input name="opposite" type="file" class="form-control ">
+										</div>
+										<div class="form-group">
+											<label>手持身份证照片*</label>
+											<input name="identify_image" type="file" class="form-control ">
+										</div>
+									</div>
+									<div class="col-sm-4" style="width: 350px; float: right;">
+										<div class="form-group">
+											<label>营业执照图片*</label> 
+											<input name="charter_image" type="file" class="form-control ">
+
+										</div>
+										<div class="form-group">
+											<label>组织机构代码证图片*</label> 
+											<input name="organizations_image" type="file" class="form-control ">
+										</div>
+										<div class="form-group">
+											<label>登记证书图片*</label> 
+											<input  name="registration_image" type="file"/>
+										</div>
+										<div class="form-group">
+											<label>纳税人资质证书(图片)*</label> 
+											<input  name="aptitudes_image" type="file"  />
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+							
+							<h1>商家所属实体</h1>
+                            <fieldset>
+								<div class="row">
+									<div class="col-sm-8" style="width: 350px; float: left;padding-left: 20px;">
+										<div class="form-group">
+										<!-- 实体id -->
+										<input type="hidden" value="" name="domainId">
+											<label>实体名称 *</label> 
+											<input name="front" type="text" class="form-control required">
+										</div>
+									</div>
+									<div class="col-sm-4" style="width: 350px; float: right;">
+										 <div class="form-group">
+											<label>实体类型 *</label> 
+											<input name="opposite" type="text" class="form-control ">
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+                            <h1>店铺详情</h1>
+							<fieldset>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group" style="height: 600px;">
+											<script type="text/plain" id="content" name="detail"
+												style="height:190px; width: 790px;"></script>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   <!--   <script src="${contextPath}/resources/js/address_load.js"></script> -->
+    <script src="${contextPath}/resources/js/jquery.min63b9.js?v=2.1.4"></script>
+    <script src="${contextPath}/resources/js/bootstrap.minb16a.js?v=3.3.5"></script>
+    <script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+    <script src="${contextPath}/resources/js/plugins/staps/jquery.steps.min.js"></script>
+    <script src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+    <script>
+        $(document).ready(function(){$("#wizard").steps();$("#form").steps({bodyTag:"fieldset",onStepChanging:function(event,currentIndex,newIndex){if(currentIndex>newIndex){return true}if(newIndex===3&&Number($("#age").val())<18){return false}var form=$(this);if(currentIndex<newIndex){$(".body:eq("+newIndex+") label.error",form).remove();$(".body:eq("+newIndex+") .error",form).removeClass("error")}form.validate().settings.ignore=":disabled,:hidden";return form.valid()},onStepChanged:function(event,currentIndex,priorIndex){if(currentIndex===2&&Number($("#age").val())>=18){$(this).steps("next")}if(currentIndex===2&&priorIndex===3){$(this).steps("previous")}},onFinishing:function(event,currentIndex){var form=$(this);form.validate().settings.ignore=":disabled";return form.valid()},onFinished:function(event,currentIndex){var form=$(this);form.submit()}}).validate({errorPlacement:function(error,element){element.before(error)},rules:{confirm:{equalTo:"#password"}}})});
+    </script>
+    <#include "/public/frame/metrnicjs.html">
+<!--      <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${contextPath}/resources/ueditor/ueditor.all.min.js"></script>  -->
+<!--  	<script type="text/javascript">
+		$(function() {
+			var mobileUE = UE.getEditor('content');
+			$(".add-form").validate({
+				rules : {
+					name : {
+						required : !0,
+						minlength : 2
+					},
+					title : {
+						required : !0,
+						minlength : 2
+					},
+					content : {
+						required : true
+					},
+					batch : {
+						required : true
+					}
+				},
+				messages : {
+					name : {
+						required : "请输入正确的名称",
+						minlength : "标题必须两个字符以上"
+					},
+					title : {
+						required :  "请输入正确的标题",
+						minlength : "标题必须两个字符以上"
+					}
+				},
+				submitHandler : function() {
+					$(".add-form").ajaxSubmitForm(refurbishCollback);
+				}
+			});
+
+		});
+	</script>  -->
+	<script type="text/javascript">
+/* 	var contextPath_tojs = $("#contextPath_tojs").val(); */
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                      
+                    	<div class="row m-b-sm m-t-sm">
+                    	 
+                    	     <div class="col-md-4">
+                    			<a onclick="fnClickAdd();"  href="javascript:void(0);" class="btn btn-primary "><i class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;新增</i></a>
+                    		</div>
+                    		<form id="serchform">
+                                    <div class="col-md-8">
+									<div class="input-group">
+                                    <input type="text" name="name" placeholder="请输入商品名称" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" onclick="search();" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                   </div>
+										</div>
+										
+                            </form>
+                        </div> 
+                        <div class="project-list">
+	                        <table id="grid-table"></table>
+	                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <#include "/public/frame/jqgridjs.html">
+    <script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/product/query",
+	     colNames:['商品名称','首图', '最低价', '市价','热卖','状态','上下架', '操作'],
+	   	     colModel:[
+	   			{name:'name',label:'name',width:40},
+	   			{name:'titleImage',label:'titleImage', width:90,formatter:function(cellvalue, options, rowObject){
+				return "<img style='width: 100px; height:66px;' src=${imageContextPath}/"+cellvalue+">";
+			}} ,
+	   			{name:'lowestPrice',label:'lowestPrice', width:90},
+	   			{name:'originalPrice',label:'originalPrice', width:40},
+	   			
+	   			{name:'hot',label:'hot', width:40,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue)
+					     return "<img style='width: 20px; height:20px;cursor:pointer;' onclick=fnClickNoHot('"+rowObject.id+"'); src='${contextPath}/resources/hot/iconfont-close.png'/>";
+					   else
+						 return "<img style='width: 20px; height:20px;cursor:pointer;' onclick=fnClickHot('"+rowObject.id+"'); src='${contextPath}/resources/hot/iconfont-unie64e.png'/>";
+					}},
+				
+	   			{name:'status',label:'status', width:40,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue=="enable")
+					   return "上架";
+					   else if(cellvalue=="disable")
+					   return "下架";
+					   else if(cellvalue=="create")
+						   return "创建";
+					   else if(cellvalue=="remove")
+						   return "已被删除";
+					}},
+	   			{name:'status',label:'status', width:20,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue=="enable")
+					   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickHide('"+rowObject.id+"'); type='button'>下架</button>";
+					   else if(cellvalue=="disable" || cellvalue=="create")
+					   return "<button class='btn default btn-xs purple btn-primary' onclick=fnClickShowDY('"+rowObject.id+"'); type='button'>上架</button>";
+					   else if(cellvalue=="remove")
+						   return "已被删除";
+					}},
+	   			{name:'id',label:'id', width:150,formatter:function(cellvalue, options, rowObject){
+	   					return "<a href='javascript:;' onclick=fnClickModify('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>编辑 </a>"+
+	   					"&nbsp;&nbsp;<a href='javascript:;' onclick=fnClickExterion('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>添加图片</a>"+
+	   					"&nbsp;&nbsp;<a href='javascript:;' onclick=fnClickShowExterion('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>查看详情 </a>"
+	   					 +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:;' onclick=fnClickStock('"+cellvalue+"') class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>编辑库存和价格</a>";
+	   				    
+	   			}} 
+	   		],
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"产品列表"
+	});
+    
+    </script>
+ <script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	$("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入
+	 }
+	 
+	  function fnClickStock(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['1000px', ($(window).height() - 50) +'px'], 
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/product/to-stock?productId="+cellvalue
+	    	});
+	    }
+	    
+	    
+	    function fnClickShowExterion(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['1000px', ($(window).height() - 50) +'px'], 
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/productExterior/view?productId="+cellvalue
+	    	});
+	    }
+	    
+	    function fnClickExterion(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['1000px', ($(window).height() - 50) +'px'], 
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/productExterior/add?productId="+cellvalue
+	    	});
+	    }
+ 
+	 function fnClickModify(cellvalue){
+	    	layer.open({
+	    	    type: 2,
+	    	    area: ['1000px', ($(window).height() - 50) +'px'], 
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/product/edit?id="+cellvalue
+	    	});
+	    }
+	    
+	     function fnClickAdd(){
+	    	 layer.open({
+	    	    type: 2,
+	    	    area: ['80%', ($(window).height() - 50) +'px'], 
+	    	    fix: false, //不固定
+	    	    maxmin: true,
+	    	    content: "${contextPath}/product/add"
+	    	}); 
+	    }
+	    
+	       function fnClickHot(id){
+		      fnAjax("${contextPath}/product/setting-hot?productId="+id, "post", "json", '', search)
+		    }
+    
+		     function fnClickNoHot(id){
+		      fnAjax("${contextPath}/product/setting-no?productId="+id, "post", "json", '', search)
+		    }
+	      //下架
+    function fnClickHide(id){
+      fnAjax("${contextPath}/product/disable?productId="+id, "post", "json", '', search)
+    }
+	
+	//上架
+	function fnClickShowDY(id){
+	  fnAjax("${contextPath}/product/enable?productId="+id, "post", "json", '', search)
+	}
+	     
+	   function resertAdd(){
+		  fnClickAdd();
+		}
+	     
+	     /*删除*/
+	     function fnClickDel(id){
+			
+	     	fnAjaxDel("${contextPath}/product/" + id + "_delete", '', search);
+	     }
+	  
+	  function refurbish(){
+		  search();
+	  }
+    </script> 
+</body>
+
+</html>

@@ -1,0 +1,481 @@
+/*<!--分类导航-->*/
+.iconcls .crumb{
+    font-size:14px;
+    color:#666;
+    line-height: 50px;
+}
+
+.iconcls .crumb span a.curr{
+    color:#f00;
+}
+
+.iconcls .option{
+    border:1px solid #c9def7;
+}
+
+.iconcls .option-top{
+    height:35px;
+    font-size:16px;
+    font-weight: 400;
+    border-bottom: 1px solid #c9def7;
+    line-height: 35px;
+    padding-left:30px;
+}
+
+.iconcls .option-b ul{
+    height: 128px;
+    margin-top: 29px;
+}
+
+.iconcls .option-b ul li{
+    width:197px;
+    height:100px;
+    float:left;
+    border-right:1px solid #c9def7;
+    overflow: hidden;
+    position:relative;
+    cursor: pointer;
+}
+
+.iconcls .option-b ul li:last-child{
+    border-right:0;
+    cursor: pointer;
+}
+
+.iconcls .option-b ul li:hover p{
+    color:#f00;
+    cursor: pointer;
+}
+
+.iconcls .option-b ul li p{
+    padding: 0 64px;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.iconcls .option-b ul li i{
+    display: inline-block;
+    width:98px;
+    height:110px;
+    margin-left: 47px;
+    background:url(../../images/optionicon.png) no-repeat; 
+    
+}
+.iconcls .option-b ul li i.icon1{
+    background-position: -26px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon1 {
+    background-position: -26px -120px;
+}
+
+.iconcls .option-b ul li i.icon2{
+    background-position: -139px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon2 {
+    background-position: -139px -120px;
+}
+
+.iconcls .option-b ul li i.icon3{
+    background-position: -242px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon3 {
+    background-position: -242px -120px;
+}
+
+.iconcls .option-b ul li i.icon4{
+    background-position: -347px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon4 {
+    background-position: -347px -120px;
+}
+
+.iconcls .option-b ul li i.icon5{
+    background-position: -447px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon5 {
+    background-position: -447px -120px;
+}
+
+.iconcls .option-b ul li i.icon6{
+    background-position: -552px -14px;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.iconcls .option-b ul li:hover .icon6 {
+    background-position: -552px -120px;
+}
+
+
+/*<!--end 分类导航-->*/
+
+.iconcls .titled{
+    line-height: 56px;
+    font-size: 16px;
+    padding-left:30px;
+}
+
+.iconcls .titled span{
+    color: #525252;
+    padding: 3px 12px;
+    margin-left: 15px;
+    border: 1px solid #d9e8f9;
+}
+
+/*<!-- 揭晓-->*/
+
+.iconcls .commlist ul li{
+    width:297px;
+    height:270px;
+    float:left;
+    box-sizing: border-box;
+    border:1px solid #cce0f7;
+    border-right:1px solid #fff;
+    position:relative;
+}
+
+.iconcls .commlist ul li.curr{
+    width:299px; 
+    border-right:1px solid #cce0f7 !important;
+}
+
+.iconcls .commlist ul li:hover {
+    border:1px solid #f00 !important;
+    background:#f1f1f1;
+}
+
+.iconcls .commlist i{
+    display:inline-block;
+    width:67px;
+    height:67px;
+    background:url(../../images/icon.png) no-repeat -230px -270px;
+    position:absolute;
+    left:24px;
+    top:8px;
+}
+
+.iconcls .commlist ul li .pic{
+    padding:30px 0 0 79px;
+}
+
+.iconcls .commlist ul li .pic-text{
+    font-size:12px;
+    color:#666;
+    padding:10px;
+}
+
+.iconcls .commlist ul li .pic-text .lest{
+    font-size:14px;
+    color:#333;
+    margin-top:3px;
+}
+
+.iconcls .commlist ul li .pic-text .lest span{
+    color:#16a6f5;
+}
+
+/*<!-- end 揭晓-->*/
+
+/*<!--1元购-->*/
+
+.iconcls .commlist .items{
+    margin-top:15px;
+}
+
+.iconcls .commlist .items li{
+    width:297px;
+    height:422px;
+    float:left;
+    box-sizing: border-box;
+    border:1px solid #cce0f7;
+    border-right:1px solid #fff;
+    background:#fff;
+}
+
+.iconcls .commlist .items li.curr{
+    width:299px; 
+    border-right:1px solid #cce0f7 !important;
+}
+
+.iconcls .commlist .items li:hover {
+    border:1px solid #f00 !important;
+    background:#f1f1f1;
+}
+
+.iconcls .commlist .items li .pic{
+    padding:30px 0 0 79px;
+}
+
+.iconcls .commlist .items li .pic-text{
+    font-size:12px;
+    padding:10px;
+}
+
+.iconcls .commlist .items li .pic-text .tops{
+    color:#666;
+}
+
+.iconcls .commlist .items li .pic-text .lest{
+    font-size:14px;
+    color:#999;
+    margin-top:3px;
+}
+
+.iconcls .commlist .items li .progress{
+    margin-left:25px;
+}
+
+.iconcls .commlist .items li .progress-bar{
+    width:240px;
+    height:5px;
+    border-radius: 3px;
+    background:#ddd;
+    overflow: hidden;
+}
+
+.iconcls .commlist .items li .progress-bar b{
+    display: block;
+    width:180px;
+    height:8px;
+    background:#c8002e;
+    
+}
+
+
+#asset .asset-b {
+    width:80px;
+    height:50px;
+    float:left;
+    line-height: 18px;
+    border:0;
+    color:#999;
+}
+
+#asset .first .one{
+    color:#c8002e;
+}
+
+#asset .middle{
+    text-align: center;
+}
+
+#asset .lest .two{
+    color:#0e91eb;
+}
+
+#asset .lest .three{
+    padding-top:17px;
+    margin-right:-7px;
+}
+
+.iconcls .commlist .items .items-but{
+    padding:35px 0 0 65px;
+}
+
+.iconcls .commlist .items .items-but a{
+    display: inline-block;
+    width:160px;
+    height:40px;
+    color:#fff;
+    font-size:18px;
+    text-align:center;
+    line-height: 40px;
+    background:url(../../images/icon.png) no-repeat;
+    background-position: -4px -502px;
+}
+
+.iconcls .commlist .items .items-but a:hover{
+    background-position: -4px -549px;
+}
+
+/*<!-- end 1元购-->*/
+
+/*<!-- 倒计时 -->*/
+
+ 
+.iconcls .commlist .countdown li{
+    width:297px;
+    height:422px;
+    float:left;
+    box-sizing: border-box;
+    border:1px solid #cce0f7;
+    border-right:1px solid #fff;
+    background:#fff;
+}
+
+
+.iconcls .commlist .countdown li.curr{
+    width:299px; 
+    border-right:1px solid #cce0f7 !important;
+}
+
+.iconcls .commlist .countdown li:hover {
+    border:1px solid #f00 !important;
+    background:#f1f1f1;
+} 
+
+
+.iconcls .commlist .countdown li .pic{
+    padding:30px 0 0 79px;
+}
+
+.iconcls .commlist .countdown li .pic-text{
+    font-size:12px;
+    padding:10px;
+}
+
+.iconcls .commlist .countdown li .pic-text p.timedown em{
+    display: inline-block;
+    width:27px;
+    height:27px;
+    float:left;
+    margin: 4px 12px 0 8px;
+    background:url(../../images/icon.png) no-repeat -262px -707px ;
+}
+
+.iconcls .commlist .countdown li .pic-text p.timedown{
+    font-size:20px;
+    line-height: 34px;
+}
+
+
+
+
+.iconcls .commlist .countdown li .pic-text .tops{
+    color:#666;
+}
+
+.iconcls .commlist .countdown li .pic-text .lest{
+    font-size:14px;
+    color:#999;
+    margin-top:3px;
+}
+
+.iconcls .commlist .countdown li .progress{
+    margin-left:25px;
+}
+
+.iconcls .commlist .countdown li .progress-bar{
+    width:240px;
+    height:5px;
+    border-radius: 3px;
+    background:#ddd;
+    overflow: hidden;
+}
+
+.iconcls .commlist .countdown li .progress-bar b{
+    display: block;
+    width:180px;
+    height:8px;
+    background:#c8002e;
+    
+}
+
+
+.asset .asset-b {
+    width:80px;
+    height:50px;
+    float:left;
+    line-height: 18px;
+    border:0;
+    color:#999;
+}
+
+.asset .first .one{
+    color:#c8002e;
+}
+
+.asset .middle{
+    text-align: center;
+}
+
+.asset .lest .two{
+    color:#0e91eb;
+}
+
+.asset .lest .three{
+    padding-top:17px;
+    margin-right:-7px;
+}
+
+.iconcls .countdown .items-but{
+    padding:35px 0 0 65px;
+}
+
+.iconcls .countdown .items-but a{
+    display: inline-block;
+    width:160px;
+    height:40px;
+    color:#fff;
+    font-size:18px;
+    text-align:center;
+    line-height: 40px;
+    background:url(../../images/icon.png) no-repeat;
+    background-position: -4px -502px;
+}
+
+.iconcls .countdown .items-but a:hover{
+    background-position: -4px -549px;
+}
+
+/*<!-- end 倒计时 -->*/
+
+/*<!--页计-->*/
+
+.iconcls .page ul{
+    margin-top:30px;
+    padding: 0px 280px;
+}
+
+.iconcls .page ul li{
+    float:left;
+    margin-left: 10px;
+    font-size:18px;
+}
+
+.iconcls .page ul li.heights{
+    line-height: 36px;
+}
+
+.iconcls .page ul li a{
+    display: inline-block;
+    padding: 5px 11px;
+    border:1px solid #cce0f7;
+}
+
+/*<!-- end 页计-->*/
+
+
+
+
+
+

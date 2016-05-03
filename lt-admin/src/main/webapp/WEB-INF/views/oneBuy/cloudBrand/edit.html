@@ -1,0 +1,197 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+
+
+
+<#include "/public/frame/metrnic.html">
+
+<link rel="stylesheet" href="${contextPath}/resources/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="${contextPath}/resources/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/ztree/js/jquery.ztree.excheck.js"></script>
+<body class="gray-bg">
+
+
+					<div class="ibox-content">
+			<form id="submitForm"  class="form-horizontal add-form" action="${contextPath}/cloudBrand/modify" method="post">
+	        <input name="cloudBrandId" type="hidden" value="${pc.id}" id="productBrandId"/>
+			<div class="modal-body">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">品牌名称：</label>
+						<div class="col-sm-6">
+							<input name="brandName" placeholder="请输入品牌名称" value="${pc.brandName}" type="text"
+								class="form-control">
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">上级品牌名称:</label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<div class="input-icon">
+									<input id="newpassword"  class="text-input form-control" value="${pc.parent.brandName}"  type="text" placeholder="请选择品牌名称" readonly/>
+									<input type="hidden" id="parentId" name="parentId" class="hidden-input" value="${pc.parent.id}"/>
+								</div>
+								<span class="input-group-btn">
+									<a class="btn btn-success" type="button" data-url='${contextPath}/cloudBrand/getPermData.html' data-current-id='' data-toggle='iceModal' data-target='#MyModalPerm'><i class="fa fa-search fa-fw"></i>选择</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					 <div class="form-group">
+								<label class="col-sm-3 control-label">排序：</label>
+								<div class="col-sm-6">
+								    <input id="sort" value="${pc.sort}"  class="form-control" name="sort" type="text" >
+								</div>
+							</div>
+					
+					<div class="form-group">
+					<label class="col-sm-3 control-label">类型:</label>
+					<div class="col-sm-6">
+						<ul id="treeDemo" class="ztree"></ul>
+					</div>
+				</div>
+					
+					
+					
+					<input type="hidden" name="cloudCategoryId" id="productCategoryId"/>
+
+			 <div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-8">
+									<button class="btn btn-primary btn-save" type="submit">保存</button>
+								</div>
+							</div>
+			</div>
+			</form>
+					</div>
+
+
+<!-- 对话框 start -->
+<div class="modal fade bs-example-modal-sm" id="MyModalPerm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加信息</h4>
+      </div>
+      <div class="modal-body">
+       		<div class="jstree"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default calcel" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary save">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 对话框 end -->
+
+<#include "/public/frame/metrnicjs.html">
+
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+
+
+
+ <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    
+    
+                               
+<script>	
+    jQuery(document).ready(function() {  
+    Metronic.init(); // init metronic core components
+		Layout.init(); // init current layout
+		QuickSidebar.init(); // init quick sidebar  
+		
+		Datatable.pagination();
+		
+		Ice.modal();  //初始化modal框  如果不需要保存功能可以不初始化
+		
+    });
+</script>
+
+
+<SCRIPT type="text/javascript">
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		
+		
+		$(document).ready(function(){
+		  $.ajax({
+		     url : "${contextPath}/cloudCategory/getCloudBrandZtreeData?id=${pc.id}", 
+		type : "post",
+		dataType : "json", 
+		success :function(data){
+		  $.fn.zTree.init($("#treeDemo"), setting, data);
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.setting.check.chkboxType ={"Y" : "ps", "N" : "ps"};
+		}
+	});
+			
+		});
+		
+	</SCRIPT>   
+
+<script type="text/javascript">
+   $(function() {
+		$(".add-form").validate({
+			rules : {
+				brandName : {
+					required : true
+				},
+				sort : {
+							maxlength : 10,
+							required : true,
+							digits : true
+						}
+			},
+			messages : {
+				name : {
+					required : e + "请输入正确的品牌名称"
+					
+				},sort:{
+				required : "请输入排序",
+							maxlength : "长度不能大于10",
+							digits : "必须为整数"
+				}
+			},
+			submitHandler : function() {
+			   var treeObj=$.fn.zTree.getZTreeObj("treeDemo");
+		            nodes=treeObj.getCheckedNodes(true);
+		            var resourseIds="";
+		            for(var i=0;i<nodes.length;i++){
+		            resourseIds+=nodes[i].id + ",";
+					}
+				$("#productCategoryId").val(resourseIds);
+				$(".add-form").ajaxSubmitForm(refurbishCollback);
+			}
+		});
+	});
+
+
+</script>
+
+</body>
+</html>

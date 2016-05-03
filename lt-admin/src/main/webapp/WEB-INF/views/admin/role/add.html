@@ -1,0 +1,143 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#include "/public/frame/jqgridcss.html">
+
+	<#include "/public/frame/ztree.html">
+<body class="gray-bg">
+
+
+					<div class="ibox-content">
+						<form class="form-horizontal add-form" action="${contextPath}/permission/role/save" method="post">
+								<div class="modal-body">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">角色名称：<input type="hidden" name="ids" id="resourseIds"/></label>
+					<div class="col-sm-3">
+						<input name="name" placeholder="请输入角色名称" type="text"
+							class="form-control">
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-sm-3 control-label">排序：</label>
+					<div class="col-sm-3">
+						<input class="form-control" placeholder="请输入序号" name="sort" type="text">
+					</div>
+				</div>
+				
+				
+				
+				<div class="form-group">
+					<label class="col-sm-3 control-label">资源：</label>
+					 <div class="col-sm-6">
+						<ul id="treeDemo" class="ztree"></ul>
+					</div> 
+					
+					
+					
+				</div>
+
+			</div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-8">
+									<button class="btn btn-primary btn-save" type="submit">保存</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+
+
+
+<script src="${contextPath}/resources/js/content.mine209.js?v=1.0.0"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/jquery.validate.min.js"></script>
+<script
+	src="${contextPath}/resources/js/plugins/validate/messages_zh.min.js"></script>
+<script src="${contextPath}/resources/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${contextPath}/resources/js/form-validate-common.js"></script>
+
+
+
+ <script src="${contextPath}/resources/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    
+ <SCRIPT type="text/javascript">
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		
+		
+		$(document).ready(function(){
+		  $.ajax({
+		     url : "${contextPath}/permission/resource/getResourceData.html", 
+		type : "post",
+		dataType : "json", 
+		success :function(data){
+		  $.fn.zTree.init($("#treeDemo"), setting, data);
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.setting.check.chkboxType ={"Y" : "ps", "N" : "ps"};
+		}
+	});
+			
+		});
+		
+	</SCRIPT>   
+                               
+<script type="text/javascript">
+	$(function() {
+		$(".add-form").validate({
+			rules : {
+				name : {
+					required : true
+					
+				},
+				sort : {
+					maxlength : 10,
+					required : true,
+					digits : true
+				}
+			},
+			messages : {
+				name : {
+					required : e + "请输入正确的角色名称"
+					
+				},
+				sort : {
+					required : "请输入排序",
+					maxlength : "长度不能大于10",
+					digits : "必须为整数"
+				}
+			},
+			
+			submitHandler : function() {
+				var treeObj=$.fn.zTree.getZTreeObj("treeDemo");
+		            nodes=treeObj.getCheckedNodes(true);
+		            var resourseIds="";
+		            for(var i=0;i<nodes.length;i++){
+		            resourseIds+=nodes[i].id + ",";
+					}
+				$("#resourseIds").val(resourseIds);
+				$(".add-form").ajaxSubmitForm(refurbishCollback);
+			}
+		});
+	});
+
+
+</script>
+
+</body>
+</html>

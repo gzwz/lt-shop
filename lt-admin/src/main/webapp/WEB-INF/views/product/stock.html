@@ -1,0 +1,101 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "/public/frame/jqgridcss.html">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                      
+                    	<div class="row m-b-sm m-t-sm">
+                    	 
+                    		<form id="serchform">
+                                    <div class="col-md-8">
+									<div class="input-group">
+                                    <input type="text" name="skuSpecInfo" placeholder="请输入属性组合" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" onclick="search();" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                   </div>
+										</div>
+										
+                            </form>
+                        </div> 
+                        <div class="project-list">
+	                        <table id="grid-table"></table>
+	                        <div id="grid-pager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<#include "/product/update-stock.html">
+    <#include "/public/frame/jqgridjs.html">
+    <script>
+    grid = $('#grid-table').myJqGrid({
+	     url: "${contextPath}/product/stock?productQO.id=${productId}",
+	     colNames:['属性组合','库存量', '价格', '是否隐藏', '操作'],
+	   	     colModel:[
+	   			{name:'skuSpecInfo',label:'skuSpecInfo',width:80},
+	   			
+	   			{name:'number',label:'number', width:90},
+	   			{name:'price',label:'price', width:90},
+	   		
+	   			{name:'status',label:'status', width:40,formatter:function(cellvalue, options, rowObject){
+					   if(cellvalue)
+					   return "隐藏";
+					   else 
+					   return "显示";
+					}},
+	   			
+	   			{name:'id',label:'id', width:90,formatter:function(cellvalue, options, rowObject){
+	   					return "<a href='javascript:;' onclick=fnClickModifyStock('"+cellvalue+"') data-toggle='modal' data-target='#myModal5' class='btn default btn-xs purple btn-primary J_menuItem'><i class='fa fa-edit'></i>编辑 </a>";
+	   				
+	   			}} 
+	   		],
+		styleUI : 'Bootstrap',
+		pager : '#grid-pager',
+		height:"auto",
+        viewrecords:true,
+        caption:"库存列表"
+	});
+    
+    </script>
+ <script type="text/javascript">
+ /*搜索*/
+	 function search(){
+	 	$("#grid-table").jqGrid('setGridParam',{  
+	        datatype:'json',  
+	        postData:$("#serchform").serialize(), //发送数据  
+	        page:1  
+	    }).trigger("reloadGrid"); //重新载入
+	 }
+ 
+	 function fnClickModifyStock(cellvalue){
+	    	var collback = function(d) {
+				$(".modal-title").html("");
+				$(".modal-title").html("编辑库存");
+				$('input[name=sKUProductId]').val(d.id);
+				$('input[name=number]').val(d.number);
+				$('input[name=price]').val(d.price);
+				$(".add-form").attr('action',
+						'${contextPath}/product/modif-stock')
+			}
+			fnAjaxGet("${contextPath}/product/edit-stock?id="+cellvalue, '',
+					collback);
+	    }
+	    
+	  
+	  function refurbish(){
+		  search();
+	  }
+    </script> 
+</body>
+
+</html>

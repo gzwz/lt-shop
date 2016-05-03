@@ -1,0 +1,293 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>卡车网——首页</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+    <link rel="stylesheet" href="${contextPath}/resources/css/pc/master.one.css">
+    <link rel="stylesheet" href="${contextPath}/resources/js/countdown/style.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/oneBuy/css/progress-bar.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/oneBuy/css/result.css">
+    
+    
+</head>
+	<script src="${contextPath}/resources/js/jquery191.min.js"></script>
+    <script src="${contextPath}/resources/js/countdown/countdown.js"></script>
+    <script src="${contextPath}/resources/js/effects.one.js"></script>
+    <script src="${contextPath}/resources/js/utils/getData.js"></script>
+    <script src="${contextPath}/resources/js/common.js"></script>
+    <script type="text/javascript">
+    
+    	function getCode(code){
+    		var strs= new Array(); //定义一数组
+    		strs=code.split(","); //字符分割
+    		var a = "";
+    		for (i=0;i<strs.length ;i++ ) {
+				a +=strs[i]; //分割后的字符输出 
+				} 
+			return a;
+    	}
+			
+    	function calculateResult(){
+		var url = "${contextPath}/oneBuy/calculate";
+		fnAjax(url, "post", "json", "", function(data){
+			$(".progressbar").hide();
+			$(".buttonToTime").hide();
+			for (var i = 0; i < data.length; i++) {
+				var array_element = data[i];
+				$("#"+data[i].productId).html(
+						"<div class='result'>"
+                 		+"<div class='result_imgs'><img src='${contextPath}/resources/images/2007.jpg' /></div>"
+						+"<div class='result_right'>"
+						+"	<p class='clearfix'><span>获得者：</span><span class='result_blue w120'>"+data[i].userName+"</span></p>"
+						+"	<p class='clearfix'><span>来自：</span><span class='result_form w120'>"+data[i].mobile.slice(0, 3)+"*****"+data[i].mobile.slice(-3)+"</span></p>"
+						+"	<p class='clearfix'><span>幸运号码：</span><span class='result_blue'>"+data[i].lottery+"</span></p>"
+//						+"	<p class='clearfix'><span>本期参与：</span><span class='result_blue'>4</span>人次</p>"
+						+"</div>"
+					+"</div>" 
+					);
+			}
+//			setTimeout("reflush()", 60000);
+		});
+		}
+		
+		function reflush(){
+			location.reload();
+		}
+    </script>
+<body>
+<!-- 头部 -->
+	<#include "common/one-head.html">
+<!-- banner/-->
+<div class="flexslider">
+	<ul class="slides">
+		<li style="background:url(${imageContextPath}/img1.png) 50% 0 no-repeat;"></li>
+		<li style="background:url(${imageContextPath}/img2.png) 50% 0 no-repeat;"></li>
+		<li style="background:url(${imageContextPath}/img3.png) 50% 0 no-repeat;"></li>
+		<li style="background:url(${imageContextPath}/img4.png) 50% 0 no-repeat;"></li>
+		<li style="background:url(${imageContextPath}/img5.png) 50% 0 no-repeat;"></li>
+	</ul>
+</div>
+<!-- end  banner/-->
+<!--newon/新品上市-->
+ <div class="newon clearfix">
+     <div class="content">
+          <div class="newon-top">
+              <span class="title">最新揭晓</span>
+              <span class="title2"><a target="_blank" class="arr" href="${contextPath}/oneBuy/one-list.html?type=newPublished">更多>></a></span>
+          </div>
+          <div class="items">
+             <ul>
+              <#list newPublished as np> 
+                 <li>
+                     <div class="pic" style="width: 220px;height: 138px;">
+                    	 <a target="_blank" href="${contextPath}/oneBuy/one-detaile.html?id=${np.id}">
+                         	<img  width="138px" height="138px" src="${imageContextPath}/${np.baseInfo.titleImage!'pic_01.png'}" alt="">
+                        </a>
+                     </div>
+                     <div class="pic-text">
+                         <p><a target="_blank" href="${contextPath}/oneBuy/one-detaile.html?id=${np.id}">${np.baseInfo.name!'没有标题'}</a></p>
+                         <p class="lest">获得者：<span>151****5677</span></p>
+                     </div>
+                     <i></i>
+                 </li>
+              </#list>
+              
+             </ul>
+          </div>
+     </div>
+  </div>
+<!-- end newon/新品上市-->
+<!-- recommended/揭晓推荐-->
+<#if willPublished ??>
+  <div class="recommended clearfix">
+  <button onclick="getResult()">点击事件</button>
+     <div class="content">
+          <div class="recommended-top">
+              <span class="title">即将揭晓</span>
+              <span class="title2"><a target="_blank" class="arr" href="${contextPath}/oneBuy/one-list.html?type=willPublish">更多>></a></span>
+          </div>
+          <div class="items">
+             <ul>
+                 <#list willPublished as wp> 
+                  <li>
+                 <div class="pic"  style="width: 220px;height: 138px;" >
+                 <a href="${contextPath}/oneBuy/one-detaile.html?id=${wp.id}" target="blank">
+                     <img width="138px" height="138px" src="${imageContextPath}/${wp.baseInfo.titleImage!'pic_01.png'}" alt="">
+                 </a>
+                 </div>
+                 <div class="pic-text">
+                 <a href="${contextPath}/oneBuy/one-detaile.html?id=${wp.id}" target="blank">
+                   	 <p class="tops"> ${wp.baseInfo.name!'没有标题'} </p> 
+                  </a>
+                     <p class="lest">市场价：${(wp.baseInfo.originalPrice)?c}</p>
+                 </div>
+                 <div id="${wp.id}">
+                  <div id="pro-select-sku" class="lottery_progress" style="font-size: 20px; text-align: center;">
+                    <div class="time-item" >
+						
+						<strong class="hour_show">0时</strong>
+						<strong class="minute_show">0分</strong>
+						<strong class="second_show">0秒</strong>
+					</div>
+                 </div>
+                  <div class="progressbar" style="display: none;">
+    				  <span class="green"  style="width: 10%;"> <span>0%</span> </span>
+    			  </div>
+                 <div class="items-but">
+                     <a class="buttonToTime" href="${contextPath}/oneBuy/one-detaile?id=${wp.id}" target="_blank">立即1元购</a>
+                 </div>
+                 	<!-- <div class="result">
+                 		<div class="result_imgs"><img src="${contextPath}/resources/images/2007.jpg" /></div>
+						<div class="result_right">
+							<p class="clearfix"><span>获得者：</span><span class="result_blue w120">封结</span></p>
+							<p class="clearfix"><span>来自：</span><span class="result_form w120">国内未能识别的地区</span></p>
+							<p class="clearfix"><span>幸运号码：</span><span class="result_blue">10000007</span></p>
+							<p class="clearfix"><span>本期参与：</span><span class="result_blue">4</span>人次</p>
+						</div>
+					</div> -->
+                 
+                 </div>
+               </li> 
+              </#list>
+             </ul>
+          </div>
+     </div>
+  </div> 
+  </#if>
+  <div class="recommended clearfix">
+     <div class="content">
+          <div class="recommended-top">
+              <span class="title">热门推荐 </span>
+              <span class="title2"><a target="_blank" class="arr" href="${contextPath}/oneBuy/one-list.html?type=normal">更多>></a></span>
+          </div>
+          <div class="items">
+             <ul>
+             <#list hotList as hot> 
+                 <li>
+                 <input type="hidden" value="${hot.id}" name="id">
+                     <div class="pic" style="width: 138px;height: 138px;">
+                     <a href="${contextPath}/oneBuy/one-detaile.html?id=${hot.id}" target="blank">
+                         <img width="138px" height="138px;" src="${imageContextPath}/${hot.baseInfo.titleImage!'pic_01.png'}" alt="">
+                     </a>
+                     </div>
+                     <div class="pic-text">
+                         <p class="tops"><a href="${contextPath}/oneBuy/one-detaile.html?id=${hot.id}" target="blank"> ${hot.baseInfo.name!'没有标题'}</a></p>
+                         <p class="lest">市场价：${(hot.baseInfo.originalPrice)?c}</p>
+                     </div>
+                     <div class="progress clearfix">
+                         <div class="progress-bar">
+                             <b style="width: ${(hot.countInfo.partakeCount/hot.countInfo.totalCount)*100}%"></b>
+                         </div>
+                         <div id="asset">
+                             <div class="asset-b first">
+                                 <p class="one">${hot.countInfo.partakeCount!0}</p>
+                                 <p>已参与</p>
+                             </div>
+                             <div class="asset-b middle">
+                                 <p>${hot.countInfo.totalCount!0}</p>
+                                 <p>总需人次</p>
+                             </div>
+                             <div class="asset-b lest">
+                                 <p class="two flr">${(hot.countInfo.totalCount-hot.countInfo.partakeCount)!0}</p>
+                                 <p class="three flr">剩余</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="items-but">
+                         <a href="${contextPath}/oneBuy/one-detaile?id=${hot.id}" target="_blank">立即1元购</a>
+                     </div>
+                 </li>
+                 </#list>
+             </ul>
+          </div>
+     </div>
+  </div>
+<!-- end recommended/揭晓推荐-->
+<!--share/分享-->
+<div class="share clearfix">
+    <div class="content">
+        <div class="share-top">
+              <span class="title">晒单分享 </span>
+              <span class="title2"><a class="arr" href="${contextPath}/oneBuy/one-list">更多>></a></span>
+        </div>
+        <div class="share-foot">
+            <div class="share-left clearfix">
+                <ul>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="${imageContextPath}/pic_shandan.png" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="share-right flt">
+               <h2>TA们都在说</h2>
+                <ul>
+                    <li>
+                        <img src="${imageContextPath}/icon_head.png" alt="">
+                        <div class="text-right">
+                            <p class="text">152*****770</p>
+                            <p><a href="#">玩了很久，第一次中...</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="${imageContextPath}/icon_head.png" alt="">
+                        <div class="text-right">
+                            <p class="text">152*****770</p>
+                            <p><a href="#">玩了很久，第一次中...</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="${imageContextPath}/icon_head.png" alt="">
+                        <div class="text-right">
+                            <p class="text">152*****770</p>
+                            <p><a href="#">玩了很久，第一次中...</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="${imageContextPath}/icon_head.png" alt="">
+                        <div class="text-right">
+                            <p class="text">152*****770</p>
+                            <p><a href="#">玩了很久，第一次中...</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="${imageContextPath}/icon_head.png" alt="">
+                        <div class="text-right">
+                            <p class="text">152*****770</p>
+                            <p><a href="#">玩了很久，第一次中...</a></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end share/分享-->
+ <#include "common/foot.html">
+</body>
+    <script type="text/javascript" src="${contextPath}/resources/js/jquery.flexslider-min.js"></script>
+</html>

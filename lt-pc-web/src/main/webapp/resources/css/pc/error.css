@@ -1,0 +1,149 @@
+.sidebar_a{
+    width:212px;
+    margin-top:15px;
+    float:left;
+    border: 1px solid #c9cacb;
+}
+
+.sidebar_a dl dt img{
+    width:21px;
+    height:21px;
+    margin: 4px 10px 0 0;
+    float: left;
+}
+
+.sidebar_a dl{
+    border-bottom: 1px solid #c9cacb;
+    padding-bottom: 10px;
+}
+
+.sidebar_a dt{
+    line-height: 30px;
+    padding-left:20px;
+    font-size:16px;
+    font-weight: 600;
+    background:#eceef0;
+}
+
+.sidebar_a dd{
+    line-height: 22px;
+    padding-left:52px;
+}
+
+.sidebar_a dd a{
+    color:#7d7f80;
+}
+
+.sidebar_a dd a.curr{
+    color:#f00;
+}
+
+.sidebar_a dd a:hover{
+    color:#f00;
+}
+
+.sidebar_a .tel{
+    padding:12px;
+    background:#eceef0;
+}
+
+.sidebar_a .tel p{
+    width:184px;
+    line-height: 20px;
+    color:#7d7f80;
+}
+
+.sidebar_a .tel img{
+    width:159px;
+    height:62px;
+    margin: 10px 0 0 15px;
+}
+
+.summary{
+    width:80%;
+    margin:15px 0 0 15px;
+    float:left;
+}
+
+.summary .nav {
+    line-height: 30px;
+    font-size:14px;
+}
+
+.summary .nav a.at{
+    color:#f00;
+}
+
+.summary .main{
+    border:1px solid #c9cacb;
+    padding:20px 50px;
+}
+
+.summary .column{
+    line-height: 34px;
+    border-bottom: 1px solid #c9cacb;
+}
+
+.summary .column span{
+    display: inline-block;
+    width: 90px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 16px;
+    color: #c8002e;
+    font-weight: 600;
+    border-left: 3px solid #c8002e;
+}
+
+.summary .description p{
+    font-size: 16px;
+    line-height: 20px;
+    margin-top:10px;
+}
+
+/*出错页面*/
+.wrap .error{
+    height:500px;
+    overflow: hidden;
+    background:url(../../images/error_img.png) no-repeat 50% 50%;
+}
+
+.wrap .error p{
+    font-size:20px;
+    color:#c8002e;
+    margin: 228px 0 0 596px;
+}
+
+.wrap .error span{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: inherit;
+    color: #c81623;
+    margin:52px 0 0 54px;
+}
+
+.wrap .error span.marg{
+    margin-left:54%;
+}
+
+.wrap .error span a{
+    color:#f00;
+}
+
+.wrap .error span a:hover{
+    color:#3464d1;
+}
+
+/* end 出错页面*/
+
+
+
+
+
+
+
+
+
+
+

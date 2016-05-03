@@ -1,0 +1,338 @@
+
+
+
+.filtrate .crumb{
+    font-size:14px;
+    color:#666;
+    line-height: 50px;
+}
+
+.filtrate .crumb span a.curr{
+    color:#f00;
+}
+
+/*<!--筛选项-->*/
+
+
+
+.filtrate .filtrate-list{
+    border:1px solid #dedede;
+    position:relative;
+}
+
+.filtrate .filtrate-list ul{
+    line-height: 20px;
+    background:#f2f2f2;
+    padding: 8px 0 8px 20px;
+    border-bottom: 1px solid #dedede;
+}
+
+.filtrate .filtrate-list ul li{
+    float:left;
+    font-size:12px;
+    margin-right:4px;
+    border:1px solid #3b5998;
+}
+
+.filtrate .filtrate-list ul li div{
+    padding:0px 6px;
+    float:left;
+    color:#c81623;
+}
+
+.filtrate .filtrate-list ul li span{
+    font-size: 24px;
+    float:left;
+    cursor:pointer;
+}
+
+.filtrate .filtrate-list ul li span:hover{
+    background:#fdf1c2;
+}
+
+.filtrate .filtrate-list ul li.curr1{
+    border:0;
+    font-size:14px;
+    font-weight: bold;
+}
+
+.filtrate .filtrate-list ul li.curr2{
+    border:0;
+    padding-left:6px;
+    margin-top: 3px;
+    margin-left:6px;
+    border-left:1px solid #dedede;
+}
+
+.filtrate .filtrate-list dl{
+    padding:10px 0 10px 22px;
+    border-bottom: 1px dotted #ddd;
+    
+}
+
+.filtrate .filtrate-list dt{
+    width:100px;
+    font-size:16px;
+    margin-top: 5px;
+    cursor:pointer;
+    color:#333;
+    font-weight: 600;
+    float:left;
+}
+
+.filtrate .filtrate-list dl.cancel1{
+    border-bottom: 0;
+    position: absolute;
+    bottom: 234px;
+    right: 49px;
+}
+
+.filtrate .filtrate-list dl.cancel2{
+    border-bottom: 0;
+    position: absolute;
+    bottom: 184px;
+    right: 133px;
+}
+
+.filtrate .filtrate-list dl.cancel3{
+    border-bottom: 0;
+    position: absolute;
+    bottom: 134px;
+    right: 184px;
+}
+
+
+.filtrate .filtrate-list dl.cancel{
+    border-bottom: 0;
+}
+
+.filtrate .filtrate-list dd.select{
+    width:121px;
+}
+
+.filtrate .filtrate-list dd{
+    font-size:14px;
+    margin-left:5px;
+    cursor:pointer;
+    color:#3b5998;
+    float:left;
+    padding:7px 10px;
+    position:relative;
+}
+
+.filtrate label{
+   display: inline-block;
+   padding:5px 9px;
+   
+}
+
+/* .filtrate input{
+    visibility:hidden; 
+    position:absolute;
+} */
+
+#marquee12 input{
+    visibility:visible;
+    position:static;
+    
+}
+
+.filtrate .filtrate-list dd.curr{
+    background:#3b5998;
+    color:#fff;
+}
+
+.filtrate .filtrate-list dd input{
+    width:16px;
+    height:16px;
+    margin: 2px 12px 3px 3px;
+    float: left;
+}
+
+/*<!-- end 筛选项-->*/
+
+.filtrate .paging ul {
+    height:38px;
+    padding-left: 17px;
+    font-size: 14px;
+    line-height: 38px;
+    border: solid #dedede;
+    border-width: 0 1px 1px 1px;
+}
+
+.filtrate .paging ul span{
+    float:left;
+    color:#333;
+    border-right:1px solid #ddd;
+}
+
+.filtrate .paging ul li{
+    float:left;
+    color:#333;
+    padding:0 20px;
+    cursor:pointer;
+    border-right:1px solid #ddd;
+    background:#f2f2f2;
+}
+
+.filtrate .paging ul li.curr{
+    background:#fff;
+    color:#f00;
+    border-bottom: 1px solid #fff;
+}
+
+
+
+.filtrate .brand{
+    margin-top:11px;
+    border-top:2px solid #0f5489;
+}
+
+.filtrate .brand .brand-nav{
+    height:37px;
+    color:#c8002e;
+    font-size:24px;
+    padding-left:30px;
+    font-weight:bold;
+    line-height: 37px;
+    background:#f2f2f2;
+}
+
+.filtrate .brand .thebrand{
+    border:1px solid #dedede;
+    /* position:relative; */
+}
+
+.filtrate .brand .thebrand .borands{
+    float:left;
+    width:112px;
+    border-right:1px solid #dedede;
+    background:#f2f2f2;
+    /* position:absolute;
+    top:0;
+    left:0; */
+}
+
+
+.filtrate .brand .thebrand2{
+    border-top:0;
+}
+
+.filtrate .brand .thebrand p{
+    text-align:center;
+    font-size: 16px;
+}
+
+.filtrate .brand .thebrand .borands li{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dedede;
+    height:151px;
+    width:112px;
+    background:#f2f2f2;
+    cursor: pointer;
+}
+
+.filtrate .brand .thebrand .borands .curr{
+	width:113px;
+    background:#fff;
+    color:#f00;
+    border: solid #0f5489;
+    border-width: 0px 0 0px 1px;
+}
+
+
+.filtrate .brand .thebrand .brandname img{
+    width:114px;
+}
+
+.filtrate .brand .thebrand .products{
+    width: 1073px;
+    float: right;
+    /* border: 1px solid #0f5489; */
+}
+
+.filtrate .brand .thebrand .products ul li{
+    width:192px;
+    height:200px;
+    float:left;
+    margin:18px;
+    padding:10px 19px;
+    border:1px solid #dedede;
+    position: relative;
+}
+
+.filtrate .brand .thebrand .products ul li i{
+    display: inline-block;
+    width:47px;
+    height:28px;
+    background:url(../../images/icon.png) no-repeat -237px -664px;
+    position:absolute;
+    right:5px;
+    top:5px;
+}
+
+.filtrate .brand .thebrand .products ul li .imges{
+    width:192px;
+    overflow: hidden;
+}
+
+.filtrate .brand .thebrand .products ul li img{
+    height:125px;
+    padding:6px 0;
+}
+
+.filtrate .brand .thebrand .products ul li .p1{
+    font-size:16px;
+    color:#0f5489;
+    text-align: center;
+}
+
+.filtrate .brand .thebrand .products ul li .p2{
+    font-size: 16px;
+    
+}
+
+.filtrate .brand .thebrand .products ul li .p3 a{
+    font-size: 14px;
+    color: #0f5489;
+    float:left;
+    margin-top: 4px;
+    
+}
+
+.filtrate .brand .thebrand .products ul li .p3 a:hover{
+    color:#f00;
+}
+
+.filtrate .brand .page .pages{
+    font-size: 16px;
+    line-height: 46px;
+    padding: 0 330px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

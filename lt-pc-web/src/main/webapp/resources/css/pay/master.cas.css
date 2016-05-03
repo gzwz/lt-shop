@@ -1,0 +1,175 @@
+/*<!-- logo-->*/
+.logo .logon img{
+    width:203px;
+    height:101px;
+}
+
+.logo .sum{
+    font-size:16px;
+}
+
+.logo .sum .money{
+    font-size: 24px;
+}
+
+/*<!-- end / logo-->*/
+
+/*<!-- bank/银行-->*/
+.bank .network ul li{
+    position:relative;
+    float:left;
+    font-size:14px;
+    color:#666;
+    border:2px solid #d8d8d8;
+    margin-right:30px;
+    background:url(../../images/icon.png) no-repeat;
+    cursor: pointer;
+}
+
+.bank .network ul li.currt{
+    border:2px solid #c8002e;
+}
+
+.bank .network ul li label{
+    display: inline-block;
+    padding: 14px 16px 15px 47px;
+}
+
+.bank .network ul li.ba1{
+    background-position:12px -981px;
+}
+
+.bank .network ul li.ba2{
+    background-position:-135px -981px;
+}
+
+.bank .network ul li.ba3{
+    background-position:-181px -816px;
+}
+
+.bank .network ul li.ba4{
+    background:#f4f4f4;
+    border-bottom: 2px solid #f4f4f4;
+    background:#f4f4f4 url(../../images/icon.png) no-repeat -181px -816px;
+}
+
+.bank .network ul li span{
+    color:#666;
+}
+
+.bank .network ul li i{
+    display: inline-block;
+    width:17px;
+    height:17px;
+    position:absolute;
+    right:0;
+    bottom: 0;
+    background:url(../../images/icon.png) no-repeat 0px 5px;
+}
+
+.bank .network ul li i.curr{
+    background-position: -183px -4px;
+}
+
+.bank .network input{
+    visibility: hidden;
+}
+
+.bank .network .help{
+    font-size:16px;
+    float:right;
+}
+
+.bank .network .help span{
+    color:#666;
+    display: inline-block;
+    margin: 24px 0 0 38px;
+}
+
+/*<!-- end bank/银行-->*/
+
+/*<!-- 线下银行-->*/
+.bank .below{
+    border-bottom:2px solid #d8d8d8;
+    position:relative;
+    padding-bottom: 20px;
+    background:#f4f4f4;
+    visibility: hidden;
+}
+
+.bank .below p{
+    font-size: 14px;
+    line-height: 40px;
+    color:#666;
+}
+
+.bank .below ul{
+    width:1000px;
+}
+
+.bank .below ul li{
+    width:145px;
+    height:32px;
+    float:left;
+    margin:0 50px 10px 0;
+    border:1px solid #d8d8d8;
+    background:#fff;
+    position: relative;
+    cursor:pointer;
+
+}
+
+.bank .below ul li.currt{
+    border:1px solid #c8002e;
+}
+
+.bank .below ul li i.curr{
+    display: inline-block;
+    width:17px;
+    height:17px;
+    background:url(../../images/icon.png) no-repeat -183px -4px;
+    position: absolute;
+    right:0;
+    bottom: 0;
+}
+/*<!-- end 线下银行-->*/
+/*<!-- payment/付款-->*/
+
+.bank .payment ul li{
+    margin-top:10px;
+}
+
+.bank .payment .sum{
+    font-size:16px;
+}
+
+.bank .payment .sum .money{
+    font-size: 24px;
+}
+
+.bank .payment button{
+    width:111px;
+    height:44px;
+    border: 0;
+    color:#fff;
+    font-size: 20px;
+    background:#c8002e;
+}
+
+.bank .payment a{
+    font-size: 18px;
+    color:#0f5489;
+}
+
+.bank .payment a:hover{
+    color:#f00;
+}
+
+
+/*<!-- end payment/付款-->*/
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+.form-img-list{
+	margin-top: 10px;
+}
+.form-img-list .img-box{
+	margin-top: 10px;
+}
+.table-search-form-inline{
+	margin-bottom: 5px;
+}
+.table-search-form-inline .form-group{
+	margin-bottom: 5px;
+}
+.table-search-form-inline .control-label {
+  text-align: right;
+  margin: 0 5px 0 20px;
+}
+.table .btn {
+  margin-top: 5px;
+}
+.image-container{
+	position: relative;
+	max-width: 200px; 
+	max-height: 150px; 
+	min-height: 150px;
+    line-height: 10px;
+    margin-right: 20px;
+}
+.file-preview{
+}
+.delete-image{
+	position: absolute;
+	right: -22px;
+	top: -10px;
+	display: block;
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+	cursor: pointer;
+	text-decoration: none;
+	color: #f3565d;
+}
+.delete-image:hover{
+	text-decoration: none;
+	color: #f3565d;
+}

@@ -1,0 +1,154 @@
+@charset "utf-8";
+/*html5*/
+
+article,aside,footer,header,section,footer,nav,figure,main{display:block}
+
+/* css reset */
+
+body,div,p,ul,ol,dl,dt,dd,li,form,input,table,th,td,img,h1,h2,h3,h4,h5,h6 { margin: 0;padding: 0;}
+h1, h2, h3, h4, h5, h6{font-size:100%;font-weight:normal;vertical-align:baseline;}
+
+/*html{width:100%; height:100%;}*/
+
+
+body {  
+/*
+       width:100%;
+       height:100%;
+*/
+       background: #fff; 
+       color: #222; 
+       font-size: 12px; 
+       font-style: normal; 
+       font-family:'Microsoft Yahei','微软雅黑','Simsun','宋体','Arial', sans-serif;
+    }
+
+a { text-decoration:none; color:#555;  }
+a:hover { text-decoration:none; }
+
+fidldset,img { border:none;}
+
+li { list-style:none;}
+
+em, b, i { font-style:normal; }
+
+table { border-spacing:0; border-collapse:collapse;}
+
+html {font-size: 62.5%; margin: 0 auto;}
+
+
+/*common*/
+
+.clearfix { *zoom: 1;} 
+.clearfix:before, .clearfix:after { display: table; line-height: 0; content: "";}
+.clearfix:after { clear: both;}
+.clear{clear:both;}
+
+.flt{float:left;}
+.flr{float:right;}
+
+.space_l20 { margin-left: 60px;}
+.space_r20 { margin-right: 20px;}
+.space_t10{ margin-top: 10px;}
+.space_t50{ margin-top: 50px;}
+
+.ptop {padding-top:25px; }
+
+
+span { font-weight:inherit;}
+.r6{ color:#666; }
+
+.content{ 
+    width:800px; 
+    margin: 0 auto; 
+}
+
+/*style*/
+
+.w{
+    width:100%;
+    height:100%;
+}
+
+.w ul li{
+	margin: 0 auto;
+    width:650px;
+    border:1px solid #afd9ff;
+}
+
+.w .top{
+    height:47px;
+    background:#ebf9ff;
+}
+
+.w .top .select{
+    padding:10px 0 0 30px;
+    vertical-align:middle;
+}
+
+
+.w .top span{
+    float:left;
+    color:#000;
+    padding:10px 0 0 30px;
+    display: inline-block;
+}
+
+.w .top .select input{
+    margin-right:10px;
+}
+
+.w .list_body{
+    height:110px;
+    border-top:1px solid #ccc;
+    padding:20px 10px;
+}
+
+.w .list_body .icon{
+    width:52px;
+    height:51px;
+}
+
+.w .curr{
+    border-top:0 !important;
+}
+
+.w .list_body .icon{
+    float:left;
+}
+
+.w .list_body .text{
+    width:560px;
+    float:left;
+}
+
+.w .list_body .text span{
+    display: inline-block;
+    width:60px;
+    float:left;
+}
+
+.w .list_body .text_p{
+    width:210px;
+    margin-left:15px;
+    float:left;
+    word-wrap:break-word;
+    word-break:break-all; 
+}
+
+.w .list_body .text_p .p1{
+    margin-top:10px;
+}
+
+.w .list_body .text_1{
+    width:100px;
+    float:left;
+    text-align: center;
+}
+
+.w .list_body .text_2{
+    width:100px;
+    float:right;
+    text-align: center;
+}
+

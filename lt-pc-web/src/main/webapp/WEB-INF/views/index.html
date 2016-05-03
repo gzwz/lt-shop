@@ -1,0 +1,499 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=0.5, minimum-scale=0.25 maximum-scale=0.25, user-scalable=yes" />
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="shortcut icon" href="${contextPath}/resources/img/favicon.ico">
+<title>卡车网</title>
+
+<!--[if IE]> 
+        <script src="../servers/js/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+	<!-- 头部 -->
+	<#include "common/head.html">
+	<!-- banner -->
+	<div class="banner clearfix">
+		<div class="content">
+			<div id="nav">
+				<ul id="supnav">
+				   <#if productCatoryList??>
+				 	
+				       <#list productCatoryList as productCatory>
+							<li>
+								<dl class="supnav-nav clearfix">
+									<dt>
+									      ${productCatory.name}<i class="flr"></i>
+									</dt>
+									<#list productCatory.parentList as chd>
+									<dd>${chd.name}</dd>
+									</#list>
+									<i class="borderfood"></i>
+								</dl>
+								<div>
+								<#list productCatory.parentList as chd>
+									<dl class="column clearfix">
+										<dt>${chd.name}：</dt>
+										<#assign lenth=0>
+										       <#if chd.name=="价格">
+											         <#list scList as sc>
+											            <dd>
+															<a href="${contextPath}/product/truck-list?productCatoryId=${chd.id}">${sc.name}</a>
+														</dd>
+										              </#list>
+									              </#if>
+									              
+									              <#if chd.name=="品牌">
+									              <#list brandList as pb>
+									              <#assign lenth=(brandList)?size>
+									                 <#if (brandList)?size lt 16>
+									                    <dd>
+															<a href="${contextPath}/product/truck-list?productCatoryId=${chd.id}">${pb.brandName}</a>
+														</dd>
+									                 </#if>
+									              </#list>
+									              <#if lenth gt 15>
+										              <dd style="width:97px; font-weight: bold;  font-size: 16px;">
+										               <a href="#">更多选择＞＞</a>
+										              </dd>
+									              </#if>
+									        </#if>
+										<#list chd.chidrenList as chd>
+										<dd>
+											<a href="${contextPath}/product/truck-list?productCatoryId=${chd.id}&productCatoryName=${productCatory.name}">${chd.name}</a>
+										</dd>
+										</#list>
+									</dl>
+								 </#list>
+								</div>
+							</li>
+					  </#list>
+				   </#if>
+					<p class="pictu">
+	                  <img class="flt" src="${imageContextPath}/${qrCode}" alt="">
+	              </p>
+	              <i class="andr"></i>
+	              <i class="ipho"></i>  
+				</ul>
+			</div>
+			
+			
+			
+			
+			<div class="banner-img">
+			<div id="container" class="banner-img01 flt">
+				<div id="list" style="left:-730px;">
+					<#if bannerList??> <#list bannerList as banner> <#if
+					banner.sort==4> <a href="${banner.url}" target="_blank"><img
+						src="${imageContextPath}/${banner.image}"
+						alt="轮播图4"></a> </#if> <#if banner.sort==1> <a
+						href="${banner.url}" target="_blank"><img
+						src="${imageContextPath}/${banner.image}"
+						alt="轮播图1"></a> </#if> <#if banner.sort gt 1 && banner.sort lt
+					4> <a href="${banner.url}" target="_blank"><img
+						src="${imageContextPath}/${banner.image}"
+						alt="轮播图23"></a> </#if> <#if banner.sort==4> <a
+						href="${banner.url}" target="_blank"><img
+						src="${imageContextPath}/${banner.image}"
+						alt="轮播图4"></a> </#if> <#if banner.sort==1> <a
+						href="${banner.url}" target="_blank"><img
+						src="${imageContextPath}/${banner.image}"
+						alt="轮播图1"></a> </#if> </#list> </#if>
+
+				</div>
+				<div id="buttons">
+					<#if bannerList??> <#list bannerList as banner> <#if
+					banner.sort==1> <span index="${banner.sort}" class="on"></span>
+					<#elseif banner.sort gt 1 && banner.sort lt 5> <span
+						index="${banner.sort}"></span> </#if> </#list> </#if>
+				</div>
+				<a href="javascript:;" class="arrow" id="prev"></a> <a
+					href="javascript:;" class="arrow" id="next"></a>
+			</div>
+			<#if bannerList??> <#list bannerList as banner> <#if banner.sort gt 4
+			&& banner.sort lt 7>
+			<div class="banner-img02">
+				<a href="${banner.url}" target="_blank"><img
+					src="${imageContextPath}/${banner.image}"
+					alt="${banner.sort}"></a>
+			</div>
+			<#elseif banner.sort==7>
+			<div class="banner-img02 curr">
+				<a href="${banner.url}" target="_blank"><img
+					src="${imageContextPath}/${banner.image}"
+					alt="${banner.sort}"></a>
+			</div>
+			</#if> </#list> </#if>
+		</div>
+		<div class="banner-serve">
+			<div id="bnnserve" class="banner-serve-top">
+				<ul id="serve">
+				  <#if articleCateList?exists><#list articleCateList as articleCate>
+				    <#if articleCate.id!=articleCate.parent.id>
+					     <#if articleCate_index==1>
+					    <li class="curr" accesskey="${articleCate.id}"><a href="${contextPath}/article/article-list?id=${articleCate.id}">${articleCate.name}</a></li>
+					    <#else>
+					    <li class=""  accesskey="${articleCate.id}"><a href="${contextPath}/article/article-list?id=${articleCate.id}">${articleCate.name}</a></li>
+					    </#if>
+				    </#if>
+				  </#list></#if>
+					
+				</ul>
+				<div class="banner-serve-tab" style="display:block"></div>
+				<div class="banner-serve-tab"></div>
+				<div class="banner-serve-tab"></div>
+				<div class="banner-serve-tab"></div>
+			</div>
+			<div class="banner-serve-but">
+				<a class="but1" href="#">商家认证</a> <a class="but2" href="#">我要发货</a>
+				<a class="but1" href="#">我要找货</a>
+			</div>
+			<div class="banner-serve-query">
+				<div class="servequery">汽车服务</div>
+				<ul>
+					<li><i class="serve"></i>
+						<p>
+							<a href="#">周边服务</a>
+						</p></li>
+					<li><i class="query"></i>
+						<p>
+							<a href="#">违章查询</a>
+						</p></li>
+					<li><i class="serve"></i>
+						<p>
+							<a href="#">周边服务</a>
+						</p></li>
+					<li><i class="query"></i>
+						<p>
+							<a href="#">违章查询</a>
+						</p></li>
+				</ul>
+			</div>
+		</div>
+			
+			
+			
+			
+		</div>
+
+
+
+
+		
+
+	</div>
+	<!-- end banner -->
+
+
+	<!-- items/项目 -->
+	<div class="Oneyuancar clearfix">
+		<div class="content">
+			<div class="Oneyuancar-top">
+				<i></i> <span class="title">一元购车</span> <span class="title2"><a
+					class="arr" href="${contextPath}/oneBuy">点击进入>></a></span>
+			</div>
+			<div class="items">
+				<ul>
+					<#if oneBuyList?exists> 
+					 <#list oneBuyList as oneBuy>
+						<li>
+							<div class="pic">
+								<img  src="${imageContextPath}/${oneBuy.baseInfo.titleImage!''}"
+									alt="${oneBuy.baseInfo.name!''}">
+							</div>
+							<div class="pic-text">
+								<p class="pic-text-title">${oneBuy.baseInfo.name!''}</p>
+								<p class="lest">${(oneBuy.baseInfo.originalPrice)?c}</p>
+							</div>
+							<div class="progress  clearfix">
+								<div class="progress-bar">
+									<b></b>
+								</div>
+								<div id="asset">
+									<div class="asset-b first">
+										<p class="one">${(oneBuy.countInfo.partakeCount)?c}</p>
+										<p>已参与</p>
+									</div>
+									<div class="asset-b middle">
+										<p>${(oneBuy.countInfo.totalCount)?c}</p>
+										<p>总需人次</p>
+									</div>
+									<div class="asset-b lest">
+										<p class="two flr">8</p>
+										<p class="three flr">${(oneBuy.countInfo.residueCount)?c}</p>
+									</div>
+								</div>
+							</div>
+							<div class="items-but">
+								<a href="${contextPath}/oneBuy/one-detaile?id=${oneBuy.id}">立即1元购</a>
+							</div>
+						</li> 
+				 </#list> 
+				</#if>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end items/项目 -->
+
+	<!-- advertisement/广告 -->
+	<div class="advertisement space_t20">
+		<div class="content">
+			<#list adList as ad> <#if ad_index==0> <a href="${ad.url}"
+				target="_blank"><img style="width: 1196px;height: 120px;"
+				src="${imageContextPath}/${ad.image}"
+				alt="${ad.adName}"></a> </#if> </#list>
+		</div>
+	</div>
+	<!-- end advertisement/广告 -->
+
+	<!--store/商城-->
+	<#if floorsList??>
+	    <#list floorsList as floors>
+	       <#if floors_index==0>
+	        <div class="store">
+				<div class="content">
+					<div class="express-top">
+						<i></i> <span class="title">${floors.name!''}</span> <i class="recommend"></i> <span
+							class="title2"><a class="arr" href="${floors.url!'javascript:void(0);'}">点击进入>></a></span>
+					</div>
+					<div class="eurocity clearfix">
+					 <#list floors.parentList as parent>
+						   <#if parent_index==0>
+						<div class="cart">
+							<a href="${parent.url!'javascript:void(0);'}"><img style="width: 350px;height: 237px;"
+								src="${imageContextPath}/${parent.titleImage}" alt=""></a>
+							<!-- <p class="p1">【康瑞K2】无法抗拒的82马力</p> -->
+							<div class="p2-r">
+							    <a href="${parent.url!'javascript:void(0);'}">
+								<p class="p2">${parent.name}</p>
+								<span>¥${(parent.price)?c}</span><i>超值</i>
+								</a>
+							</div>
+						</div>
+						</#if>
+					</#list>
+						<ul>
+						  <#list floors.parentList as parent>
+						   <#if parent_index gt 0>
+						       
+						    
+								<li>
+									<div class="cartlist">
+										<a href="${parent.url!'javascript:void(0)'}"><img style="width: 260px;height: 169px;" src="${imageContextPath}/${parent.titleImage}" alt=""></a>
+										<p>${parent.name}</p>
+										<p class="money">¥${(parent.price)?c}</p>
+										<a class="but"  href="${parent.url!'javascript:void(0)'}">产品亮点</a>
+									</div>
+								</li>
+							</#if>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</#if>
+	    </#list>
+	</#if>
+	
+	<!-- end store/商城-->
+
+	<!-- advertisement/广告 -->
+	<div class="advertisement space_t20">
+		<div class="content">
+			<#list adList as ad> <#if ad_index==1> <a href="${ad.url}"
+				target="_blank"><img style="width: 1196px;height: 120px;"
+				src="${imageContextPath}/${ad.image}"
+				alt="${ad.adNmae}"></a> </#if> </#list>
+		</div>
+	</div>
+	<!-- end advertisement/广告 -->
+
+	<!--store/商城-->
+	
+	<#if floorsList??>
+	    <#list floorsList as floors>
+	       <#if floors_index==1>
+	        <div class="store">
+				<div class="content">
+					<div class="express-top">
+						<i></i> <span class="title">${floors.name!''}</span> <i class="recommend"></i> <span
+							class="title2"><a class="arr" href="${floors.url!'javascript:void(0)'}">点击进入>></a></span>
+					</div>
+					<div class="eurocity clearfix">
+					 <#list floors.parentList as parent>
+						   <#if parent_index==0>
+						<div class="cart">
+							<div class="cart_img">
+			                     <a href="${parent.url!'javascript:void(0)'}"><img style="width: 350px;height: 237px;"
+								src="${imageContextPath}/${parent.titleImage}" alt="${parent.name}"></a>
+			                </div>
+							<!-- <p class="p1">【康瑞K2】无法抗拒的82马力</p> -->
+							<div class="p2-r">
+							<a href="${parent.url!'javascript:void(0)'}">
+								<p class="p2">${parent.name}</p>
+								<span>¥${(parent.price)?c}</span><i>超值</i>
+								</a>
+							</div>
+						</div>
+						</#if>
+					</#list>
+						<ul>
+						  <#list floors.parentList as parent>
+						   <#if parent_index gt 0>
+						       
+						    
+								<li>
+									<div class="cartlist">
+										<div class="cartlist_img">
+			                               <a href="${parent.url!'javascript:void(0)'}"><img style="width: 260px;height: 169px;"
+											src="${imageContextPath}/${parent.titleImage}" alt="${parent.name}"></a>
+			                            </div>
+										<p><a href="${parent.url!'javascript:void(0)'}">${parent.name}</a></p>
+										<p class="money">¥${(parent.price)?c}</p>
+										<a class="but" href="${parent.url!'javascript:void(0)'}">产品亮点</a>
+									</div>
+								</li>
+							</#if>
+							</#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</#if>
+	    </#list>
+	</#if>
+	<!-- end store/商城-->
+
+
+	<!-- advertisement/广告 -->
+	<div class="advertisement space_t20">
+		<div class="content">
+			<#list adList as ad> <#if ad_index==2> <a href="${ad.url}"
+				target="_blank"><img  style="width: 1196px;height: 120px;"
+				src="${imageContextPath}/${ad.image}"
+				alt="${ad.adName}"></a> </#if> </#list>
+		</div>
+	</div>
+	<!-- end advertisement/广告 -->
+
+	<!--store/商城-->
+	<#if floorsList??>
+	    <#list floorsList as floors>
+	       <#if floors_index==2>
+				<div class="store">
+					<div class="content">
+						<div class="express-top">
+						<i></i> <span class="title">${floors.name!''}</span> <i class="recommend"></i> <span
+							class="title2"><a class="arr" href="${floors.url!'javascript:void(0)'}">点击进入>></a></span>
+					</div>
+						<div class="eurocity clearfix">
+						 <#list floors.parentList as parent>
+						   <#if parent_index==0>
+							<div class="carts ">
+							     <a href="${parent.url!'javascript:void(0)'}"> <img style="width: 304px;height: 424px;" src="${imageContextPath}/${parent.titleImage}" alt="${parent.name}"/></a>
+								<div class="p2-t">
+									抢购价：<span>${(parent.price)?c}</span>
+								</div>
+								<div class="p2-but">
+									<a href="${parent.url!'javascript:void(0)'}">立即购买</a>
+								</div>
+								<div class="p2-but2">${parent.name}</div>
+							</div>
+							</#if>
+					  </#list>
+							<ul id="component">
+							 <#list floors.parentList as parent>
+						        <#if parent_index gt 0>
+								<li>
+									<div class="component_img">
+				                         <a href="${parent.url!'javascript:void(0)'}"><img src="${imageContextPath}/${parent.titleImage}"
+									alt="${parent.name}"></a>
+				                    </div>
+									<p class="det"><a href="${parent.url!'javascript:void(0)'}">${parent.name}</a></p>
+									<div class="but">￥${(parent.price)?c}</div></li>
+								</#if>
+							</#list>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</#if>
+	    </#list>
+	</#if>
+	<!-- end store/商城-->
+
+	<#include "common/foot.html">
+
+	<script src="${contextPath}/resources/js/effect.js"></script>
+	
+	<script type="text/javascript">
+	
+	    $(function(){
+	        
+	        //异步加载
+	          ajaxLoad();
+	    
+	         $("#serve li").mouseover(function(){
+	           $(this).siblings("li").removeClass("curr");
+	            $(this).addClass("curr");
+	            $("#serve li").each(function(){
+	              if($(this).attr("class")!="curr"){
+	                $(this).parent().parent().find("div").eq(parseInt($(this).index())).hide();
+	              } 
+	            });
+	            var dd=$(this).parent().parent().find("div").eq(parseInt($(this).index()));
+	            dd.show();
+	            $.ajax({
+	                url:"${contextPath}/article/contents?artickeCateId="+$(this).attr("accesskey"),
+	                dataType:"json",
+	                type:"post",
+	                success : function(data){
+	                   if(null!=data){
+	                     dd.html("");
+	                     dd.html("<a href='${contextPath}/article/article-contents?id="+data.id+"'>"+data.baseInfo.content+"</a>");
+	                   }
+	                }
+	            });
+	         });
+	    });
+	
+	
+	
+	//异步加载
+	function ajaxLoad(){
+	    
+	     var cateyId="";
+	         $("#serve li").each(function(){
+	              if($(this).attr("class")=="curr"){
+	                cateyId=$(this);
+	              } 
+	            });
+	            
+	            var dd=cateyId.parent().parent().find("div").eq(parseInt(cateyId.index()));
+	          	$.ajax({
+	                url:"${contextPath}/article/contents?artickeCateId="+cateyId.attr("accesskey"),
+	                dataType:"json",
+	                type:"post",
+	                success : function(data){
+	                   if(null!=data){
+	                     dd.html("");
+	                     dd.html("<a href='${contextPath}/article/article-contents?id="+data.id+"'>"+data.baseInfo.content+"</a>");
+	                   }
+	                }
+	            });
+	
+	}
+	</script>
+	
+</body>
+</html>
+
+
